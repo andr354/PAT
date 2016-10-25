@@ -1,0 +1,43 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <!-- Configuration for the default package. -->
+    <package name="default" extends="struts-default">
+        <!--Login default de SITA, modificar para que sea compatible con admin, estudiante, profGen, profCurs, usuarioNormal-->
+        <action name="Login" class="paquete.LoginAction">
+            <result name="exitoso">admin.jsp</result>
+            <result name="exitosop">pacientei.jsp</result>
+            <result name="exitosom">medicoi.jsp</result>
+            <result name="error">index.jsp</result>
+        </action>
+        <!---->
+        <!--Poner comentarios sobre las actividades, se puede usar para comentar sobre los articulos-->
+        <action name="Com" class="paquete.commentAction">
+            <result name="exitoso">/studentIndex.jsp</result>
+            <result name="error">/studentIndex.jsp</result>
+        </action>
+        <!--Para poner calificaciones a los alumnos en sus participaciones-->
+        <action name="Cal" class="paquete.califAction">
+            <result name="exitoso">/professorIndex.jsp</result>
+            <result name="error">/professorIndex.jsp</result>
+        </action>
+        <!--Eliminar usuario-->
+        <action name="Del" class="paquete.DelAction">
+            <result name="exitoso">/success.jsp</result>
+            <result name="error">/success.jsp</result>
+        </action>
+        <!----><!--Eliminar diagrama, la parte de diagrama terminara convertida en articulo u OAT para que sea mas "fancy" xD--> 
+        <action name="Deld" class="paquete.DelDAction">
+            <result name="exitoso">/professorIndex.jsp</result>
+            <result name="error">/professorIndex.jsp</result>
+        </action>
+        <!----><!--Modificar usuarios--> 
+        <action name="Mod" class="paquete.ModifyAction">
+            <result name="exitoso">admin.jsp</result>
+            <result name="error">admin.jsp</result>
+        </action>
+
+    </package>
+</struts>
