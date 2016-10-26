@@ -25,14 +25,14 @@ class LoginBeanX{
         int id = 0;
         try {
             con = Conexion.getConexion();
-            String consulta = "Select * from usuarios where nom_usu=? and pass_usu=?";
+            String consulta = "Select * from users where id=? and password=?";
             pst = con.prepareStatement(consulta);
             pst.setString(1, userName);
             pst.setString(2, password);
             rs = pst.executeQuery();
             status = rs.next();   
             if(status){
-                id = rs.getInt("usuarios.acc_usu");
+                id = rs.getInt("users.nivel");//acc_usu se convirtio en nivel y usuarios en users ;)
                 return(id);
             }
         } catch (Exception e) {  
@@ -74,21 +74,25 @@ class LoginBeanX{
         String pass2 = "";
         try {
             con = Conexion.getConexion();
-            String nivel = "Paciente";
-            if(rol==3){
-                nivel = "Administrador";
+            String nivel = "RUSER";
+            if(rol==5){
+                nivel = "PROFFESOR";
+            }else if(rol==4){
+                nivel = "PROFFESOR+";
+            }else if(rol==3){
+                nivel = "ADMIN";
             }else if(rol==2){
-                nivel = "Medico";
+                nivel = "STUDENT";
             }
             if(password==""){
-                pst = con.prepareStatement("SELECT usuarios.pass_usu FROM usuarios WHERE usuarios.id_usu="+id+"");
-                rs = pst.executeQuery("SELECT usuarios.pass_usu FROM usuarios WHERE usuarios.id_usu="+id+"");
-                pass2 = rs.getString("usuarios.pass_usu");
+                pst = con.prepareStatement("SELECT users.password FROM users WHERE users.idUser="+id+"");
+                rs = pst.executeQuery("SELECT users.password FROM users WHERE users.idUser="+id+"");
+                pass2 = rs.getString("users.password");
                 password = pass2;
             }
-            String consulta = "update usuarios\n" +
-                            "set nom_usu='"+userName+"', pass_usu='"+password+"', acc_usu='"+rol+"'\n" +
-                            "where id_usu='"+id+"';";
+            String consulta = "update users\n" +
+                            "set id='"+userName+"', password='"+password+"', rol='"+nivel+"', nivel='"+rol+"'\n" +
+                            "where idUser='"+id+"';"; //tambien esta al reves pero nimodo de nuevo
             pst = con.prepareStatement(consulta);
             int cols = pst.executeUpdate(consulta);
             status=1;
@@ -146,15 +150,19 @@ class LoginBeanX{
     
     public int addUser(String userName, String password, int rol){
         int status = 0;
-        String nivel = "Paciente";
-            if(rol==3){
-                nivel = "Administrador";
+        String nivel = "RUSER";
+            if(rol==5){
+                nivel = "PROFFESOR";
+            }else if(rol==4){
+                nivel = "PROFFESOR+";
+            }else if(rol==3){
+                nivel = "ADMIN";
             }else if(rol==2){
-                nivel = "Medico";
+                nivel = "STUDENT";
             }
         try {
             con = Conexion.getConexion();
-            String consulta = "insert into usuarios(nom_usu, pass_usu, acc_usu) values('"+userName+"', '"+password+"', '"+rol+"');";
+            String consulta = "insert into users(id, password, rol, nivel) values('"+userName+"', '"+password+"', '"+nivel+"', '"+rol+"');";//ya se que esta al reves pero nimodo :D
             pst = con.prepareStatement(consulta);
             int cols = pst.executeUpdate(consulta);
             status=1;

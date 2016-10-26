@@ -16,7 +16,7 @@ public class DataSource {
         ds.setDriverClassName("com.mysql.jdbc.Driver");
         ds.setUsername("root");
         ds.setPassword("12345678");
-        ds.setUrl("jdbc:mysql://localhost:3306/sita");
+        ds.setUrl("jdbc:mysql://localhost:3306/pat");
        
      // settings
         ds.setMinIdle(5);

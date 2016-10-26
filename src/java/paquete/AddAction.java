@@ -37,7 +37,7 @@ public class AddAction extends ActionSupport
     }
     
     public String getDefaultRol() {
-	return "Paciente";
+	return "RUSER";
 	}
  
     public String execute() {

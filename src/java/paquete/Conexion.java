@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 public class Conexion {
     private static Connection cn = null;
-    private static String URL = "jdbc:mysql://localhost:3306/sita";
+    private static String URL = "jdbc:mysql://localhost:3306/pat";
     private static String usuario = "root";
     private static String contrasena = "12345678";
     

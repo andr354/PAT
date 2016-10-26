@@ -13,6 +13,10 @@
             <result name="error">index.jsp</result>
         </action>
         <!---->
+        <action name="Add" class="paquete.AddAction">
+            <result name="exitoso">admin.jsp</result>
+            <result name="error">admin.jsp</result>
+        </action>
         <!--Poner comentarios sobre las actividades, se puede usar para comentar sobre los articulos-->
         <action name="Com" class="paquete.commentAction">
             <result name="exitoso">/studentIndex.jsp</result>

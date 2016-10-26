@@ -46,7 +46,7 @@ public class ModifyAction extends ActionSupport
     }
     
     public String getDefaultRol() {
-	return "Paciente";
+	return "RUSER";
 	}
  
     public String execute() {
