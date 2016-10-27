@@ -9,7 +9,7 @@
             int Id = Integer.parseInt(request.getParameter("id"));
             ResultSet rs=null;
             String nombre = "";
-            manejador.setConnection("com.mysql.jdbc.Driver","jdbc:mysql://localhost:3306/baseloginservlet");
+            manejador.setConnection("com.mysql.jdbc.Driver","jdbc:mysql://localhost:3306/pat");
             rs=manejador.executeQuery("SELECT users.id FROM users WHERE idUser='"+Id+"' ");
             while(rs.next()){
                 nombre = rs.getString("users.id");

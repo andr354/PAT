@@ -5,7 +5,7 @@
 <head>
   <!-- Theme Made By www.w3schools.com - No Copyright -->
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>SITA</title>
+  <title>PAT</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -208,9 +208,9 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="admin.jsp">INICIO</a></li>
-        <li><a href="medicos.jsp">Alumnos</a></li>
-        <li><a href="pacientes.jsp">Profesores</a></li>
-        <li><a href="pacientes.jsp">Profesores+</a></li>
+        <li><a href="alumnos.jsp">Alumnos</a></li>
+        <li><a href="profs.jsp">Profesores</a></li>
+        <li><a href="profsp.jsp">Profesores+</a></li>
       </ul>
     </div>
   </div>
@@ -226,7 +226,7 @@
 <div id="about" class="container-fluid">
   <div class="row">
     <div class="col-sm-8">
-      <h2>Administración de usuarios</h2><br>
+      <h2>Administración de Usuarios</h2><br>
     </div>
     <div class="col-sm-4">
       <span class="glyphicon glyphicon-signal logo"></span>
@@ -235,6 +235,8 @@
         <%@ page import="java.sql.*" %>
         <jsp:useBean id="manejador" scope="session" class="paquete.DB"></jsp:useBean>
         <%
+            
+        try{    
             String user = (String)session.getAttribute("username");
             String acc = (String)session.getAttribute("acc");
             int acc2 = Integer.parseInt(acc);
@@ -289,6 +291,9 @@
         }else{
             response.sendRedirect("index.jsp");
         }
+        }catch(Exception e){
+            response.sendRedirect("index.jsp");
+        }
 
         %>
       </div>
@@ -312,9 +317,7 @@
   <a href="#myPage" title="To Top">
     <span class="glyphicon glyphicon-chevron-up"></span>
   </a>
-  <p>SITA</p>		
+  <p>PAT</p>		
 </footer>
-
-
 </body>
 </html>

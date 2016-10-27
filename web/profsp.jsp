@@ -2,13 +2,10 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <html lang="es">
-    <%
-        int Id = Integer.parseInt(request.getParameter("id"));
-    %>
 <head>
   <!-- Theme Made By www.w3schools.com - No Copyright -->
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>SITA</title>
+  <title>PAT</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -49,7 +46,7 @@
       background-color: #f6f6f6;
   }
   .logo-small {
-      color: #6c132b; /*anterior: 1DCEF6*/
+      color: #6c132b;
       font-size: 50px;
   }
   .logo {
@@ -221,7 +218,7 @@
 
 <div class="jumbotron text-center">
   <h1>PAT</h1> 
-  <p>PLATAFORMA DE APRENDIZAJE TURISTICO</p>  
+  <p>PLATAFORMA DE APRENDIZAJE TURISTICO</p> 
 
 </div>
 
@@ -229,29 +226,38 @@
 <div id="about" class="container-fluid">
   <div class="row">
     <div class="col-sm-8">
-      <h2>Modificar usuario</h2><br>
+      <h2>Administración de Profesores Generadores de contenido</h2><br>
     </div>
     <div class="col-sm-4">
-      <span class="glyphicon glyphicon-wrench logo"></span>
+      <span class="glyphicon glyphicon-signal logo"></span>
     </div>
-    <div class="col-sm-8">
-      <%@ page import="java.sql.*" %>
-      <jsp:useBean id="manejador" scope="session" class="paquete.DB"></jsp:useBean>
-      <h4>Datos actuales del usuario</h4>
-      <%
-            String user = (String)session.getAttribute("userName");
+      <div>
+        <%@ page import="java.sql.*" %>
+        <jsp:useBean id="manejador" scope="session" class="paquete.DB"></jsp:useBean>
+        <%
+            
+        try{    
+            String user = (String)session.getAttribute("username");
+            String acc = (String)session.getAttribute("acc");
+            int acc2 = Integer.parseInt(acc);
+        if(acc2==3){
+                //out.println("Acceso autorizado<br>");
+            
             String rol = "";
             int nivel = 1;
             ResultSet rs=null;
             ResultSet rs2 = null;
             manejador.setConnection("com.mysql.jdbc.Driver","jdbc:mysql://localhost:3306/pat");
-            rs2=manejador.executeQuery("SELECT idUser, id, password,nivel FROM users WHERE idUser='"+Id+"' ");
+
+            rs2=manejador.executeQuery("SELECT idUser, id, nivel FROM users");//id_usu, nom_usu, acc_usu FROM usuarios
+            
             out.println("<table class=\"table table-striped table-bordered table-responsive\">");
             out.println("<thead>");
             out.println("<tr>");
+            out.println("<th>Id</th>");
             out.println("<th>Nombre</th>");
-            out.println("<th>Password</th>");
             out.println("<th>Rol</th>");
+            out.println("<th>Acciones</th>");
             out.println("</tr>");
             out.println("</thead>");
             out.println("<tbody>");
@@ -268,27 +274,39 @@
                     acceso = "Profesor escolar";
                 }
                 out.println("<tr>");
+                out.println("<th>"+rs2.getString("users.idUser")+"</th>");
                 out.println("<th>"+rs2.getString("users.id")+"</th>");
-                out.println("<th>"+rs2.getString("users.password")+"</th>");
                 out.println("<th>"+acceso+"</th>");
+                //out.println("<th>"+rs2.getString("usuarios.acc_usu")+"</th>");
+                out.println("<th>");
+                out.println(" <a href='modificar.jsp?id="+rs2.getString("users.idUser")+"'>Modificar usuario</a> |");
+                out.println(" <a href='eliminar.jsp?id="+rs2.getString("users.idUser")+"'>Eliminar usuario</a> ");
+                out.println("</th>");
                 out.println("</tr>");
                 
             }
             
             out.println("</tbody>");
             out.println("</table>");
-      %>
-    </div>
+        }else{
+            response.sendRedirect("index.jsp");
+        }
+        }catch(Exception e){
+            response.sendRedirect("index.jsp");
+        }
+
+        %>
+      </div>
   </div>
-        <s:form action="/Mod">
-            <s:textfield placeHolder="nombre de usuario" name="username" label="Username"/>
-            <input type="hidden" name="id" value=<%out.println(Id);%>/>
-            <s:textfield placeHolder="Contraseña" name="password" label="Password" /><br>
+      <h2>Agregar nuevo Profesor generador de contenido</h2>
+        <s:form action="/Add">
+            <s:textfield placeHolder="ID" name="username" label="Username" required="true"/>
+            <s:textfield placeHolder="Contraseña" name="password" label="Password" required="true"/><br>
              <s:select label="Rol" 
 		headerKey="-1" headerValue="Asigne un rol al usuario"
 		list="#{'1':'Usuario','2':'Estudiante', '3':'Administrador', '4':'Profesor generador', '5':'Profesor escolar'}" 
 		name="rol" 
-		value="rol" />
+		value="rol"  required="true"/>
             <br>
             <br>
             <s:submit/>
@@ -299,9 +317,7 @@
   <a href="#myPage" title="To Top">
     <span class="glyphicon glyphicon-chevron-up"></span>
   </a>
-  <p>PAT</p>		
+  <p>SITA</p>		
 </footer>
-
-
 </body>
 </html>

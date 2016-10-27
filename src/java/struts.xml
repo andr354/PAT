@@ -10,7 +10,7 @@
             <result name="exitoso">admin.jsp</result>
             <result name="exitosop">pacientei.jsp</result>
             <result name="exitosom">medicoi.jsp</result>
-            <result name="error">index.jsp</result>
+            <result name="error">fail.jsp</result>
         </action>
         <!---->
         <action name="Add" class="paquete.AddAction">
@@ -29,8 +29,8 @@
         </action>
         <!--Eliminar usuario-->
         <action name="Del" class="paquete.DelAction">
-            <result name="exitoso">/success.jsp</result>
-            <result name="error">/success.jsp</result>
+            <result name="exitoso">/admin.jsp</result>
+            <result name="error">/admin.jsp</result>
         </action>
         <!----><!--Eliminar diagrama, la parte de diagrama terminara convertida en articulo u OAT para que sea mas "fancy" xD--> 
         <action name="Deld" class="paquete.DelDAction">
