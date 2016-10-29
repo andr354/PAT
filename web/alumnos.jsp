@@ -273,7 +273,7 @@
                 out.println("<th>"+rs2.getString("students.grp_std")+"</th>");
                 out.println("<th>");
                 out.println(" <a href='modificarEst.jsp?id="+rs2.getString("students.id_std")+"'>Modificar</a> |");
-                out.println(" <a href='eliminarEst.jsp?id="+rs2.getString("students.id_std")+"'>Eliminar privilegios</a> ");
+                out.println(" <a href='eliminarEst.jsp?id="+rs2.getString("students.id_usu")+"'>Eliminar privilegios</a> ");
                 out.println("</th>");
                 out.println("</tr>");
                 
@@ -292,7 +292,7 @@
       </div>
   </div>
       <h2>Agregar nuevo alumno</h2>
-        <s:form action="/Add">
+        <s:form action="/AddAlumno">
             <s:textfield placeHolder="ID de usuario" name="idu" label="idu" required="true"/>
             <s:textfield placeHolder="Nombre(s)" name="nombre" label="nombre" required="true"/>
             <s:textfield placeHolder="Apellido(s)" name="apps" label="apps" required="true"/>

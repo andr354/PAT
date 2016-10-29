@@ -105,6 +105,34 @@ class LoginBean{
         return status;
     }
     
+    public int deleteUserEst(int id){
+        int status = 0;
+        try {
+            con = DataSource.getInstance().getConnection();
+            String consulta = "DELETE FROM students\n" +
+                                "WHERE id_usu="+id+";";
+            pst = con.prepareStatement(consulta);
+            int cols = pst.executeUpdate(consulta);
+            status=deleteUserEst2(id);
+        } catch (Exception e) {  
+            System.out.println(e);  
+        }
+        return status;
+    }
+    public int deleteUserEst2(int id){
+        int status = 0;
+        try {
+            con = DataSource.getInstance().getConnection();
+            String consulta = "UPDATE users set rol = 'RUSER', nivel=1 where idUser="+id+" ;";
+            pst = con.prepareStatement(consulta);
+            int cols = pst.executeUpdate(consulta);
+            status=1;
+        } catch (Exception e) {  
+            System.out.println(e);  
+        }
+        return status;
+    }
+    
     public int addUser(String userName, String password, int rol){
         int status = 0;
         String nivel = "STUDENT";

@@ -17,6 +17,11 @@
             <result name="exitoso">admin.jsp</result>
             <result name="error">admin.jsp</result>
         </action>
+        <!--Añade alumno dentro del modulo de administrador, la idea es que tambien sirva para que un usuario se registre a si mismo como alumno-->
+        <action name="AddAlumno" class="paquete.AddAlumnoAction">
+            <result name="exitoso">alumnos.jsp</result>
+            <result name="error">admin.jsp</result>
+        </action>
         <!--Poner comentarios sobre las actividades, se puede usar para comentar sobre los articulos-->
         <action name="Com" class="paquete.commentAction">
             <result name="exitoso">/studentIndex.jsp</result>
@@ -32,6 +37,11 @@
             <result name="exitoso">/admin.jsp</result>
             <result name="error">/admin.jsp</result>
         </action>
+        <!--Eliminar privilegios de estudiante de un usuario-->
+        <action name="DelEst" class="paquete.DelEstAction">
+            <result name="exitoso">/alumnos.jsp</result>
+            <result name="error">/alumnos.jsp</result>
+        </action>
         <!----><!--Eliminar diagrama, la parte de diagrama terminara convertida en articulo u OAT para que sea mas "fancy" xD--> 
         <action name="Deld" class="paquete.DelDAction">
             <result name="exitoso">/professorIndex.jsp</result>
@@ -42,6 +52,10 @@
             <result name="exitoso">admin.jsp</result>
             <result name="error">admin.jsp</result>
         </action>
-
+        <!----><!--Modificar estudiante--> 
+        <action name="ModEst" class="paquete.ModifyStudentAction">
+            <result name="exitoso">alumnos.jsp</result>
+            <result name="error">alumnos.jsp</result>
+        </action>
     </package>
 </struts>

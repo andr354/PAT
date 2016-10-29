@@ -229,7 +229,7 @@
 <div id="about" class="container-fluid">
   <div class="row">
     <div class="col-sm-8">
-      <h2>Modificar usuario</h2><br>
+      <h2>Modificar Usuario Alumno</h2><br>
     </div>
     <div class="col-sm-4">
       <span class="glyphicon glyphicon-wrench logo"></span>
@@ -245,32 +245,22 @@
             ResultSet rs=null;
             ResultSet rs2 = null;
             manejador.setConnection("com.mysql.jdbc.Driver","jdbc:mysql://localhost:3306/pat");
-            rs2=manejador.executeQuery("SELECT idUser, id, password,nivel FROM users WHERE idUser='"+Id+"' ");
+            rs2=manejador.executeQuery("SELECT idprofesor, nom_std,app_std, nom_prof, apps_prof FROM students, profesc WHERE id_std='"+Id+"' ");
             out.println("<table class=\"table table-striped table-bordered table-responsive\">");
             out.println("<thead>");
             out.println("<tr>");
             out.println("<th>Nombre</th>");
-            out.println("<th>Password</th>");
-            out.println("<th>Rol</th>");
+            out.println("<th>ID Prof</th>");
+            out.println("<th>Profesor</th>");
             out.println("</tr>");
             out.println("</thead>");
             out.println("<tbody>");
             
             while(rs2.next()){
-                String acceso = "Usuario Registrado";
-                if(rs2.getInt("users.nivel")==2){
-                    acceso = "Usuario alumno";
-                }else if(rs2.getInt("users.nivel")==3){
-                    acceso = "Administrador";
-                }else if(rs2.getInt("users.nivel")==4){
-                    acceso = "Profesor generador";
-                }else if(rs2.getInt("users.nivel")==5){
-                    acceso = "Profesor escolar";
-                }
                 out.println("<tr>");
-                out.println("<th>"+rs2.getString("users.id")+"</th>");
-                out.println("<th>"+rs2.getString("users.password")+"</th>");
-                out.println("<th>"+acceso+"</th>");
+                out.println("<th>"+rs2.getString("students.nom_std")+" "+rs2.getString("students.app_std")+"</th>");
+                out.println("<th>"+rs2.getString("students.idprofesor")+"</th>");
+                out.println("<th>"+rs2.getString("profesc.nom_prof")+" "+rs2.getString("profesc.apps_prof")+"</th>");
                 out.println("</tr>");
                 
             }
@@ -281,15 +271,11 @@
     </div>
   </div>
     <h2>Nuevos datos</h2><br>
-        <s:form action="/Mod">
-            <s:textfield placeHolder="nombre de usuario" name="username" label="Username"/>
+        <s:form action="/ModEst">
+            <s:textfield placeHolder="Nombre(s)" name="noms" label="noms"/>
+            <s:textfield placeHolder="Apellido(s)" name="apps" label="apps"/>
             <input type="hidden" name="id" value=<%out.println(Id);%>/>
-            <s:textfield placeHolder="Contraseña" name="password" label="Password" /><br>
-             <s:select label="Rol" 
-		headerKey="-1" headerValue="Asigne un rol al usuario"
-		list="#{'1':'Usuario','2':'Estudiante', '3':'Administrador', '4':'Profesor generador', '5':'Profesor escolar'}" 
-		name="rol" 
-		value="rol" />
+            <input type="number" placeHolder="ID de profesor" name="idprof" /><br>
             <br>
             <br>
             <s:submit/>
@@ -306,3 +292,4 @@
 
 </body>
 </html>
+

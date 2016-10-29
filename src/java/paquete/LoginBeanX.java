@@ -102,6 +102,22 @@ class LoginBeanX{
         return status;
     }
     
+    public int modifyStudent(String nom, String app, int id, int idprof){
+        int status = 0;
+        try {
+            con = Conexion.getConexion();
+            String consulta = "update students\n" +
+                            "set nom_std='"+nom+"', app_std='"+app+"', idprofesor="+idprof+"\n" +
+                            "where id_std="+id+";"; 
+            pst = con.prepareStatement(consulta);
+            int cols = pst.executeUpdate(consulta);
+            status=1;
+        } catch (Exception e) {  
+            System.out.println(e);  
+        }
+        return status;
+    }
+    
     public int MModifyUser(int id, String nom, String aps, String callen, String colonia, String del, String cd, String ced, String edad, String esp){
         int status = 0;
         try {
@@ -139,6 +155,20 @@ class LoginBeanX{
             con = Conexion.getConexion();
             String consulta = "DELETE FROM medicos\n" +
                                 "WHERE id_med='"+id+"';";
+            pst = con.prepareStatement(consulta);
+            int cols = pst.executeUpdate(consulta);
+            status=1;
+        } catch (Exception e) {  
+            System.out.println(e);  
+        }
+        return status;
+    }
+    
+    public int addAlumno(int id_usu, String nombre, String apellido, int id_prof){
+        int status = 0;
+        try {
+            con = Conexion.getConexion();
+            String consulta = "insert into students(id_usu,idprofesor, nom_std, app_std) values(" + id_usu + "," + id_prof + ", '"+nombre+"', '"+apellido+"');";//ya se que esta al reves pero nimodo :D
             pst = con.prepareStatement(consulta);
             int cols = pst.executeUpdate(consulta);
             status=1;
