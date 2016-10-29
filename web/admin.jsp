@@ -249,13 +249,14 @@
             ResultSet rs2 = null;
             manejador.setConnection("com.mysql.jdbc.Driver","jdbc:mysql://localhost:3306/pat");
 
-            rs2=manejador.executeQuery("SELECT idUser, id, nivel FROM users");//id_usu, nom_usu, acc_usu FROM usuarios
+            rs2=manejador.executeQuery("SELECT idUser, id, nivel, email FROM users");//id_usu, nom_usu, acc_usu FROM usuarios
             
             out.println("<table class=\"table table-striped table-bordered table-responsive\">");
             out.println("<thead>");
             out.println("<tr>");
             out.println("<th>Id</th>");
             out.println("<th>Nombre</th>");
+            out.println("<th>Email</th>");
             out.println("<th>Rol</th>");
             out.println("<th>Acciones</th>");
             out.println("</tr>");
@@ -276,6 +277,7 @@
                 out.println("<tr>");
                 out.println("<th>"+rs2.getString("users.idUser")+"</th>");
                 out.println("<th>"+rs2.getString("users.id")+"</th>");
+                out.println("<th>"+rs2.getString("users.email")+"</th>");
                 out.println("<th>"+acceso+"</th>");
                 //out.println("<th>"+rs2.getString("usuarios.acc_usu")+"</th>");
                 out.println("<th>");
@@ -300,8 +302,9 @@
   </div>
       <h2>Agregar nuevo usuario</h2>
         <s:form action="/Add">
-            <s:textfield placeHolder="ID" name="username" label="Username" required="true"/>
+            <s:textfield placeHolder="Nombre de usuario" name="username" label="Username" required="true"/>
             <s:textfield placeHolder="Contraseña" name="password" label="Password" required="true"/><br>
+            <s:textfield placeHolder="Nombre de usuario" name="username" label="Username" required="true"/>
              <s:select label="Rol" 
 		headerKey="-1" headerValue="Asigne un rol al usuario"
 		list="#{'1':'Usuario','2':'Estudiante', '3':'Administrador', '4':'Profesor generador', '5':'Profesor escolar'}" 

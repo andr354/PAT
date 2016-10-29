@@ -247,7 +247,7 @@
             ResultSet rs2 = null;
             manejador.setConnection("com.mysql.jdbc.Driver","jdbc:mysql://localhost:3306/pat");
 
-            rs2=manejador.executeQuery("SELECT id_std, students.id_usu, idprofesor, nom_std, app_std, grp_std, nom_prof, apps_prof FROM students, profesc");//id_usu, nom_usu, acc_usu FROM usuarios
+            rs2=manejador.executeQuery("SELECT id_std, students.id_usu, idprofesor, nom_std, app_std, grp_std, nom_prof, apps_prof FROM students, profesc WHERE idprofesor=id_profe");//id_usu, nom_usu, acc_usu FROM usuarios
             
             out.println("<table class=\"table table-striped table-bordered table-responsive\">");
             out.println("<thead>");
