@@ -212,4 +212,68 @@ class LoginBean{
         }
         return status;
     }
+    public int addProfEsc(int id_usuario, String nombre, String apellidos, String escuela){
+        int status = 0;
+        try {
+            con = Conexion.getConexion();
+            String consulta = "insert into profesc( id_usu, nom_prof, apps_prof, escuela) values('"
+                    + id_usuario + "', '"
+                    + nombre + "', '"
+                    + apellidos +"', '"
+                    + escuela
+                    +"');";//ya se que esta al reves pero nimodo :D
+            pst = con.prepareStatement(consulta);
+            int cols = pst.executeUpdate(consulta);
+            status=1;
+        } catch (Exception e) {  
+            System.out.println(e);  
+        }
+        return status;
+    }
+    
+    private Boolean strIsValid(String pwd){
+        if( pwd==null || pwd=="" )
+            return false;
+        return true;
+    }
+    
+    public int modifyPE(String nombre, String apellidos, String escuela, int id_usuario){
+        String table_name="profesc";
+        int status = 0;
+        if(strIsValid(nombre)&&strIsValid(apellidos)&&strIsValid(escuela)&&id_usuario!=0){
+            try{
+                con = DataSource.getInstance().getConnection();
+                String consulta = "UPDATE "+table_name +" "
+                            + "SET nom_prof='"+nombre
+                            + "', apps_prof='"+apellidos
+                            + "', escuela='"+escuela
+                            + "' WHERE id_profe="+id_usuario+";";
+                System.out.println(consulta);
+                pst = con.prepareStatement(consulta);
+                int cols = pst.executeUpdate(consulta);
+                status=1;
+            } catch (Exception e) { 
+                System.out.println(status);
+                System.out.println(e);  
+            }
+        }
+        return status;
+    }
+    
+    public int borrarPE(int id){
+        int status = 0;
+        try {
+            con = DataSource.getInstance().getConnection();
+            String consulta = "DELETE FROM profesc " +
+                                "WHERE id_profe="+id+";";
+            System.out.println(consulta);
+            pst = con.prepareStatement(consulta);
+            int cols = pst.executeUpdate(consulta);
+            //status=deleteUserEst2(id);
+            status = 1;
+        } catch (Exception e) {  
+            System.out.println(e);  
+        }
+        return status;
+    }
 }

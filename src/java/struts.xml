@@ -77,5 +77,20 @@
             <result name="exitoso">profsp.jsp</result>
             <result name="error">profsp.jsp</result>
         </action>
+        <!----><!--Crear profesor escolar--> 
+        <action name="AddProfEsc" class="paquete.AddProfEscAction">
+            <result name="exitoso">profs.jsp</result>
+            <result name="error">profs.jsp</result>
+        </action>
+       <!----><!--Modificar profesor escolar--> 
+        <action name="ModificarPE" class="paquete.ModificarPEAction">
+            <result name="exitoso">profs.jsp</result>
+            <result name="error">profs.jsp</result>
+        </action>
+        <!----><!--Eliminar perfil de profesor escolar--> 
+        <action name="BorrarProfEsc" class="paquete.BorrarProfEscAction">
+            <result name="exitoso">profs.jsp</result>
+            <result name="error">profs.jsp</result>
+        </action>
     </package>
 </struts>
