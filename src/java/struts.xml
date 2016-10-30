@@ -22,6 +22,11 @@
             <result name="exitoso">alumnos.jsp</result>
             <result name="error">admin.jsp</result>
         </action>
+        <!--Añade OAT-->
+        <action name="AddOAT" class="paquete.AddOATAction">
+            <result name="exitoso">oats.jsp</result>
+            <result name="error">oats.jsp</result>
+        </action>
         <!--Poner comentarios sobre las actividades, se puede usar para comentar sobre los articulos-->
         <action name="Com" class="paquete.commentAction">
             <result name="exitoso">/studentIndex.jsp</result>
@@ -47,6 +52,11 @@
             <result name="exitoso">/professorIndex.jsp</result>
             <result name="error">/professorIndex.jsp</result>
         </action>
+        <!----><!--Eliminar privilegios prof G--> 
+        <action name="DelProfG" class="paquete.DelProfGAction">
+            <result name="exitoso">/profsp.jsp</result>
+            <result name="error">/profsp.jsp</result>
+        </action>
         <!----><!--Modificar usuarios--> 
         <action name="Mod" class="paquete.ModifyAction">
             <result name="exitoso">admin.jsp</result>
@@ -56,6 +66,16 @@
         <action name="ModEst" class="paquete.ModifyStudentAction">
             <result name="exitoso">alumnos.jsp</result>
             <result name="error">alumnos.jsp</result>
+        </action>
+        <!----><!--Modificar profesor generador--> 
+        <action name="ModProfGen" class="paquete.ModifyPGAction">
+            <result name="exitoso">profsp.jsp</result>
+            <result name="error">profsp.jsp</result>
+        </action>
+        <!----><!--Añadir profesor generador--> 
+        <action name="AddProfesorG" class="paquete.AddProfGAction">
+            <result name="exitoso">profsp.jsp</result>
+            <result name="error">profsp.jsp</result>
         </action>
     </package>
 </struts>

@@ -2,6 +2,9 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <html lang="es">
+    <%
+        int Id = Integer.parseInt(request.getParameter("id"));
+    %>
 <head>
   <!-- Theme Made By www.w3schools.com - No Copyright -->
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -46,7 +49,7 @@
       background-color: #f6f6f6;
   }
   .logo-small {
-      color: #6c132b;
+      color: #6c132b; /*anterior: 1DCEF6*/
       font-size: 50px;
   }
   .logo {
@@ -218,7 +221,7 @@
 
 <div class="jumbotron text-center">
   <h1>PAT</h1> 
-  <p>PLATAFORMA DE APRENDIZAJE TURISTICO</p> 
+  <p>PLATAFORMA DE APRENDIZAJE TURISTICO</p>  
 
 </div>
 
@@ -226,72 +229,57 @@
 <div id="about" class="container-fluid">
   <div class="row">
     <div class="col-sm-8">
-      <h2>Administración de Profesores generadores de contenido</h2><br>
+      <h2>Modificar Usuario Profesor Generador</h2><br>
     </div>
     <div class="col-sm-4">
-      <span class="glyphicon glyphicon-signal logo"></span>
+      <span class="glyphicon glyphicon-wrench logo"></span>
     </div>
-      <div>
-        <%@ page import="java.sql.*" %>
-        <jsp:useBean id="manejador" scope="session" class="paquete.DB"></jsp:useBean>
-        <%
-            
-        try{
-            String user = (String)session.getAttribute("username");
-            String acc = (String)session.getAttribute("acc");
-            int acc2 = Integer.parseInt(acc);  
-        if(acc2==3){
-                //out.println("Acceso autorizado<br>");
+    <div class="col-sm-8">
+      <%@ page import="java.sql.*" %>
+      <jsp:useBean id="manejador" scope="session" class="paquete.DB"></jsp:useBean>
+      <h4>Datos actuales del usuario</h4>
+      <%
+            String user = (String)session.getAttribute("userName");
+            String rol = "";
+            String nomp="";
+            String appp="";
+            String espp="";
+            int nivel = 1;
             ResultSet rs=null;
             ResultSet rs2 = null;
             manejador.setConnection("com.mysql.jdbc.Driver","jdbc:mysql://localhost:3306/pat");
-
-            rs2=manejador.executeQuery("SELECT * FROM profesores");//id_usu, nom_usu, acc_usu FROM usuarios
-            
+            rs2=manejador.executeQuery("SELECT * FROM profesores WHERE id_prof='"+Id+"' ");
             out.println("<table class=\"table table-striped table-bordered table-responsive\">");
             out.println("<thead>");
             out.println("<tr>");
-            out.println("<th>Id Profesor</th>");
-            out.println("<th>Id Usuario</th>");
             out.println("<th>Nombre</th>");
             out.println("<th>Especialidad</th>");
-            out.println("<th>Acciones</th>");
             out.println("</tr>");
             out.println("</thead>");
             out.println("<tbody>");
             
             while(rs2.next()){
+                nomp=rs2.getString("profesores.nom_prof");
+                appp=rs2.getString("profesores.apps_prof");
+                espp=rs2.getString("profesores.esp_prof");
                 out.println("<tr>");
-                out.println("<th>"+rs2.getString("profesores.id_prof")+"</th>");
-                out.println("<th>"+rs2.getString("profesores.id_usu")+"</th>");
-                out.println("<th>"+rs2.getString("profesores.nom_prof")+" "+rs2.getString("profesores.apps_prof")+"</th>");
-                out.println("<th>"+rs2.getString("profesores.esp_prof")+"</th>");
-                out.println("<th>");
-                out.println(" <a href='modificarProf.jsp?id="+rs2.getString("profesores.id_prof")+"'>Modificar</a> |");
-                out.println(" <a href='eliminarProf.jsp?id="+rs2.getString("profesores.id_usu")+"'>Eliminar privilegios</a> ");
-                out.println("</th>");
+                out.println("<th>"+nomp+" "+appp+"</th>");
+                out.println("<th>"+espp+"</th>");
                 out.println("</tr>");
                 
             }
             
             out.println("</tbody>");
             out.println("</table>");
-        }else{
-            response.sendRedirect("index.jsp");
-        }
-        }catch(Exception e){
-            response.sendRedirect("index.jsp");
-        }
-
-        %>
-      </div>
+      %>
+    </div>
   </div>
-      <h2>Agregar nuevo Profesor Generador de Contenido</h2>
-        <s:form action="/AddProfesorG">
-            ID de usuario: <br><input type ="number" name="idu"/><br>
-            Nombre(s): <br><input type="text" name = "nombre"/><br>
-            Apellido(s): <br><input type="text" name = "apps"/><br>
-            Especialidad: <br><input type ="text" name="esp"/><br>
+    <h2>Nuevos datos</h2><br>
+        <s:form action="/ModProfGen">
+            <input type="hidden" name="id" value=<%out.println(Id);%>/>
+            Nombre(s):<br><input type="text" placeHolder="Nombre" name="noms" value=<%out.println(nomp);%> /><br>
+            Apellido(s):<br><input type="text" placeHolder="Apellido" name="apps" value=<%out.println(appp);%> /><br>
+            Especialidad(s):<br><input type="text" placeHolder="Especialidad" name="esp" value=<%out.println(espp);%> /><br>
             <br>
             <br>
             <s:submit/>
@@ -304,5 +292,9 @@
   </a>
   <p>PAT</p>		
 </footer>
+
+
 </body>
 </html>
+
+

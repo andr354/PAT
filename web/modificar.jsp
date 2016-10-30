@@ -290,6 +290,7 @@
 		list="#{'1':'Usuario','2':'Estudiante', '3':'Administrador', '4':'Profesor generador', '5':'Profesor escolar'}" 
 		name="rol" 
 		value="rol" />
+             Correo electronico:<input type="email" name="mail">
             <br>
             <br>
             <s:submit/>

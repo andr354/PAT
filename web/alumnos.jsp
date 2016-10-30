@@ -241,13 +241,11 @@
             String acc = (String)session.getAttribute("acc");
             int acc2 = Integer.parseInt(acc);  
         if(acc2==3){
-                //out.println("Acceso autorizado<br>");
-            System.out.println("Probando alumnos2...");
             ResultSet rs=null;
             ResultSet rs2 = null;
             manejador.setConnection("com.mysql.jdbc.Driver","jdbc:mysql://localhost:3306/pat");
 
-            rs2=manejador.executeQuery("SELECT id_std, students.id_usu, idprofesor, nom_std, app_std, grp_std, nom_prof, apps_prof FROM students, profesc WHERE idprofesor=id_profe");//id_usu, nom_usu, acc_usu FROM usuarios
+            rs2=manejador.executeQuery("SELECT id_std, students.id_usu, idprofesor, nom_std, app_std, grp_std, nom_prof, apps_prof FROM students, profesc WHERE idprofesor=id_profe");
             
             out.println("<table class=\"table table-striped table-bordered table-responsive\">");
             out.println("<thead>");
@@ -293,10 +291,10 @@
   </div>
       <h2>Agregar nuevo alumno</h2>
         <s:form action="/AddAlumno">
-            <s:textfield placeHolder="ID de usuario" name="idu" label="idu" required="true"/>
-            <s:textfield placeHolder="Nombre(s)" name="nombre" label="nombre" required="true"/>
-            <s:textfield placeHolder="Apellido(s)" name="apps" label="apps" required="true"/>
-            <s:textfield placeHolder="ID de profesor" name="idp" label="idp" required="true"/><br>
+            ID de usuario: <br><input type ="number" name="idu"/><br>
+            Nombre(s): <br><input type="text" name = "nombre"/><br>
+            Apellido(s): <br><input type="text" name = "apps"/><br>
+            ID de profesor: <br><input type ="number" name="idp"/><br>
             <br>
             <br>
             <s:submit/>

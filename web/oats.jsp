@@ -13,6 +13,8 @@
   <link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+  <script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
   <style>
   body {
       font: 400 15px Lato, sans-serif;
@@ -203,7 +205,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="index.jsp">Logo</a>
+      <a class="navbar-brand" href="index.jsp">Logo </a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
@@ -226,7 +228,7 @@
 <div id="about" class="container-fluid">
   <div class="row">
     <div class="col-sm-8">
-      <h2>Administración de Profesores generadores de contenido</h2><br>
+      <h2>Administración de OATs</h2><br>
     </div>
     <div class="col-sm-4">
       <span class="glyphicon glyphicon-signal logo"></span>
@@ -241,20 +243,21 @@
             String acc = (String)session.getAttribute("acc");
             int acc2 = Integer.parseInt(acc);  
         if(acc2==3){
-                //out.println("Acceso autorizado<br>");
             ResultSet rs=null;
             ResultSet rs2 = null;
             manejador.setConnection("com.mysql.jdbc.Driver","jdbc:mysql://localhost:3306/pat");
 
-            rs2=manejador.executeQuery("SELECT * FROM profesores");//id_usu, nom_usu, acc_usu FROM usuarios
+            rs2=manejador.executeQuery("SELECT * FROM oats, profesores WHERE oats.id_prof=profesores.id_prof;");
             
             out.println("<table class=\"table table-striped table-bordered table-responsive\">");
             out.println("<thead>");
             out.println("<tr>");
-            out.println("<th>Id Profesor</th>");
-            out.println("<th>Id Usuario</th>");
-            out.println("<th>Nombre</th>");
-            out.println("<th>Especialidad</th>");
+            out.println("<th>Id oat</th>");
+            out.println("<th>Creador</th>");
+            out.println("<th>Titulo</th>");
+            out.println("<th>Descripción</th>");
+            out.println("<th>Fecha</th>");
+            out.println("<th>Curso</th>");
             out.println("<th>Acciones</th>");
             out.println("</tr>");
             out.println("</thead>");
@@ -262,13 +265,16 @@
             
             while(rs2.next()){
                 out.println("<tr>");
-                out.println("<th>"+rs2.getString("profesores.id_prof")+"</th>");
-                out.println("<th>"+rs2.getString("profesores.id_usu")+"</th>");
+                out.println("<th>"+rs2.getString("oats.id_oat")+"</th>");
                 out.println("<th>"+rs2.getString("profesores.nom_prof")+" "+rs2.getString("profesores.apps_prof")+"</th>");
-                out.println("<th>"+rs2.getString("profesores.esp_prof")+"</th>");
+                out.println("<th>"+rs2.getString("oats.titulo")+"</th>");
+                out.println("<th>"+rs2.getString("oats.descrip")+"</th>");
+                out.println("<th>"+rs2.getString("oats.fecha")+"</th>");
+                out.println("<th>"+rs2.getString("oats.curso")+"</th>");
                 out.println("<th>");
-                out.println(" <a href='modificarProf.jsp?id="+rs2.getString("profesores.id_prof")+"'>Modificar</a> |");
-                out.println(" <a href='eliminarProf.jsp?id="+rs2.getString("profesores.id_usu")+"'>Eliminar privilegios</a> ");
+                out.println(" <a href='veroat.jsp?id="+rs2.getString("oats.id_oat")+"'>Ver</a> |");
+                out.println(" <a href='modificarEst.jsp?id="+rs2.getString("oats.id_oat")+"'>Modificar</a> |");
+                out.println(" <a href='eliminarEst.jsp?id="+rs2.getString("oats.id_oat")+"'>Eliminar privilegios</a>");
                 out.println("</th>");
                 out.println("</tr>");
                 
@@ -286,22 +292,26 @@
         %>
       </div>
   </div>
-      <h2>Agregar nuevo Profesor Generador de Contenido</h2>
-        <s:form action="/AddProfesorG">
-            ID de usuario: <br><input type ="number" name="idu"/><br>
-            Nombre(s): <br><input type="text" name = "nombre"/><br>
-            Apellido(s): <br><input type="text" name = "apps"/><br>
-            Especialidad: <br><input type ="text" name="esp"/><br>
+      <h2>Crear un OAT</h2>
+        <s:form action="/AddOAT" id="usrform">
+            ID de generador: <br><input type="number" name="id"/><br>
+            Titulo: <br><input type ="text" name="titulo"/><br>
+            Descripción: <br><input type="text" name = "desc"/><br>
+            Curso al que pertenece el OAT: <br><input type="number" name = "curso"/><br>
+            <br><textarea name="contenido" form="usrform" rows="20" cols="80"></textarea>
             <br>
             <br>
             <s:submit/>
         </s:form>
 </div>
-
+<script>
+        var f = new Date();
+        document.write(f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear());
+    </script>
 <footer class="container-fluid text-center">
   <a href="#myPage" title="To Top">
     <span class="glyphicon glyphicon-chevron-up"></span>
-  </a>
+  </a>         
   <p>PAT</p>		
 </footer>
 </body>

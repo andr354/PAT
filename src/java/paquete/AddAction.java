@@ -10,6 +10,15 @@ public class AddAction extends ActionSupport
         private String username;
         private String password;
         private int rol;
+        private String mail;
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
 
     public String getPassword() {
         return password;
@@ -43,7 +52,7 @@ public class AddAction extends ActionSupport
     public String execute() {
         System.out.println("Rol: " + rol);
          LoginBeanX lb = new LoginBeanX();
-        if(lb.addUser(username,password, rol)==1){
+        if(lb.addUser(username,password, rol, mail)==1){
             return "exitoso";
         }else{
             return "error";

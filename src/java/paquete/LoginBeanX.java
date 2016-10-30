@@ -4,6 +4,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -69,7 +71,7 @@ class LoginBeanX{
         return 0;
     }
     
-    public int modifyUser(String userName, String password, int rol, int id){
+    public int modifyUser(String userName, String password, int rol, int id, String mail){
         int status = 0;
         String pass2 = "";
         try {
@@ -91,7 +93,7 @@ class LoginBeanX{
                 password = pass2;
             }
             String consulta = "update users\n" +
-                            "set id='"+userName+"', password='"+password+"', rol='"+nivel+"', nivel='"+rol+"'\n" +
+                            "set id='"+userName+"', password='"+password+"', rol='"+nivel+"', nivel='"+rol+"'\n, email='"+mail+"'\n" +
                             "where idUser='"+id+"';"; //tambien esta al reves pero nimodo de nuevo
             pst = con.prepareStatement(consulta);
             int cols = pst.executeUpdate(consulta);
@@ -109,6 +111,22 @@ class LoginBeanX{
             String consulta = "update students\n" +
                             "set nom_std='"+nom+"', app_std='"+app+"', idprofesor="+idprof+"\n" +
                             "where id_std="+id+";"; 
+            pst = con.prepareStatement(consulta);
+            int cols = pst.executeUpdate(consulta);
+            status=1;
+        } catch (Exception e) {  
+            System.out.println(e);  
+        }
+        return status;
+    }
+    
+    public int modifyPG(String nom, String app, int id, String esp){
+        int status = 0;
+        try {
+            con = Conexion.getConexion();
+            String consulta = "update profesores\n" +
+                            "set nom_prof='"+nom+"', apps_prof='"+app+"', esp_prof='"+esp+"'\n" +
+                            "where id_prof='"+id+"';"; 
             pst = con.prepareStatement(consulta);
             int cols = pst.executeUpdate(consulta);
             status=1;
@@ -149,6 +167,34 @@ class LoginBeanX{
         return status;
     }
     
+    public int deleteProfG(int id){
+        int status = 0;
+        try {
+            con = Conexion.getConexion();
+            String consulta = "DELETE FROM profesores\n" +
+                                "WHERE id_usu='"+id+"';";
+            pst = con.prepareStatement(consulta);
+            int cols = pst.executeUpdate(consulta);
+            status=deleteProfGPart2(id);
+        } catch (Exception e) {  
+            System.out.println(e);  
+        }
+        return status;
+    }
+    
+    public int deleteProfGPart2(int id){
+        try {
+            con = Conexion.getConexion();
+            String consulta = "update users set rol='RUSER', nivel=1 WHERE idUser='"+id+"' ";
+            pst = con.prepareStatement(consulta);
+            int cols = pst.executeUpdate(consulta);
+            return 1;
+        } catch (Exception e) {  
+            System.out.println(e);  
+        }
+        return 0;
+    }
+    
     public int MdeleteUser(int id){
         int status = 0;
         try {
@@ -171,14 +217,63 @@ class LoginBeanX{
             String consulta = "insert into students(id_usu,idprofesor, nom_std, app_std) values(" + id_usu + "," + id_prof + ", '"+nombre+"', '"+apellido+"');";//ya se que esta al reves pero nimodo :D
             pst = con.prepareStatement(consulta);
             int cols = pst.executeUpdate(consulta);
-            status=1;
+            status=addAlumnoPlus(id_usu);
         } catch (Exception e) {  
             System.out.println(e);  
         }
         return status;
     }
     
-    public int addUser(String userName, String password, int rol){
+    public int addAlumnoPlus(int id_usu){
+        try{
+            con = Conexion.getConexion();
+            String consulta = "update users set nivel=2 WHERE id_usu='"+id_usu+"'";
+            return 1;
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        return 0;
+    }
+    
+    public int addProfG(int id_usu, String nombre, String apellido, String esp){
+        int status = 0;
+        try {
+            con = Conexion.getConexion();
+            String consulta = "insert into profesores(id_usu,nom_prof, apps_prof, esp_prof) values(" + id_usu + ", '"+nombre+"', '"+apellido+"', '"+esp+"');";
+            System.out.println(consulta);
+            pst = con.prepareStatement(consulta);
+            int cols = pst.executeUpdate(consulta);
+            status = 1;
+        } catch (Exception e) {  
+            System.out.println(e);  
+        }
+        return status;
+    }
+    
+    public int addOAT(int id, String titulo, String desc, int curso, String contenido){
+        Calendar fecha = new GregorianCalendar();
+        int año = fecha.get(Calendar.YEAR);
+        int mes = fecha.get(Calendar.MONTH);
+        int dia = fecha.get(Calendar.DAY_OF_MONTH);
+        int hora = fecha.get(Calendar.HOUR_OF_DAY);
+        int minuto = fecha.get(Calendar.MINUTE);
+        int segundo = fecha.get(Calendar.SECOND);
+        String cont = contenido.replace('"','\"');
+        int status = 0;
+        try {
+            con = Conexion.getConexion();
+            String consulta = "insert into oats(id_prof,titulo, descrip, diagrama, curso) values(" + id + ", '"+titulo+"', '"+desc+"', '"+cont +"', "+curso+");";
+            System.out.println(consulta);
+            pst = con.prepareStatement(consulta);
+            int cols = pst.executeUpdate(consulta);
+            status = 1;
+        } catch (Exception e) {  
+            System.out.println(e);  
+        }
+        return status;
+    }
+    
+    public int addUser(String userName, String password, int rol, String mail){
         int status = 0;
         String nivel = "RUSER";
             if(rol==5){
@@ -192,7 +287,7 @@ class LoginBeanX{
             }
         try {
             con = Conexion.getConexion();
-            String consulta = "insert into users(id, password, rol, nivel) values('"+userName+"', '"+password+"', '"+nivel+"', '"+rol+"');";//ya se que esta al reves pero nimodo :D
+            String consulta = "insert into users(id, password, rol, nivel, email) values('"+userName+"', '"+password+"', '"+nivel+"', '"+rol+"', '"+mail+"');";//ya se que esta al reves pero nimodo :D
             pst = con.prepareStatement(consulta);
             int cols = pst.executeUpdate(consulta);
             status=1;
