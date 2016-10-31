@@ -8,8 +8,10 @@
         <!--Login default de SITA, modificar para que sea compatible con admin, estudiante, profGen, profCurs, usuarioNormal-->
         <action name="Login" class="paquete.LoginAction">
             <result name="exitoso">admin.jsp</result>
-            <result name="exitosop">pacientei.jsp</result>
-            <result name="exitosom">medicoi.jsp</result>
+            <result name="exitosop">indexprofesc.jsp</result>
+            <result name="exitosopp">indexprofp.jsp</result>
+            <result name="exitosou">indexnus.jsp</result>
+            <result name="exitosos">indexalum.jsp</result>
             <result name="error">fail.jsp</result>
         </action>
         <!---->

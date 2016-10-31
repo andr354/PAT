@@ -42,7 +42,11 @@ public class LoginAction extends ActionSupport implements SessionAware
             if(acc==3){
                 return "exitoso";
             }else if(acc==2){
-                return "exitosom";
+                return "exitosos";
+            }else if(acc==1){
+                return "exitosou";
+            }else if(acc==4){
+                return "exitosopp";
             }else{
                 return "exitosop";
             }

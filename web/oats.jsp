@@ -13,8 +13,8 @@
   <link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
-  <script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
+  <!--<script src="ckeditor/ckeditor.js"></script>-->
+  <script src="//cdn.ckeditor.com/4.5.1/full-all/ckeditor.js"></script>
   <style>
   body {
       font: 400 15px Lato, sans-serif;
@@ -298,7 +298,12 @@
             Titulo: <br><input type ="text" name="titulo"/><br>
             Descripción: <br><input type="text" name = "desc"/><br>
             Curso al que pertenece el OAT: <br><input type="number" name = "curso"/><br>
-            <br><textarea name="contenido" form="usrform" rows="20" cols="80"></textarea>
+            <br><textarea name="contenido" form="usrform" id="contenido" rows="20" cols="80"></textarea>
+            <script>
+                // Replace the <textarea id="editor1"> with a CKEditor
+                // instance, using default configuration.
+                CKEDITOR.replace( 'contenido' );
+            </script>
             <br>
             <br>
             <s:submit/>
