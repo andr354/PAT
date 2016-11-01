@@ -319,7 +319,7 @@
     
     <%
             if(user==null&&acc==null){
-                out.println("<h2 class=\"text-center\">Inicio de Sesión");
+                out.println("<h2 class=\"text-center\">Inicio de Sesión</h2>");
             }else{
                 out.println("<h2 class=\"text-center\">Cerrar Sesión</h2>");
                 out.println("    <center>");
@@ -329,25 +329,28 @@
             }
     %>
     
-   <h2 class="text-center"></h2>
-    <center>
-    <s:form action="/Login">
-    <div class="col-sm-7 slideanim">
-      <div class="row">
-        <div class="col-sm-6 form-group">
-          < s:textfield placeHolder="Usuario" name="username" label="Username"/>
-          < s:password placeHolder="Contraseña" name="password" label="Password" />
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-12 form-group">
-          < s:submit value="Accesar"/>
-        </div>
-      </div>	
+                <!--<h2 class="text-center"></h2>-->
+            <div class="col-md-4 slideanim text-center col-md-offset-4 well">
+                <s:form action="/Login" class="form-group">
+                    <div class="row form-group">
+                        <!--<div class="col-sm-6 form-group">-->
+                        <div class="row-xs-3 form-group">
+                            <label for="usuario">Nombre de usuario: </label>
+                            <input type="text" name="username" placeholder="Usuario" id="usuario" class="btn-block form-group"/>
+                        </div>
+                        <div class="row-xs-3 form-group">                        
+                            <label for="contra">Contraseña: </label>
+                            <input type="password"  name="password" placeholder="Contraseña" id="contra" class="btn-block form-group"/>
+                        </div>
+                        <!--</div>-->
+                        <div class="row-xs-3 form-group">
+                            <br>
+                            <input type="submit" class="btn btn-primary form-group btn-block" value="Acceder"/>
+                        </div>
+                    </div>
+                </s:form>
+            </div>
     </div>
-    </s:form>
-    </center>
-</div>
 
 <!-- Add Google Maps -->
 <script src="http://maps.googleapis.com/maps/api/js"></script>

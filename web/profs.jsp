@@ -48,16 +48,13 @@
         <!-- Container (About Section) -->
         <div id="about" class="container-fluid">
             <div class="row">
-                <div class="col-sm-8">
-                    <h2>Administración de profesores escolares</h2><br>
+                <div class="text-center">
+                    <h2>Administración de profesores escolares</h2>
                 </div>
-                <div class="col-sm-4">
-                    <span class="glyphicon glyphicon-signal logo"></span>
-                </div>
-                <div>
+                <div class="text-center">
                     <%@ page import="java.sql.*" %>
                     <jsp:useBean id="manejador" scope="session" class="paquete.DB"></jsp:useBean>
-                        <h3>Agregar nuevo profesor escolar</h3>
+                    <h3>Agregar nuevo profesor escolar</h3>
                     <s:form action="/AddProfEsc" class="form-horizontal">
                         <div class="form-group">
                             <div class="col-xs-2">
@@ -68,7 +65,9 @@
                                             manejador.setConnection("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/pat");
                                             ResultSet users = manejador.executeQuery("SELECT idUser, id FROM users");
                                             while (users.next()) {
-                                                out.println("<option value=\"" + users.getString("users.idUser") + "\">" + users.getString("users.idUser") + " | " + users.getString("users.id")+ "</option>");
+                                                if(!users.getString("users.id").equals("Admin")){
+                                                    out.println("<option value=\"" + users.getString("users.idUser") + "\">" /*+ users.getString("users.idUser") + " | " */+ users.getString("users.id")+ "</option>");
+                                                }
                                             }
                                         } catch (Exception e) {
                                             out.print(e);
@@ -78,11 +77,11 @@
                                 </select>
                             </div>
                             <div class="col-xs-3">
-                                <label for="nombre">Nombre (s): </label>
+                                <label for="nombre">Nombre(s): </label>
                                 <input type="text" name="nombre" id="nombre" class="form-control"/>
                             </div>
                             <div class="col-xs-3">
-                                <label for="apellidos">Apellido (s)</label>
+                                <label for="apellidos">Apellido(s)</label>
                                 <input type="text" name="apellidos" id="apellidos" class="form-control"/>
                             </div>
                             <div class="col-xs-3">
@@ -105,8 +104,8 @@
                 <table class="table table-striped table-bordered table-responsive">
                     <thead>
                         <tr>
-                            <th>Id Prof</th>
-                            <th>id_usu</th>
+                            <!--<th>Id Prof</th>-->
+                            <th>Nombre de usuario</th>
                             <th>Nombre</th>
                             <th>Apellidos</th>
                             <th>Escuela</th>
@@ -122,25 +121,32 @@
                                 if (acc2 == 3) {
                                     //out.println("Acceso autorizado<br>");
                                     System.out.println("Probando Administracion de profesores escolares...");
+                                    ResultSet rs = null;
                                     ResultSet rs2 = null;
                                     manejador.setConnection("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/pat");
-                                    rs2 = manejador.executeQuery("SELECT id_profe, id_usu, nom_prof, apps_prof, escuela FROM profesc");
-
+                                    rs2 = manejador.executeQuery("SELECT users.id, id_profe, id_usu, nom_prof, apps_prof, escuela FROM profesc, users WHERE idUser=id_usu;");
                                     while (rs2.next()) {
                                         out.println("<tr>");
-                                        out.println("<th>" + rs2.getString("profesc.id_profe") + "</th>"
-                                                + "<th>" + rs2.getString("profesc.id_usu") + "</th>"
+                                        out.println(//"<th>" + rs2.getString("profesc.id_profe") + "</th>"
+                                                "<th>" + rs2.getString("users.id") + "</th>"
                                                 + "<th>" + rs2.getString("profesc.nom_prof") + "</th>"
                                                 + "<th>" + rs2.getString("profesc.apps_prof") + "</th>"
                                                 + "<th>" + rs2.getString("profesc.escuela") + "</th>"
                                         );
 
                                         out.println("<th>");
-                                        out.println(" <a class=\"btn btn-sm btn-info\" href='modificarProfEsc.jsp?id=" + rs2.getString("profesc.id_profe") + "'>Modificar</a>");
-                                        out.println(" <a class=\"btn btn-sm btn-info\" href='eliminarPE.jsp?id=" + rs2.getString("profesc.id_profe") + "'>Eliminar privilegios</a> ");
+                                        out.println(" <a "
+                                                + "class=\"btn btn-sm btn-info\" "
+                                                + "href='modificarProfEsc.jsp?id=" 
+                                                + rs2.getString("profesc.id_profe") 
+                                                + "'>Modificar</a>");
+                                        out.println(" <a "
+                                                + "class=\"btn btn-sm btn-info\" "
+                                                + "href='eliminarPE.jsp?id=" 
+                                                + rs2.getString("profesc.id_profe") 
+                                                + "'>Eliminar privilegios</a> ");
                                         out.println("</th>");
                                         out.println("</tr>");
-
                                     }
                                 } else {
                                     response.sendRedirect("index.jsp");
