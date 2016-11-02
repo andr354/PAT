@@ -33,10 +33,7 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="admin.jsp">INICIO</a></li>
-        <li><a href="alumnos.jsp">Alumnos</a></li>
-        <li><a href="profs.jsp">Profesores</a></li>
-        <li><a href="profsp.jsp">Profesores+</a></li>
+        <li><a href="indexprofesc.jsp">INICIO</a></li>
       </ul>
     </div>
   </div>
@@ -62,7 +59,7 @@
             ResultSet rs=null;
             ResultSet rs2 = null;
             manejador.setConnection("com.mysql.jdbc.Driver","jdbc:mysql://localhost:3306/pat");
-            rs2=manejador.executeQuery("SELECT * FROM oats, profesores WHERE id_oat='"+Id+"' ");
+            rs2=manejador.executeQuery("SELECT * FROM oats, profesc WHERE id_oat='"+Id+"' ");
             rs2.next();
             out.println("<h1><center>"+rs2.getString("oats.titulo")+"</h1>");
             out.println("<table class=\"table table-striped table-bordered table-responsive\">");
@@ -74,7 +71,7 @@
             out.println("</thead>");
             out.println("<tbody>");
             out.println("<tr>");
-            out.println("<th>"+rs2.getString("profesores.nom_prof")+" "+rs2.getString("profesores.apps_prof")+"</th>");
+            out.println("<th>"+rs2.getString("profesc.nom_prof")+" "+rs2.getString("profesc.apps_prof")+"</th>");
             out.println("<th>"+rs2.getString("oats.fecha")+"</th>");
             out.println("</tr>");
             out.println("</tbody>");

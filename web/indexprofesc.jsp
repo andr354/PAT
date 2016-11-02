@@ -14,6 +14,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <link rel="stylesheet" type="text/css" href="resources/PATEstilos.css">
+  <script src="//cdn.ckeditor.com/4.5.1/full-all/ckeditor.js"></script>
   
    <%
         int grupo = 0;
@@ -103,7 +104,8 @@ function capturar()
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="admin.jsp">INICIO</a></li>
+        <li><a href="indexprofesc.jsp">INICIO</a></li>
+        <li><a href="mensajes.jsp">MENSAJES</a></li>
         <%
             String user = (String)session.getAttribute("username");
             String acc = (String)session.getAttribute("acc");
@@ -164,7 +166,7 @@ function capturar()
                     idPr = rss.getInt("profesc.id_profe");
                 }
 
-            rs3=manejador.executeQuery("SELECT * FROM oats WHERE id_prof='"+idPr+"' ");
+            rs3=manejador.executeQuery("SELECT * FROM oats WHERE id_prof='"+idP+"' ");
             //manejador.closeConnection();
             //out.println("<h1>Bienvenido "+rol+" : "+user+"</h1>");
             System.out.println("-"+rol+"-");
@@ -202,7 +204,7 @@ function capturar()
             out.println("<div id=\"resultado\"></div>");
             
             out.println("<br><br>");
-            out.println("<h2>Diagramas creados:</h2>");
+            out.println("<h2>OATs creados:</h2>");
             out.println("<div class=\"container\">");
             out.println("<table class=\"table table-striped table-bordered table-responsive\">");
             out.println("<thead>");
@@ -224,7 +226,8 @@ function capturar()
                 out.println("<th id=\""+rs3.getInt("oats.id_oat")+"\">"+rs3.getInt("oats.estado")+"</th>");
                 out.println("<th>");
                 out.println("<button type=\"button\" onclick=\"loadDoc("+rs3.getInt("oats.id_oat")+","+rs3.getInt("oats.estado")+")\">Cambiar estado</button>");
-                out.println("<a href='eliminarD.jsp?id="+rs3.getInt("oats.id_oat")+"'>Eliminar</a>");
+                out.println("<a href='eliminarD.jsp?id="+rs3.getInt("oats.id_oat")+"'>Eliminar | </a>");
+                out.println("<a href='veroat2.jsp?id="+rs3.getInt("oats.id_oat")+"'>Ver</a>");
                 out.println("</th>");
                 out.println("</tr>");
                 
@@ -237,7 +240,22 @@ function capturar()
         %>
       </div>
   </div>
-      <h2>Agregar nuevo usuario</h2>
+      <h2>Agregar nuevo OAT</h2>
+      <s:form action="/AddOAT" id="usrform">
+            ID de generador: <br><input type="number" name="id"/><br>
+            Titulo: <br><input type ="text" name="titulo"/><br>
+            Descripción: <br><input type="text" name = "desc"/><br>
+            Curso al que pertenece el OAT: <br><input type="number" name = "curso"/><br>
+            <br><textarea name="contenido" form="usrform" id="contenido" rows="20" cols="80"></textarea>
+            <script>
+                // Replace the <textarea id="editor1"> with a CKEditor
+                // instance, using default configuration.
+                CKEDITOR.replace( 'contenido' );
+            </script>
+            <br>
+            <br>
+            <s:submit/>
+        </s:form>
 
 </div>
 

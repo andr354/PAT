@@ -23,16 +23,16 @@
             int result = 0;
             int estado = 0;
             ResultSet rs=null;
-            manejador.setConnection("com.mysql.jdbc.Driver","jdbc:mysql://localhost:3306/baseloginservlet");
-            rs=manejador.executeQuery("SELECT estado FROM diagramasP WHERE id_dip='"+Id+"'");
+            manejador.setConnection("com.mysql.jdbc.Driver","jdbc:mysql://localhost:3306/pat");
+            rs=manejador.executeQuery("SELECT estado FROM oats WHERE id_oat='"+Id+"'");
             rs.next();
-            estado = rs.getInt("diagramasP.estado");
+            estado = rs.getInt("oats.estado");
             if(estado==0){
                 estado=1;
             }else{
                 estado=0;
             }
-            result = manejador.executeUpdate("UPDATE diagramasP set estado="+estado+" where id_dip="+Id+"");
+            result = manejador.executeUpdate("UPDATE oats set estado="+estado+" where id_oat="+Id+"");
             
             System.out.println(result);
       %>
