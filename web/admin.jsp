@@ -35,6 +35,7 @@
         <li><a href="profs.jsp">Profesores</a></li>
         <li><a href="profsp.jsp">Profesores+</a></li>
         <li><a href="oats.jsp">OATs</a></li>
+        <li><a href="cursos.jsp">CURSOS</a></li>
       </ul>
     </div>
   </div>

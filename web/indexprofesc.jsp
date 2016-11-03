@@ -226,7 +226,7 @@ function capturar()
                 out.println("<th id=\""+rs3.getInt("oats.id_oat")+"\">"+rs3.getInt("oats.estado")+"</th>");
                 out.println("<th>");
                 out.println("<button type=\"button\" onclick=\"loadDoc("+rs3.getInt("oats.id_oat")+","+rs3.getInt("oats.estado")+")\">Cambiar estado</button>");
-                out.println("<a href='eliminarD.jsp?id="+rs3.getInt("oats.id_oat")+"'>Eliminar | </a>");
+                out.println("<a href='eliminarOAt.jsp?id="+rs3.getInt("oats.id_oat")+"'>Eliminar | </a>");
                 out.println("<a href='veroat2.jsp?id="+rs3.getInt("oats.id_oat")+"'>Ver</a>");
                 out.println("</th>");
                 out.println("</tr>");

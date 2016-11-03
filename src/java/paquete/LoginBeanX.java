@@ -224,10 +224,26 @@ class LoginBeanX{
         return status;
     }
     
+    
     public int addAlumnoPlus(int id_usu){
         try{
             con = Conexion.getConexion();
             String consulta = "update users set nivel=2 WHERE id_usu='"+id_usu+"'";
+            pst = con.prepareStatement(consulta);
+            int cols = pst.executeUpdate(consulta);
+            return 1;
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        return 0;
+    }
+    
+    public int envMSJ(int usuario, String titulo, String texto, int idenvia){
+        try{
+            con = Conexion.getConexion();
+            String consulta = "insert into mensajes(idUsuEnvia, idUsuRecibe, Titulo, Texto) values("+idenvia+",'"+usuario+"','"+titulo+"','"+texto+"')";
+            pst = con.prepareStatement(consulta);
+            int cols = pst.executeUpdate(consulta);
             return 1;
         }catch(Exception e){
             System.out.println(e);

@@ -16,6 +16,7 @@
   <link rel="stylesheet" type="text/css" href="resources/PATEstilos.css">
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+       
 
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
@@ -82,7 +83,6 @@
             out.println("<th>Titulo</th>");
             out.println("<th>Mensaje</th>");
             out.println("<th>Fecha</th>");
-            out.println("<th>Acciones</th>");
             out.println("</tr>");
             out.println("</thead>");
             out.println("<tbody>");
@@ -96,10 +96,7 @@
                 out.println("<th>"+rs.getString("users.id")+"</th>");System.out.println("Hola");
                 out.println("<th>"+rs2.getString("mensajes.Titulo")+"</th>");
                 out.println("<th>"+rs2.getString("mensajes.Texto")+"</th>");
-                out.println("<th>"+rs2.getString("mensajes.fecha")+"</th>");
-                out.println("<th>");
-                out.println(" <a href='eliminarMsj.jsp?id="+rs2.getInt("mensajes.IdMensaje")+"'>Eliminar</a> ");
-                out.println("</th>");
+                out.println("<th>"+rs2.getString("mensajes.fecha")+"</th>");;
                 out.println("</tr>");
                 
             }
@@ -115,7 +112,6 @@
             out.println("<th>Titulo</th>");
             out.println("<th>Mensaje</th>");
             out.println("<th>Fecha</th>");
-            out.println("<th>Acciones</th>");
             out.println("</tr>");
             out.println("</thead>");
             out.println("<tbody>");
@@ -130,10 +126,6 @@
                 out.println("<th>"+rs3.getString("mensajes.Titulo")+"</th>");
                 out.println("<th>"+rs3.getString("mensajes.Texto")+"</th>");
                 out.println("<th>"+rs3.getString("mensajes.fecha")+"</th>");
-                out.println("<th>");
-                out.println(" <a href='ResponderMsj.jsp?id="+rs3.getInt("mensajes.IdMensaje")+"'>Responder</a> |");
-                out.println(" <a href='eliminarMsj.jsp?id="+rs3.getInt("mensajes.IdMensaje")+"'>Eliminar</a> ");
-                out.println("</th>");
                 out.println("</tr>");
                 
             }
@@ -150,8 +142,8 @@
   </div>
       <!--Dillan, aqui necesito tu magia -->
       <h2>Enviar mensaje</h2> 
-        <s:form action="/AddProfesorG" id="mensajes">
-            ID de usuario: <br><input type ="number" name="usuario"/><br>
+        <s:form action="/EnviarM" id="mensajes">
+            ID de usuario: <br><input type ="number" id="usr" name="usuario"/><br>
             Titulo: <br><input type="text" name="titulo"/><br>
             Texto: <br><textarea name="texto" form="mensajes" id="texto" rows="5" cols="50"></textarea><br>
             <input type="hidden" name="idenvia" value=<%out.println(id2);%>/>

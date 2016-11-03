@@ -29,6 +29,16 @@
             <result name="exitoso">oats.jsp</result>
             <result name="error">oats.jsp</result>
         </action>
+        <!--Elimina OAT-->
+        <action name="DelOAT" class="paquete.DelOATAction">
+            <result name="exitoso">oats.jsp</result>
+            <result name="error">oats.jsp</result>
+        </action>
+        <!--Enviar Mensaje-->
+        <action name="EnviarM" class="paquete.EnvMeAction">
+            <result name="exitoso">mensajes.jsp</result>
+            <result name="error">mensajes.jsp</result>
+        </action>
         <!--Poner comentarios sobre las actividades, se puede usar para comentar sobre los articulos-->
         <action name="Com" class="paquete.commentAction">
             <result name="exitoso">/studentIndex.jsp</result>

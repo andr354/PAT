@@ -133,6 +133,21 @@ class LoginBean{
         return status;
     }
     
+    public int deleteOat(int id){
+        int status = 0;
+        try {
+            con = DataSource.getInstance().getConnection();
+            String consulta = "DELETE FROM oats\n" +
+                                "WHERE id_oat="+id+";";
+            pst = con.prepareStatement(consulta);
+            int cols = pst.executeUpdate(consulta);
+            status=deleteUserEst2(id);
+        } catch (Exception e) {  
+            System.out.println(e);  
+        }
+        return status;
+    }
+    
     public int addUser(String userName, String password, int rol){
         int status = 0;
         String nivel = "STUDENT";
