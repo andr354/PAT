@@ -56,21 +56,21 @@
             <h1>PAT</h1> 
             <p>PLATAFORMA DE APRENDIZAJE TURISTICO</p>  
         </div>
-    <!--Cuerpo de la pagina-->
-    <div class="container">
-        <div class="row well">
-            <div class="col-md-6 col-md-offset-3">
-                <div class="row">
-                    <h1 class="text-center">Confirmación de eliminación</h1>
-                    <h3 class="text-center">¿Seguro que desea revocar privilegios de Alumno al usuario<b> <%out.println(nomcomp);%></b>?</h3>
-                    <s:form action="/DelEst">
-                        <input type="hidden" name="id" value=<%out.println(Id);%>/>
-                        <input type="submit" value="Sí" class="btn btn-danger btn-block"/>
-                        <a href="alumnos.jsp" class="btn btn-primary btn-block">Regresar</a>
-                    </s:form>
+        <!--Cuerpo de la pagina-->
+        <div class="container">
+            <div class="row well">
+                <div class="col-md-6 col-md-offset-3">
+                    <div class="row">
+                        <h1 class="text-center">Confirmación de eliminación</h1>
+                        <h3 class="text-center">¿Seguro que desea revocar privilegios de Alumno al usuario<b> <%out.println(nomcomp);%></b>?</h3>
+                        <s:form action="/DelEst">
+                            <input type="hidden" name="id" value=<%out.println(Id);%>/>
+                            <input type="submit" value="Sí" class="btn btn-danger btn-block"/>
+                            <a href="alumnos.jsp" class="btn btn-primary btn-block">Regresar</a>
+                        </s:form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</body>
+    </body>
 </html>
