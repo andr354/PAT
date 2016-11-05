@@ -32,7 +32,7 @@
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="indexprofesc.jsp">INICIO</a></li> 
+                        <li><a href="indexalumn.jsp">INICIO</a></li> 
                     </ul>
                 </div>
             </div>
@@ -51,8 +51,8 @@
             int nivel = 1;
             ResultSet rs=null;
             ResultSet rs2 = null;
-            manejador.setConnection("com.mysql.jdbc.Driver","jdbc:mysql://localhost:3306/baseloginservlet");
-            rs2=manejador.executeQuery("SELECT id_dip, descrip, descripcion, notaP, calif FROM diagramasp, diagramas WHERE id_dip='"+Id+"' and id_dip=id_dgp");
+            manejador.setConnection("com.mysql.jdbc.Driver","jdbc:mysql://localhost:3306/pat");
+            rs2=manejador.executeQuery("SELECT id_oat, descrip, descripcion, notaP, calif FROM oats, califs WHERE id_oat='"+Id+"' and id_oat=id_dgp");
             out.println("<h2>Detalle de diagrama</h2>");
             out.println("<div class=\"container\">");
             out.println("<table class=\"table table-striped table-bordered table-responsive\">");
@@ -60,7 +60,7 @@
             out.println("<tr>");
             out.println("<th>Id</th>");
             out.println("<th>Descripción</th>");
-            out.println("<th>Mi comentario</th>");
+            out.println("<th>Mi participación</th>");
             out.println("<th>Nota del profesor</th>");
             out.println("<th>Calificación otorgada</th>");
             out.println("</tr>");
@@ -69,11 +69,11 @@
             
             while(rs2.next()){
                 out.println("<tr>");
-                out.println("<th>"+rs2.getString("diagramasP.id_dip")+"</th>");
-                out.println("<th>"+rs2.getString("diagramasP.descrip")+"</th>");
-                out.println("<th>"+rs2.getString("diagramas.descripcion")+"</th>");
-                out.println("<th>"+rs2.getString("diagramas.notaP")+"</th>");
-                out.println("<th>"+rs2.getInt("diagramas.calif")+"</th>");
+                out.println("<th>"+rs2.getString("oats.id_oat")+"</th>");
+                out.println("<th>"+rs2.getString("oats.descrip")+"</th>");
+                out.println("<th>"+rs2.getString("califs.descripcion")+"</th>");
+                out.println("<th>"+rs2.getString("califs.notaP")+"</th>");
+                out.println("<th>"+rs2.getInt("califs.calif")+"</th>");
                 out.println("</tr>");
                 
             }
@@ -82,13 +82,17 @@
             out.println("</table>");
             out.println("</div>");
       %>
-        <s:form action="/Com" class="form-horizontal form-control">
-            <s:textfield placeHolder="Comentario" name="cmt" /><br>
+      <div id="form1" class="text-center">  
+          <center>
+      <s:form action="/Com" class="form-horizontal form-control">
+            <s:textfield placeHolder="Participación" name="cmt" /><br>
             <input type="hidden" name="id" required="true" value=<%out.println(Id);%> />
             <input type="hidden" name="ide" required="true" value=<%out.println(Ide);%> />
             <br>
             <s:submit value="Guardar cambios" />
         </s:form>
+           </center>
+      </div>
             <!--Dice que no pero si jala chido-->
 </body>
 </html>

@@ -32,12 +32,8 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="admin.jsp">INICIO</a></li>
-        <li><a href="alumnos.jsp">Alumnos</a></li>
-        <li><a href="profs.jsp">Profesores</a></li>
-        <li><a href="profsp.jsp">Profesores+</a></li>
-        <li><a href="oats.jsp">OATs</a></li>
-        <li><a href="cursos.jsp">CURSOS</a></li>
+        <li><a href="indexprofp.jsp">INICIO</a></li>
+        <li><a href="cursosprofp.jsp">CURSOS</a></li>
         <li><a href="mensajes.jsp">MENSAJES</a></li>
       </ul>
     </div>
@@ -63,19 +59,21 @@
         <%@ page import="java.sql.*" %>
         <jsp:useBean id="manejador" scope="session" class="paquete.DB"></jsp:useBean>
         <%
-            
+        int idus = 0;    
         try{
             String user = (String)session.getAttribute("username");
             String acc = (String)session.getAttribute("acc");
-            int acc2 = Integer.parseInt(acc);  
-        if(acc2==3){
+            int acc2 = Integer.parseInt(acc);
+        if(acc2==4){
             ResultSet rs=null;
             ResultSet rs2 = null;
             manejador.setConnection("com.mysql.jdbc.Driver","jdbc:mysql://localhost:3306/pat");
-
-            rs2=manejador.executeQuery("SELECT * FROM oats, profesores where oats.id_prof=profesores.id_usu;");
+            rs = manejador.executeQuery("select idUser from users where id='"+user+"'");
+                rs.next();
+                idus = rs.getInt("users.idUser");
+            rs2=manejador.executeQuery("SELECT * FROM oats, profesores where oats.id_prof=profesores.id_usu and profesores.id_usu="+idus+";");
             
-            out.println("<h2>OATs creados por profesores generadores de contenido</h2>");
+            out.println("<h2>OATs creados por ti</h2>");
             out.println("<table class=\"table table-striped table-bordered table-responsive\">");
             out.println("<thead>");
             out.println("<tr>");
@@ -121,7 +119,7 @@
   </div>
       <h2>Crear un OAT</h2>
         <s:form action="/AddOAT" id="usrform">
-            ID de generador: <br><input type="number" name="id"/><br>
+            <input type="hidden" name="id" value=<%out.println(idus);%>/>
             Titulo: <br><input type ="text" name="titulo"/><br>
             Descripción: <br><input type="text" name = "desc"/><br>
             Curso al que pertenece el OAT: <br><input type="number" name = "curso"/><br>
@@ -148,3 +146,4 @@
 </footer>
 </body>
 </html>
+

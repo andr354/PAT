@@ -32,13 +32,19 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="admin.jsp">INICIO</a></li>
-        <li><a href="alumnos.jsp">Alumnos</a></li>
-        <li><a href="profs.jsp">Profesores</a></li>
-        <li><a href="profsp.jsp">Profesores+</a></li>
-        <li><a href="oats.jsp">OATs</a></li>
-        <li><a href="cursos.jsp">CURSOS</a></li>
-        <li><a href="mensajes.jsp">MENSAJES</a></li>
+        <li><a href="index.jsp">INICIO</a></li>
+        <%
+            try{
+            String user = (String)session.getAttribute("username");
+            String acc = (String)session.getAttribute("acc");
+            if(user==null&&acc==null){
+                out.println("<li><a href=\"#login\">LOGIN</a></li>");
+            }else{
+                out.println("<li><a href=\"#login\">"+user+"</a></li>");
+            }
+            }catch(Exception e){
+            }
+        %>
       </ul>
     </div>
   </div>
@@ -54,10 +60,9 @@
 <div id="about" class="container-fluid">
   <div class="row">
     <div class="col-sm-8">
-      <h2>Administración de OATs</h2><br>
+      <h2>OATs recientes</h2><br>
     </div>
     <div class="col-sm-4">
-      <span class="glyphicon glyphicon-signal logo"></span>
     </div>
       <div>
         <%@ page import="java.sql.*" %>
@@ -65,26 +70,19 @@
         <%
             
         try{
-            String user = (String)session.getAttribute("username");
-            String acc = (String)session.getAttribute("acc");
-            int acc2 = Integer.parseInt(acc);  
-        if(acc2==3){
             ResultSet rs=null;
             ResultSet rs2 = null;
             manejador.setConnection("com.mysql.jdbc.Driver","jdbc:mysql://localhost:3306/pat");
 
             rs2=manejador.executeQuery("SELECT * FROM oats, profesores where oats.id_prof=profesores.id_usu;");
             
-            out.println("<h2>OATs creados por profesores generadores de contenido</h2>");
             out.println("<table class=\"table table-striped table-bordered table-responsive\">");
             out.println("<thead>");
             out.println("<tr>");
-            out.println("<th>Id oat</th>");
-            out.println("<th>Creador</th>");
+            out.println("<th>Autor</th>");
             out.println("<th>Titulo</th>");
             out.println("<th>Descripción</th>");
             out.println("<th>Fecha</th>");
-            out.println("<th>Curso</th>");
             out.println("<th>Acciones</th>");
             out.println("</tr>");
             out.println("</thead>");
@@ -92,16 +90,12 @@
             
             while(rs2.next()){
                 out.println("<tr>");
-                out.println("<th>"+rs2.getString("oats.id_oat")+"</th>");
                 out.println("<th>"+rs2.getString("profesores.nom_prof")+" "+rs2.getString("profesores.apps_prof")+"</th>");
                 out.println("<th>"+rs2.getString("oats.titulo")+"</th>");
                 out.println("<th>"+rs2.getString("oats.descrip")+"</th>");
                 out.println("<th>"+rs2.getString("oats.fecha")+"</th>");
-                out.println("<th>"+rs2.getString("oats.curso")+"</th>");
                 out.println("<th>");
-                out.println(" <a href='veroat.jsp?id="+rs2.getString("oats.id_oat")+"'>Ver</a> |");
-                out.println(" <a href='modificarOat.jsp?id="+rs2.getString("oats.id_oat")+"'>Modificar</a> |");
-                out.println(" <a href='eliminarOAt.jsp?id="+rs2.getString("oats.id_oat")+"'>Eliminar</a>");
+                out.println(" <a href='veroat.jsp?id="+rs2.getString("oats.id_oat")+"'>Ver</a>");
                 out.println("</th>");
                 out.println("</tr>");
                 
@@ -109,37 +103,15 @@
             
             out.println("</tbody>");
             out.println("</table>");
-        }else{
-            response.sendRedirect("index.jsp");
-        }
+
         }catch(Exception e){
-            response.sendRedirect("index.jsp");
+            //response.sendRedirect("index.jsp");
         }
 
         %>
       </div>
   </div>
-      <h2>Crear un OAT</h2>
-        <s:form action="/AddOAT" id="usrform">
-            ID de generador: <br><input type="number" name="id"/><br>
-            Titulo: <br><input type ="text" name="titulo"/><br>
-            Descripción: <br><input type="text" name = "desc"/><br>
-            Curso al que pertenece el OAT: <br><input type="number" name = "curso"/><br>
-            <br><textarea name="contenido" form="usrform" id="contenido" rows="20" cols="80"></textarea>
-            <script>
-                // Replace the <textarea id="editor1"> with a CKEditor
-                // instance, using default configuration.
-                CKEDITOR.replace( 'contenido' );
-            </script>
-            <br>
-            <br>
-            <s:submit/>
-        </s:form>
 </div>
-<script>
-        var f = new Date();
-        document.write(f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear());
-    </script>
 <footer class="container-fluid text-center">
   <a href="#myPage" title="To Top">
     <span class="glyphicon glyphicon-chevron-up"></span>
@@ -148,3 +120,4 @@
 </footer>
 </body>
 </html>
+

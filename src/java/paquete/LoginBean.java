@@ -187,11 +187,12 @@ class LoginBean{
         try {
             con = DataSource.getInstance().getConnection();
             //String consulta = "insert into diagramas(calif, notaP) values('"+calif+"', '"+nota+"') where id_dig='"+id+"';";
-            String consulta = "update diagramas\n" +
-                            "set calif='"+calif+"', notaP='"+nota+"'\n" +
-                            "where id_dig='"+id+"';";
+            String consulta = "update califs\n" +
+                            "set calif="+calif+", notaP='"+nota+"'\n" +
+                            "where id_dig="+id+";";
             pst = con.prepareStatement(consulta);
             int cols = pst.executeUpdate(consulta);
+            System.out.println(consulta);
             status=1;
         } catch (Exception e) {  
             System.out.println(e);  

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+f<!DOCTYPE html>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <html lang="es">
@@ -46,7 +46,7 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="indexprofesc.jsp">INICIO</a></li>
+        <li><a href="indexalumn.jsp">INICIO</a></li>
         <li><a href="mensajes.jsp">MENSAJES</a></li>
         <%
             String user = (String)session.getAttribute("username");
@@ -118,7 +118,7 @@
                 //out.println("<th>"+rs2.getString("diagramas.descripcion")+"</th>");
                 out.println("<th>");
                 out.println("<a href='veroat2.jsp?id="+rs2.getString("oats.id_oat")+"'>Ver OAT</a> |");
-                out.println("<a href='comentar.jsp?id="+rs2.getString("oats.id_oat")+"&ide="+rs2.getInt("students.id_std")+"'>Comentar</a>");
+                out.println("<a href='comentar.jsp?id="+rs2.getString("oats.id_oat")+"&ide="+rs2.getInt("students.id_std")+"'>Enviar participación</a>");
                 out.println("</th>");
                 out.println("</tr>");
                 
@@ -152,7 +152,7 @@
                 out.println("<th>"+rs3.getString("oats.id_oat")+"</th>");
                 out.println("<th>"+rs3.getString("oats.descrip")+"</th>");
                 ResultSet rs4 = null;
-                rs4=manejador.executeQuery("SELECT SUM(calif), COUNT(calif)  FROM calfs, oats WHERE id_stdn="+idS+" AND id_dgp="+rs3.getString("oats.id_oat")+" AND estado=0");
+                rs4=manejador.executeQuery("SELECT SUM(calif), COUNT(calif)  FROM califs, oats WHERE id_stdn="+idS+" AND id_dgp="+rs3.getString("oats.id_oat")+" AND estado=0");
                 rs4.next();
                 total=rs4.getInt("SUM(calif)");
                 cuenta=rs4.getInt("COUNT(calif)");
