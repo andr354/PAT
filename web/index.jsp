@@ -382,7 +382,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
   <a href="#myPage" title="To Top">
     <span class="glyphicon glyphicon-chevron-up"></span>
   </a>
-  <p>SITA</p>		
+  <p>PAT</p>		
 </footer>
 
 <script>

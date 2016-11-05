@@ -187,7 +187,8 @@ function capturar()
                 out.println("<tr>");
                 out.println("<th>"+rs2.getString("students.nom_std")+" "+rs2.getString("students.app_std")+"</th>");
                 out.println("<th>"+rs2.getString("students.grp_std")+"</th>");
-                out.println("<th><a href='diagramas.jsp?id="+rs2.getString("students.id_std")+"&idu="+rs2.getString("users.idUser")+"&idp="+idP+"'>Ver participaciones</a>");
+                out.println("<th><a href='diagramas.jsp?id="+rs2.getString("students.id_std")+"&idu="+rs2.getString("users.idUser")+"&idp="+idP+"'>Ver participaciones | </a>");
+                out.println("<a href='asignargpo.jsp?id="+rs2.getString("students.id_usu")+"'>Asignar grupo</a>");
                 out.println("</th>");
                 out.println("</tr>");
                 

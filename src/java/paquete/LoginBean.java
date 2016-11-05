@@ -204,7 +204,7 @@ class LoginBean{
         try {
             con = DataSource.getInstance().getConnection();
             //String consulta = "insert into diagramas(calif, notaP) values('"+calif+"', '"+nota+"') where id_dig='"+id+"';";
-            String consulta = "insert into diagramas(Id_stdn, id_dgp, descripcion) values('"+ide+"', '"+idd+"', '"+comment+"');";
+            String consulta = "insert into califs(Id_stdn, id_dgp, descripcion) values('"+ide+"', '"+idd+"', '"+comment+"');";
             pst = con.prepareStatement(consulta);
             int cols = pst.executeUpdate(consulta);
             status=1;
@@ -289,6 +289,27 @@ class LoginBean{
         } catch (Exception e) {  
             System.out.println(e);  
         }
+        return status;
+    }
+
+
+public int addGrupo(int id, int grupo){
+        String table_name="students";
+        int status = 0;
+            try{
+                con = DataSource.getInstance().getConnection();
+                String consulta = "UPDATE "+table_name +" "
+                            + "SET grp_std="+grupo
+                            + " WHERE id_usu="+id+";";
+                System.out.println(consulta);
+                pst = con.prepareStatement(consulta);
+                int cols = pst.executeUpdate(consulta);
+                status=1;
+            } catch (Exception e) { 
+                System.out.println(status);
+                System.out.println(e);  
+            }
+        
         return status;
     }
 }

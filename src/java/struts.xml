@@ -11,7 +11,7 @@
             <result name="exitosop">indexprofesc.jsp</result>
             <result name="exitosopp">indexprofp.jsp</result>
             <result name="exitosou">indexnus.jsp</result>
-            <result name="exitosos">indexalum.jsp</result>
+            <result name="exitosos">indexalumn.jsp</result>
             <result name="error">fail.jsp</result>
         </action>
         <!---->
@@ -41,13 +41,13 @@
         </action>
         <!--Poner comentarios sobre las actividades, se puede usar para comentar sobre los articulos-->
         <action name="Com" class="paquete.commentAction">
-            <result name="exitoso">/studentIndex.jsp</result>
-            <result name="error">/studentIndex.jsp</result>
+            <result name="exitoso">/indexalumn.jsp</result>
+            <result name="error">/indexalumn.jsp</result>
         </action>
         <!--Para poner calificaciones a los alumnos en sus participaciones-->
         <action name="Cal" class="paquete.califAction">
-            <result name="exitoso">/professorIndex.jsp</result>
-            <result name="error">/professorIndex.jsp</result>
+            <result name="exitoso">/indexprofesc.jsp</result>
+            <result name="error">/indexprofesc.jsp</result>
         </action>
         <!--Eliminar usuario-->
         <action name="Del" class="paquete.DelAction">
@@ -73,6 +73,11 @@
         <action name="Mod" class="paquete.ModifyAction">
             <result name="exitoso">admin.jsp</result>
             <result name="error">admin.jsp</result>
+        </action>
+        <!----><!--Modificar el grupo al que pertenece un alumno--> 
+        <action name="ModGrp" class="paquete.ModifyGrpAction">
+            <result name="exitoso">indexprofesc.jsp</result>
+            <result name="error">indexprofesc.jsp</result>
         </action>
         <!----><!--Modificar estudiante--> 
         <action name="ModEst" class="paquete.ModifyStudentAction">
