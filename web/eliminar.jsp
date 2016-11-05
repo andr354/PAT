@@ -15,23 +15,60 @@
                 nombre = rs.getString("users.id");
             }
         %>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="resources/PATEstilos.css">
+        <title>Confirmación de eliminación</title>
     </head>
-<body>
-    <center>
-	<h1>Confirmar eliminar</h1>
-        <br><br><br>
-        <h2>¿Seguro que desea eliminar al usuario <%out.println(nombre);%> ?</h2>
-        <br><br><br>
-        <s:form action="/Del">
-            <input type="hidden" name="id" value=<%out.println(Id);%>/>
-            <br>
-            <s:submit value="Si, eliminar" />
-        </s:form>
-    </center>
-</body>
+
+    <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+        <!--Banner y barra de navegación-->
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>                        
+                    </button>
+                    <a class="navbar-brand" href="index.jsp">Logo</a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="admin.jsp">INICIO</a></li>
+                        <li><a href="alumnos.jsp">Alumnos</a></li>
+                        <li><a href="profs.jsp">Profesores</a></li>
+                        <li><a href="profsp.jsp">Profesores+</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="jumbotron text-center">
+            <h1>PAT</h1> 
+            <p>PLATAFORMA DE APRENDIZAJE TURISTICO</p>  
+        </div>
+        
+        <!--Cuerpo de la pagina-->
+        <div class="container">
+            <div class="row well">
+                <div class="col-md-6 col-md-offset-3">
+                    <div class="row">
+                        <h1 class="text-center">Confirmación de eliminación</h1>
+                        <h3 class="text-center">¿Seguro que desea eliminar el usuario <b><%out.println(nombre);%></b>?</h3>
+                        <s:form action="/Del">
+                            <input type="hidden" name="id" value=<%out.println(Id);%>/>
+                            <input type="submit" value="Sí" class="btn btn-danger btn-block"/>
+                            <a href="admin.jsp#focused" class="btn btn-primary btn-block">Regresar</a>
+                        </s:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</body>
 </html>

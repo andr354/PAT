@@ -5,305 +5,156 @@
     <%
         int Id = Integer.parseInt(request.getParameter("id"));
     %>
-<head>
-  <!-- Theme Made By www.w3schools.com - No Copyright -->
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>PAT</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
-  <link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <style>
-  body {
-      font: 400 15px Lato, sans-serif;
-      line-height: 1.8;
-      color: #818181;
-  }
-  h2 {
-      font-size: 24px;
-      text-transform: uppercase;
-      color: #303030;
-      font-weight: 600;
-      margin-bottom: 30px;
-  }
-  h4 {
-      font-size: 19px;
-      line-height: 1.375em;
-      color: #303030;
-      font-weight: 400;
-      margin-bottom: 30px;
-  }  
-  .jumbotron {
-      background-color: #6c132b;
-      color: #fff;
-      padding: 100px 25px;
-      font-family: Montserrat, sans-serif;
-  }
-  .container-fluid {
-      padding: 60px 50px;
-  }
-  .bg-grey {
-      background-color: #f6f6f6;
-  }
-  .logo-small {
-      color: #6c132b; /*anterior: 1DCEF6*/
-      font-size: 50px;
-  }
-  .logo {
-      color: #6c132b;
-      font-size: 200px;
-  }
-  .thumbnail {
-      padding: 0 0 15px 0;
-      border: none;
-      border-radius: 0;
-  }
-  .thumbnail img {
-      width: 100%;
-      height: 100%;
-      margin-bottom: 10px;
-  }
-  .carousel-control.right, .carousel-control.left {
-      background-image: none;
-      color: #6c132b;
-  }
-  .carousel-indicators li {
-      border-color: #6c132b;
-  }
-  .carousel-indicators li.active {
-      background-color: #6c132b;
-  }
-  .item h4 {
-      font-size: 19px;
-      line-height: 1.375em;
-      font-weight: 400;
-      font-style: italic;
-      margin: 70px 0;
-  }
-  .item span {
-      font-style: normal;
-  }
-  .panel {
-      border: 1px solid #6c132b; 
-      border-radius:0 !important;
-      transition: box-shadow 0.5s;
-  }
-  .panel:hover {
-      box-shadow: 5px 0px 40px rgba(0,0,0, .2);
-  }
-  .panel-footer .btn:hover {
-      border: 1px solid #6c132b;
-      background-color: #fff !important;
-      color: #6c132b;
-  }
-  .panel-heading {
-      color: #fff !important;
-      background-color: #6c132b !important;
-      padding: 25px;
-      border-bottom: 1px solid transparent;
-      border-top-left-radius: 0px;
-      border-top-right-radius: 0px;
-      border-bottom-left-radius: 0px;
-      border-bottom-right-radius: 0px;
-  }
-  .panel-footer {
-      background-color: white !important;
-  }
-  .panel-footer h3 {
-      font-size: 32px;
-  }
-  .panel-footer h4 {
-      color: #aaa;
-      font-size: 14px;
-  }
-  .panel-footer .btn {
-      margin: 15px 0;
-      background-color: #6c132b;
-      color: #fff;
-  }
-  .navbar {
-      margin-bottom: 0;
-      background-color: #6c132b;
-      z-index: 9999;
-      border: 0;
-      font-size: 12px !important;
-      line-height: 1.42857143 !important;
-      letter-spacing: 4px;
-      border-radius: 0;
-      font-family: Montserrat, sans-serif;
-  }
-  .navbar li a, .navbar .navbar-brand {
-      color: #fff !important;
-  }
-  .navbar-nav li a:hover, .navbar-nav li.active a {
-      color: #6c132b !important;
-      background-color: #fff !important;
-  }
-  .navbar-default .navbar-toggle {
-      border-color: transparent;
-      color: #fff !important;
-  }
-  footer .glyphicon {
-      font-size: 20px;
-      margin-bottom: 20px;
-      color: #6c132b;
-  }
-  .slideanim {visibility:hidden;}
-  .slide {
-      animation-name: slide;
-      -webkit-animation-name: slide;	
-      animation-duration: 1s;	
-      -webkit-animation-duration: 1s;
-      visibility: visible;			
-  }
-  @keyframes slide {
-    0% {
-      opacity: 0;
-      -webkit-transform: translateY(70%);
-    } 
-    100% {
-      opacity: 1;
-      -webkit-transform: translateY(0%);
-    }	
-  }
-  @-webkit-keyframes slide {
-    0% {
-      opacity: 0;
-      -webkit-transform: translateY(70%);
-    } 
-    100% {
-      opacity: 1;
-      -webkit-transform: translateY(0%);
-    }
-  }
-  @media screen and (max-width: 768px) {
-    .col-sm-4 {
-      text-align: center;
-      margin: 25px 0;
-    }
-    .btn-lg {
-        width: 100%;
-        margin-bottom: 35px;
-    }
-  }
-  @media screen and (max-width: 480px) {
-    .logo {
-        font-size: 150px;
-    }
-  }
-  </style>
-</head>
-<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+    <head>
+        <!-- Theme Made By www.w3schools.com - No Copyright -->
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>PAT</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script src="resources/busquedaTabla.js"></script>
+        <link rel="stylesheet" type="text/css" href="resources/PATEstilos.css">
+    </head>
+    <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
 
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-      <a class="navbar-brand" href="index.jsp">Logo</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="admin.jsp">INICIO</a></li>
-        <li><a href="alumnos.jsp">Alumnos</a></li>
-        <li><a href="profs.jsp">Profesores</a></li>
-        <li><a href="profsp.jsp">Profesores+</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>                        
+                    </button>
+                    <a class="navbar-brand" href="index.jsp">Logo</a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="admin.jsp">INICIO</a></li>
+                        <li><a href="alumnos.jsp">Alumnos</a></li>
+                        <li><a href="profs.jsp">Profesores</a></li>
+                        <li><a href="profsp.jsp">Profesores+</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
 
-<div class="jumbotron text-center">
-  <h1>PAT</h1> 
-  <p>PLATAFORMA DE APRENDIZAJE TURISTICO</p>  
+        <div class="jumbotron text-center">
+            <h1>PAT</h1> 
+            <p>PLATAFORMA DE APRENDIZAJE TURISTICO</p>  
 
-</div>
+        </div>
 
-<!-- Container (About Section) -->
-<div id="about" class="container-fluid">
-  <div class="row">
-    <div class="col-sm-8">
-      <h2>Modificar usuario</h2><br>
-    </div>
-    <div class="col-sm-4">
-      <span class="glyphicon glyphicon-wrench logo"></span>
-    </div>
-    <div class="col-sm-8">
-      <%@ page import="java.sql.*" %>
-      <jsp:useBean id="manejador" scope="session" class="paquete.DB"></jsp:useBean>
-      <h4>Datos actuales del usuario</h4>
-      <%
-            String user = (String)session.getAttribute("userName");
-            String rol = "";
-            int nivel = 1;
-            ResultSet rs=null;
-            ResultSet rs2 = null;
-            manejador.setConnection("com.mysql.jdbc.Driver","jdbc:mysql://localhost:3306/pat");
-            rs2=manejador.executeQuery("SELECT idUser, id, password,nivel FROM users WHERE idUser='"+Id+"' ");
-            out.println("<table class=\"table table-striped table-bordered table-responsive\">");
-            out.println("<thead>");
-            out.println("<tr>");
-            out.println("<th>Nombre</th>");
-            out.println("<th>Password</th>");
-            out.println("<th>Rol</th>");
-            out.println("</tr>");
-            out.println("</thead>");
-            out.println("<tbody>");
-            
-            while(rs2.next()){
-                String acceso = "Usuario Registrado";
-                if(rs2.getInt("users.nivel")==2){
-                    acceso = "Usuario alumno";
-                }else if(rs2.getInt("users.nivel")==3){
-                    acceso = "Administrador";
-                }else if(rs2.getInt("users.nivel")==4){
-                    acceso = "Profesor generador";
-                }else if(rs2.getInt("users.nivel")==5){
-                    acceso = "Profesor escolar";
-                }
-                out.println("<tr>");
-                out.println("<th>"+rs2.getString("users.id")+"</th>");
-                out.println("<th>"+rs2.getString("users.password")+"</th>");
-                out.println("<th>"+acceso+"</th>");
-                out.println("</tr>");
-                
-            }
-            
-            out.println("</tbody>");
-            out.println("</table>");
-      %>
-    </div>
-  </div>
-    <h2>Nuevos datos</h2><br>
-        <s:form action="/Mod">
-            <s:textfield placeHolder="nombre de usuario" name="username" label="Username"/>
-            <input type="hidden" name="id" value=<%out.println(Id);%>/>
-            <s:textfield placeHolder="Contraseña" name="password" label="Password" /><br>
-             <s:select label="Rol" 
-		headerKey="-1" headerValue="Asigne un rol al usuario"
-		list="#{'1':'Usuario','2':'Estudiante', '3':'Administrador', '4':'Profesor generador', '5':'Profesor escolar'}" 
-		name="rol" 
-		value="rol" />
-             Correo electronico:<input type="email" name="mail">
-            <br>
-            <br>
-            <s:submit/>
-        </s:form>
-</div>
+        <!-- Container (About Section) -->
+        <div id="about" class="container-fluid text-center">
+            <div class="row">
+                <div class="text-center">
+                    <h2>Modificar usuario</h2><br>
+                </div>
+                <div class="col-sm-8 col-md-offset-2 text-center">
+                    <h3>Datos actuales del usuario</h3>
+                    <div class="text-center">
+                        <s:form action="/Mod" class="form-group">
+                            <table class="table table-striped table-bordered table-responsive">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Password</th>
+                                        <th>Correo</th>
+                                        <th>Rol</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%@ page import="java.sql.*" %>
+                                    <jsp:useBean id="manejador" scope="session" class="paquete.DB"></jsp:useBean>
+                                    <%
+                                        String user = (String) session.getAttribute("userName");
+                                        String rol = "";
+                                        int nivel = 1;
+                                        ResultSet rs = null;
+                                        ResultSet rs2 = null;
+                                        String usuario = "<option value=1>Usuario registrado</option>";
+                                        String alumno = "<option value=2>Alumno</option>";
+                                        String admin = "<option value=3>Administrador</option>";
+                                        String contribuidor = "<option value=4>Contribuidor</option>";
+                                        String profesor = "<option value=5>Profesor escolar</option>";
+                                        manejador.setConnection("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/pat");
+                                        rs2 = manejador.executeQuery("SELECT idUser, id, password, nivel, email FROM users WHERE idUser='" + Id + "' ");
+                                        while (rs2.next()) {
+                                            String acceso = "<option value=" + rs2.getInt("users.nivel") + " selected=\"selected\">";
+                                            if (rs2.getInt("users.nivel") == 1) {
+                                                acceso += "Usuario registrado</option>"
+                                                        + alumno
+                                                        + admin
+                                                        + profesor
+                                                        + contribuidor;
+                                            } else if (rs2.getInt("users.nivel") == 2) {
+                                                acceso += "Alumno</option>"
+                                                        + usuario
+                                                        + admin
+                                                        + profesor
+                                                        + contribuidor;
+                                            } else if (rs2.getInt("users.nivel") == 3) {
+                                                acceso += "Administrador</option>"
+                                                        + usuario
+                                                        + alumno
+                                                        + profesor
+                                                        + contribuidor;
+                                            } else if (rs2.getInt("users.nivel") == 4) {
+                                                acceso += "Contribuidor</option>"
+                                                        + usuario
+                                                        + alumno
+                                                        + profesor
+                                                        + admin;
+                                            } else if (rs2.getInt("users.nivel") == 5) {
+                                                acceso += "Profesor escolar</option>"
+                                                        + usuario
+                                                        + alumno
+                                                        + admin
+                                                        + contribuidor;
+                                            } else {
+                                                acceso += "<option value=1 selected=\"selected\"> Usuario registrado </option>"
+                                                        + alumno
+                                                        + admin
+                                                        + contribuidor
+                                                        + profesor;
+                                            }
+                                            out.println("<tr><input type=\"hidden\" name=\"id\" value=" + Id + " class=\"form-control\"/>");
+                                            out.println("<th><input type=\"text\" name=\"username\" placeholder=\"" + rs2.getString("users.id") + "\" value=\"" + rs2.getString("users.id") + "\" class=\"form-control\"/></th>");
+                                            out.println("<th><input type=\"password\" name=\"password\" placeholder=\"Contraseña\" value=\"" + rs2.getString("users.password") + "\" class=\"form-control\"/></th>");
+                                            if (rs2.getString("users.email") != null) {
+                                                out.println("<th><input type=\"email\" name=\"mail\" placeholder=\"" + rs2.getString("users.email") + "\" value=\"" + rs2.getString("users.email") + "\"/></th>");
+                                            } else {
+                                                out.println("<th><input type=\"email\" name=\"mail\" placeholder=\"Correo electronico\" value=\"No tiene\" class=\"form-control\"/></th>");
+                                            }
+                                            out.println("<th><select name=\"rol\" class=\"form-control\">" + acceso + "</select></th>");
+                                            out.println("</tr>");
+                                        }
+                                    %>
+                                </tbody>
+                            </table>
+                            <div class="col-sm-6">
+                                <a href="admin.jsp#focused" class="btn btn-primary btn-xl form-control">Regresar</a>            
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="submit" class="btn-warning btn-xl  form-control" value="Modificar"/>      
+                            </div>
+                        </div>
+                    </s:form>
+                </div>
+            </div>
+        </div>
 
-<footer class="container-fluid text-center">
-  <a href="#myPage" title="To Top">
-    <span class="glyphicon glyphicon-chevron-up"></span>
-  </a>
-  <p>PAT</p>		
-</footer>
+        <footer class="container-fluid text-center">
+            <a href="#myPage" title="To Top">
+                <span class="glyphicon glyphicon-chevron-up"></span>
+            </a>
+            <p>PAT</p>		
+        </footer>
 
 
-</body>
+    </body>
 </html>
