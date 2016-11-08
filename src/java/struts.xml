@@ -19,6 +19,11 @@
             <result name="exitoso">admin.jsp</result>
             <result name="error">admin.jsp</result>
         </action>
+        <!---->
+        <action name="insc" class="paquete.inscAction">
+            <result name="exitoso">indexnus.jsp</result>
+            <result name="error">indexnus.jsp</result>
+        </action>
         <!--Añade alumno dentro del modulo de administrador, la idea es que tambien sirva para que un usuario se registre a si mismo como alumno-->
         <action name="AddAlumno" class="paquete.AddAlumnoAction">
             <result name="exitoso">alumnos.jsp</result>

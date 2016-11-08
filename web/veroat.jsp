@@ -33,10 +33,20 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="admin.jsp">INICIO</a></li>
-        <li><a href="alumnos.jsp">Alumnos</a></li>
-        <li><a href="profs.jsp">Profesores</a></li>
-        <li><a href="profsp.jsp">Profesores+</a></li>
+        <li><a href="index.jsp">INICIO</a></li>
+        <%
+            try{
+            String user = (String)session.getAttribute("username");
+            String acc = (String)session.getAttribute("acc");
+            if(user==null&&acc==null){
+                out.println("<li><a href=\"#login\">LOGIN</a></li>");
+            }else{
+                out.println("<li><a href=\"#login\">"+user+"</a></li>");
+            }
+            }catch(Exception e){
+                
+            }
+        %>
       </ul>
     </div>
   </div>

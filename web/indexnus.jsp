@@ -2,12 +2,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <%
-            int Id = Integer.parseInt(request.getParameter("id"));
-            int Idu = Integer.parseInt(request.getParameter("idu"));
-            int Idp = Integer.parseInt(request.getParameter("idp"));
-            //out.println(Idu+1 +" id " + Id+2);
-        %>
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
@@ -35,8 +29,6 @@
             ResultSet rss = null;
             manejador.setConnection("com.mysql.jdbc.Driver","jdbc:mysql://localhost:3306/pat");
             rs=manejador.executeQuery("SELECT Users.rol, nivel FROM Users WHERE Users.id='"+user+"'"); //"+user+"
-            rs2=manejador.executeQuery("SELECT id_dig, id_dgp, descripcion, notaP, calif FROM califs, students, oats WHERE id_prof="+Idp+" and id_oat=id_dgp and Id_stdn='"+Id+"' and id_usu='"+Idu+"'");
-            rss=manejador.executeQuery("SELECT app_std, nom_std FROM students WHERE id_std='"+Id+"'");
             if(rs.next())
                 rol = rs.getString("Users.rol");
                 nivel = rs.getInt("Users.nivel");

@@ -347,6 +347,11 @@
                             <br>
                             <input type="submit" class="btn btn-primary form-group btn-block" value="Acceder"/>
                         </div>
+                        <div class="row-xs-3 form-group">
+                            <br>
+                            ¿No tiene cuenta en PAT?<br>
+                            <a href="registro.jsp" class="btn btn-danger btn-block">Registrarse en la plataforma</a>
+                        </div>
                     </div>
                 </s:form>
             </div>

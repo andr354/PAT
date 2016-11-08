@@ -215,6 +215,21 @@ class LoginBean{
         return status;
     }
     
+    public int inscribirC(int idc, int idu){
+        int status = 0;
+        try {
+            con = DataSource.getInstance().getConnection();
+            //String consulta = "insert into diagramas(calif, notaP) values('"+calif+"', '"+nota+"') where id_dig='"+id+"';";
+            String consulta = "insert into inscritos(id_curso, id_usu) values("+idc+", "+idu+");";
+            pst = con.prepareStatement(consulta);
+            int cols = pst.executeUpdate(consulta);
+            status=1;
+        } catch (Exception e) {  
+            System.out.println(e);  
+        }
+        return status;
+    }
+    
     public int deleteD(int id){
         int status = 0;
         try {
