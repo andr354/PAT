@@ -156,7 +156,7 @@
                                         response.sendRedirect("index.jsp");
                                     }
                                 } catch (Exception e) {
-                                    //response.sendRedirect("index.jsp");
+                                    response.sendRedirect("index.jsp");
                                 }
 
                             %>
