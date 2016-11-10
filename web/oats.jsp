@@ -22,22 +22,26 @@
         <%@ page import="java.sql.*" %>
         <jsp:useBean id="manejador" scope="session" class="paquete.DB"></jsp:useBean>
         <%
+            
             String user = (String) session.getAttribute("username");
             String acc = (String) session.getAttribute("acc");
             int acc2 = Integer.parseInt(acc);
+            //int acc2 = 3;
+            
 
             ResultSet rs = null;
             ResultSet rs2 = null;
             ResultSet rsCursos = null;
-            String consulta = "SELECT * FROM oats, cursos, profesores WHERE oats.curso = cursos.id_curso AND oats.id_prof=profesores.id_usu;";
+            String consulta = "SELECT * FROM oats, profesores, cursos where oats.id_prof=profesores.id_usu;";
             try {
                 if (acc2 == 3) {
                     manejador.setConnection("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/pat");
                     rsCursos = manejador.executeQuery("SELECT id_curso, Nombre FROM cursos");
-                    //rs2 = manejador.executeQuery("SELECT * FROM oats, profesores where oats.id_prof=profesores.id_usu;");
+                    //rs2=manejador.executeQuery("SELECT * FROM oats, profesores where oats.id_prof=profesores.id_usu;");
                     rs2 = manejador.executeQuery(consulta);
                     rs = manejador.executeQuery("SELECT * FROM profesores;");
                 } else {
+                    System.out.println("Acceso denegado");
                     response.sendRedirect("index.jsp");
                 }
             } catch (Exception e) {
@@ -166,7 +170,7 @@
                         </thead>
                         <tbody class="searchable">
                             <%
-                                try {
+                                //try {
                                     while (rs2.next()) {
                                         out.println("<tr>");
                                         //out.println("<th>" + rs2.getString("oats.id_oat") + "</th>");
@@ -182,9 +186,9 @@
                                         out.println("</th>");
                                         out.println("</tr>");
                                     }
-                                } catch (Exception e) {
-                                    response.sendRedirect("index.jsp");
-                                }
+                                //} catch (Exception e) {
+                                //    response.sendRedirect("index.jsp");
+                                //}
                             %>
                         </tbody>
                     </table>
