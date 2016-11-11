@@ -73,6 +73,7 @@ class LoginBeanX{
     
     public int modifyUser(String userName, String password, int rol, int id, String mail){
         int status = 0;
+        
         String pass2 = "";
         try {
             con = Conexion.getConexion();
@@ -267,14 +268,8 @@ class LoginBeanX{
     }
     
     public int addOAT(int id, String titulo, String desc, int curso, String contenido){
-        Calendar fecha = new GregorianCalendar();
-        int año = fecha.get(Calendar.YEAR);
-        int mes = fecha.get(Calendar.MONTH);
-        int dia = fecha.get(Calendar.DAY_OF_MONTH);
-        int hora = fecha.get(Calendar.HOUR_OF_DAY);
-        int minuto = fecha.get(Calendar.MINUTE);
-        int segundo = fecha.get(Calendar.SECOND);
         String cont = contenido.replace('"','\"');
+        enviarmail enviarmail = new enviarmail();
         int status = 0;
         try {
             con = Conexion.getConexion();
@@ -283,6 +278,7 @@ class LoginBeanX{
             pst = con.prepareStatement(consulta);
             int cols = pst.executeUpdate(consulta);
             status = 1;
+            enviarmail.enviarmail(curso, titulo);
         } catch (Exception e) {  
             System.out.println(e);  
         }
