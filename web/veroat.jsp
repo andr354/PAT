@@ -32,11 +32,13 @@
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="resources/PATEstilos.css">
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="resources/angular.min.js"></script>
+        <script type="text/javascript" src="resources/app.js"></script>
+        <link rel="stylesheet" type="text/css" href="resources/PATEstilos.css"/>
     </head>
-    <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+    <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60" ng-app="pat">
 
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
@@ -80,16 +82,20 @@
             <div class="row">
                 <div>
                     <div id="encabezado">
-                        <div id="titulo">
-                            <h1 class="myTitle">
+                        <!--<div id="titulo">-->
+                            <h1 class="titulo">
                                 <%  out.println("" + rs2.getString("oats.titulo")); %>
                             </h1>
-                        </div>
+                        <!--</div>-->
                         <h5>
-                            Por: <b>
+                            <b>Por:</b> <b class="autor">
                                 <% out.print("" + rs2.getString("profesores.nom_prof") + " " + rs2.getString("profesores.apps_prof")); %>
-                            </b> 
-                            <% out.print("" + rs2.getString("oats.fecha"));%>
+                            </b> <b class="time">
+                            <% 
+                                String date=rs2.getString("oats.fecha").split(" ")[0];
+                                String hour=rs2.getString("oats.fecha").split(" ")[1];
+                                out.print("" +date+"  "+hour.split(":")[0]+":"+hour.split(":")[1]);%>
+                                </b>
                         </h5>
                     </div>
                     <div class="well text-center">
