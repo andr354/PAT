@@ -18,6 +18,7 @@
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <script src="resources/busquedaTabla.js"></script>
         <link rel="stylesheet" type="text/css" href="resources/PATEstilos.css">
+    </head>
     <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
 
         <nav class="navbar navbar-default navbar-fixed-top">
