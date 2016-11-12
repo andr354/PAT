@@ -7,12 +7,14 @@
     ResultSet profesores = null;
     ResultSet rs2 = null;
     int acc2 = 1;
+    String acc;
+    String user;
     try {
         manejador.setConnection("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/pat");
         rs2 = manejador.executeQuery("select * from cursos, profesores where cursos.id_prof=profesores.id_usu;");
         profesores = manejador.executeQuery("SELECT id_usu, nom_prof, apps_prof from profesores;");
-        String user = (String) session.getAttribute("username");
-        String acc = (String) session.getAttribute("acc");
+        user = (String) session.getAttribute("username");
+        acc = (String) session.getAttribute("acc");
         acc2 = Integer.parseInt(acc);
     } catch (Exception e) {
         response.sendRedirect("index.jsp");
@@ -126,7 +128,7 @@
                                         out.println("<th>" + rs2.getString("cursos.Lugares") + "</th>");
                                         //out.println("<th>"+rs2.getString("usuarios.acc_usu")+"</th>");
                                         out.println("<th>");
-                                        out.println(" <a href='modificar.jsp?id=" + rs2.getString("cursos.id_curso") + "' class=\"btn btn-info btn-md\" >Ver curso</a>");
+                                        out.println(" <a href='vercurso.jsp?id=" + rs2.getString("cursos.id_curso") + "' class=\"btn btn-info btn-md\" >Ver curso</a>");
                                         out.println("</th>");
                                         out.println("</tr>");
                                     }
