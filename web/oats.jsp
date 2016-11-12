@@ -60,7 +60,7 @@
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="admin.js">INICIO</a></li>
+                        <li><a href="admin.jsp#about">INICIO</a></li>
                         <li><a href="alumnos.jsp#about">Alumnos</a></li>
                         <li><a href="profs.jsp#about">Profesores</a></li>
                         <li><a href="profsp.jsp#about">Profesores+</a></li>

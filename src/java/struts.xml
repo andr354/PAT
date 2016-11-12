@@ -5,6 +5,10 @@
 <struts>
     <!-- Configuration for the default package. -->
     <package name="default" extends="struts-default">
+        <!--Default error-->
+        <action name="*">
+            <result>/errors.jsp?id=404</result>
+        </action>
         <!--Login default de SITA, modificar para que sea compatible con admin, estudiante, profGen, profCurs, usuarioNormal-->
         <action name="Login" class="paquete.LoginAction">
             <result name="exitoso">admin.jsp</result>
@@ -12,7 +16,7 @@
             <result name="exitosopp">indexprofp.jsp</result>
             <result name="exitosou">indexnus.jsp</result>
             <result name="exitosos">indexalumn.jsp</result>
-            <result name="error">fail.jsp</result>
+            <result name="error">errors.jsp?id=400</result>
         </action>
         <!---->
         <action name="Add" class="paquete.AddAction">
@@ -104,7 +108,7 @@
             <result name="exitoso">profs.jsp</result>
             <result name="error">profs.jsp</result>
         </action>
-       <!----><!--Modificar profesor escolar--> 
+        <!----><!--Modificar profesor escolar--> 
         <action name="ModificarPE" class="paquete.ModificarPEAction">
             <result name="exitoso">profs.jsp</result>
             <result name="error">profs.jsp</result>
@@ -113,6 +117,11 @@
         <action name="BorrarProfEsc" class="paquete.BorrarProfEscAction">
             <result name="exitoso">profs.jsp</result>
             <result name="error">profs.jsp</result>
+        </action>
+        <!----><!--Modificar un Objeto de Aprendizaje--> 
+        <action name="ModOAT" class="paquete.ModOatAction">
+            <result name="exitoso">oats.jsp</result>
+            <result name="error">errors.jsp?id=400</result>
         </action>
     </package>
 </struts>

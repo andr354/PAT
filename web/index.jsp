@@ -333,19 +333,17 @@
             <div class="col-md-4 slideanim text-center col-md-offset-4 well">
                 <s:form action="/Login" class="form-group">
                     <div class="row form-group">
-                        <!--<div class="col-sm-6 form-group">-->
                         <div class="row-xs-3 form-group">
                             <label for="usuario">Nombre de usuario: </label>
-                            <input type="text" name="username" placeholder="Usuario" id="usuario" class="btn-block form-group"/>
+                            <input type="text" name="username" placeholder="Usuario" id="usuario" class="btn-block form-control"/>
                         </div>
                         <div class="row-xs-3 form-group">                        
                             <label for="contra">Contraseña: </label>
-                            <input type="password"  name="password" placeholder="Contraseña" id="contra" class="btn-block form-group"/>
+                            <input type="password"  name="password" placeholder="Contraseña" id="contra" class="btn-block form-control"/>
                         </div>
-                        <!--</div>-->
                         <div class="row-xs-3 form-group">
                             <br>
-                            <input type="submit" class="btn btn-primary form-group btn-block" value="Acceder"/>
+                            <input type="submit" class="btn btn-primary form-control btn-block" value="Acceder"/>
                         </div>
                         <div class="row-xs-3 form-group">
                             <br>
