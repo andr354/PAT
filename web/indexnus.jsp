@@ -105,7 +105,65 @@
                 response.sendRedirect("index.jsp");
         }
         %>
-                
+        <div id="about" class="container-fluid text-center">
+            <div class="row">       
+        <div class="text-center">
+            <h3>Editar perfil</h3>
+            <s:form action="/Mod" class="form-group">
+                            <table class="table table-striped table-bordered table-responsive">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Password</th>
+                                        <th>Correo</th>
+                                        <th>Intereses (separados por comas)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%@ page import="java.sql.*" %>
+                                    <%
+                                        String user = (String)session.getAttribute("username");
+                                        String rol = "";
+                                        int nivel = 1;
+                                        int idu=0;
+                                        ResultSet rs = null;
+                                        ResultSet rs2 = null;
+                                        String usuario = "<option value=1>Usuario registrado</option>";
+                                        String alumno = "<option value=2>Alumno</option>";
+                                        String admin = "<option value=3>Administrador</option>";
+                                        String contribuidor = "<option value=4>Contribuidor</option>";
+                                        String profesor = "<option value=5>Profesor escolar</option>";
+                                        manejador.setConnection("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/pat");
+                                        rs=manejador.executeQuery("SELECT idUser FROM users WHERE users.id='"+user+"'"); out.println(user);
+                                        if(rs.next()){ 
+                                            idu = rs.getInt("users.idUser");
+                                        }
+                                        rs2 = manejador.executeQuery("SELECT idUser, id, password, nivel, email, intereses FROM users WHERE idUser='" +idu+ "' ");
+                                        while (rs2.next()) {
+                                            out.println("<tr><input type=\"hidden\" name=\"id\" value=" + idu + " class=\"form-control\"/>");
+                                            out.println("<th><input type=\"text\" name=\"username\" placeholder=\"" + rs2.getString("users.id") + "\" value=\"" + rs2.getString("users.id") + "\" class=\"form-control\"/></th>");
+                                            out.println("<th><input type=\"password\" name=\"password\" placeholder=\"Contraseña\" value=\"" + rs2.getString("users.password") + "\" class=\"form-control\"/></th>");
+                                            if (rs2.getString("users.email") != null) {
+                                                out.println("<th><input type=\"email\" name=\"mail\" placeholder=\"" + rs2.getString("users.email") + "\" value=\"" + rs2.getString("users.email") + "\"/></th>");
+                                            } else {
+                                                out.println("<th><input type=\"email\" name=\"mail\" placeholder=\"Correo electronico\" value=\"No tiene\" class=\"form-control\"/></th>");
+                                            }
+                                            out.println("<th><input type=\"text\" name=\"intereses\" placeholder=\"" + rs2.getString("users.intereses") + "\" value=\"" + rs2.getString("users.intereses") + "\" class=\"form-control\" /></th>");
+                                            out.println("</tr>");
+                                        }
+                                    %>
+                                </tbody>
+                            </table>
+                            <div class="col-sm-6">            
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="submit" class="btn-warning btn-xl  form-control" value="Actualizar perfil"/>      
+                            </div>
+                    
+                    </s:form>
+        </div>
+                </div>
+        </div>
 
         <footer class="container-fluid text-center">
             <a href="#myPage" title="To Top">

@@ -65,6 +65,7 @@
                                         <th>Password</th>
                                         <th>Correo</th>
                                         <th>Rol</th>
+                                        <th>Intereses</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -82,7 +83,7 @@
                                         String contribuidor = "<option value=4>Contribuidor</option>";
                                         String profesor = "<option value=5>Profesor escolar</option>";
                                         manejador.setConnection("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/pat");
-                                        rs2 = manejador.executeQuery("SELECT idUser, id, password, nivel, email FROM users WHERE idUser='" + Id + "' ");
+                                        rs2 = manejador.executeQuery("SELECT idUser, id, password, nivel, email, intereses   FROM users WHERE idUser='" + Id + "' ");
                                         while (rs2.next()) {
                                             String acceso = "<option value=" + rs2.getInt("users.nivel") + " selected=\"selected\">";
                                             if (rs2.getInt("users.nivel") == 1) {
@@ -131,6 +132,7 @@
                                                 out.println("<th><input type=\"email\" name=\"mail\" placeholder=\"Correo electronico\" value=\"No tiene\" class=\"form-control\"/></th>");
                                             }
                                             out.println("<th><select name=\"rol\" class=\"form-control\">" + acceso + "</select></th>");
+                                            out.println("<th><input type=\"text\" name=\"intereses\" placeholder=\"" + rs2.getString("users.intereses") + "\" value=\"" + rs2.getString("users.intereses") + "\" class=\"form-control\" /></th>");
                                             out.println("</tr>");
                                         }
                                     %>

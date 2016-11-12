@@ -71,7 +71,7 @@ class LoginBeanX{
         return 0;
     }
     
-    public int modifyUser(String userName, String password, int rol, int id, String mail){
+    public int modifyUser(String userName, String password, int rol, int id, String mail, String intereses){
         int status = 0;
         
         String pass2 = "";
@@ -94,7 +94,7 @@ class LoginBeanX{
                 password = pass2;
             }
             String consulta = "update users\n" +
-                            "set id='"+userName+"', password='"+password+"', rol='"+nivel+"', nivel='"+rol+"'\n, email='"+mail+"'\n" +
+                            "set id='"+userName+"', password='"+password+"', rol='"+nivel+"', nivel='"+rol+"'\n, email='"+mail+"'\n, intereses='"+intereses+"'\n" +
                             "where idUser='"+id+"';"; //tambien esta al reves pero nimodo de nuevo
             pst = con.prepareStatement(consulta);
             int cols = pst.executeUpdate(consulta);

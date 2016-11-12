@@ -122,6 +122,7 @@
                             </label>
                             <!--<input type="text" name="curso" id="curso" class="form-control"/>-->
                             <select id="curso" name="curso" class="form-control">
+                                <option value="0">Ninguno</option>
                                 <%
                                     while (rsCursos.next()) {
                                         out.println("<option value=\""

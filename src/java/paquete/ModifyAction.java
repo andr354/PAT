@@ -12,6 +12,15 @@ public class ModifyAction extends ActionSupport
         private int rol;
         private int Id;
         private String mail;
+        private String intereses;
+
+    public String getIntereses() {
+        return intereses;
+    }
+
+    public void setIntereses(String intereses) {
+        this.intereses = intereses;
+    }
 
     public String getMail() {
         return mail;
@@ -61,7 +70,7 @@ public class ModifyAction extends ActionSupport
     public String execute() {
         System.out.println("Rol: " + rol);
          LoginBeanX lb = new LoginBeanX();
-        if(lb.modifyUser(username,password, rol, Id, mail)==1){
+        if(lb.modifyUser(username,password, rol, Id, mail, intereses)==1){
             return "exitoso";
         }else{
             return "error";
