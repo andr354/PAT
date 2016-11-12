@@ -15,12 +15,14 @@
         String user = (String) session.getAttribute("userName");
         String data = "";
         ResultSet oats = null;
+        ResultSet cursos = null;
         try {
             manejador.setConnection("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/pat");
-            oats = manejador.executeQuery("SELECT * FROM oats WHERE id_oat=" + Id + " ");
+            oats = manejador.executeQuery("SELECT * FROM oats, cursos WHERE id_oat=" + Id + " ");
+            cursos = manejador.executeQuery("SELECT * FROM cursos, profesores WHERE cursos.id_prof=profesores.id_usu;");
             oats.next();
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e+"\nModificarOats.jsp");
             response.sendRedirect("oats.jsp");
         }
     %>
@@ -75,31 +77,37 @@
                 <h3 class="time">Datos actuales del usuario</h3>
                 <div class="col-sm-8 col-sm-offset-2 text-center">
                     <%
-                        out.println("<input type=\"hidden\" value='" + oats.getString("oats.diagrama") + "' id=\"data\"/>");
+                        try {
+                            out.println("<input type=\"hidden\" value='" + oats.getString("oats.diagrama") + "' id=\"data\"/>");
+                        } catch (Exception e) {
+                        }
                     %>
                     <s:form action="/ModOAT"  id="usrform" class="form-group">
-                        
-                            <input type="submit" value="Modificar" class="btn btn-md btn-warning col-md-4 col-md-offset-4"/><br><br>
-                            <table class="table table-striped table-bordered table-responsive">
-                                <thead>
-                                    <tr>
-                                        <th>Titulo</th>
-                                        <th>Descripción</th>
-                                        <th>Curso</th>
-                                    </tr>
-                                </thead>
-                                <input type="hidden" name="id" value=<% out.println(Id);%>/>
-                                <tbody>
-                                    <%
+
+                        <input type="submit" value="Modificar" class="btn btn-md btn-warning col-md-4 col-md-offset-4"/><br><br>
+                        <table class="table table-striped table-bordered table-responsive">
+                            <thead>
+                                <tr>
+                                    <th>Titulo</th>
+                                    <th>Descripción</th>
+                                    <th>Curso</th>
+                                </tr>
+                            </thead>
+                            <input type="hidden" name="id" value=<% out.println(Id);%>/>
+                            <tbody>
+                                <%
+                                    try {
                                         out.println("<tr><th>");
                                         out.println("<input type=\"text\" name=\"titulo\" value=\"" + oats.getString("oats.titulo") + "\" class=\"form-control\"  \"/>"
                                                 + "</th><th><input type=\"text\" name=\"descrip\" value=\"" + oats.getString("oats.descrip") + "\" class=\"form-control\"/></th>"
                                                 + "<th><input type=\"text\" name=\"grupo\" value=" + oats.getString("oats.grupo") + " class=\"form-control\">");
                                         out.println("</th></tr>");
-                                    %>
-                                </tbody>
-                            </table>
-                        
+                                    } catch (Exception e) {
+                                    }
+                                %>
+                            </tbody>
+                        </table>
+
                         <div>
                             <textarea name="diagrama" form="usrform" id="diagrama" rows="60" cols="80"></textarea>
                         </div>

@@ -9,6 +9,16 @@ and open the template in the editor.
 */
 
 /* Gradient transparent - color - transparent */
+.msg-author{
+    color: black;
+    font-weight: bold;
+    line-height: 1.2;
+    font-size: 12px;
+}
+
+.right {
+    float: right
+}​
 
 hr {
     border: 0;
@@ -72,6 +82,14 @@ a.link-titulo{
     color: dimgray;
     font-style: italic;
 }
+.time-chat{
+    text-align: right;
+    font-weight: normal;
+    font-size: 11px;
+    color: indigo;
+    font-style: oblique;
+}
+
 body {
     font: 400 15px Lato, sans-serif;
     line-height: 1.8;
@@ -265,6 +283,16 @@ footer .glyphicon {
 img.giant {
     width: 100px;
     height: auto;
+}
+img.chat {
+    width: 50px;
+    height: auto;
+}
+/* xs */
+@media (max-width: 767px) {
+    img.chat {
+        width: 20px;
+    }
 }
 /* sm */
 @media (min-width: 768px) {

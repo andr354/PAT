@@ -22,18 +22,20 @@
         <%@ page import="java.sql.*" %>
         <jsp:useBean id="manejador" scope="session" class="paquete.DB"></jsp:useBean>
         <%
-            
-            String user = (String) session.getAttribute("username");
-            String acc = (String) session.getAttribute("acc");
-            int acc2 = Integer.parseInt(acc);
+
+            String user = "";
+            String acc = "";
+            int acc2 = 1;
             //int acc2 = 3;
-            
 
             ResultSet rs = null;
             ResultSet rs2 = null;
             ResultSet rsCursos = null;
             String consulta = "SELECT * FROM oats, profesores, cursos where oats.id_prof=profesores.id_usu;";
             try {
+                user = (String) session.getAttribute("username");
+                acc = (String) session.getAttribute("acc");
+                acc2 = Integer.parseInt(acc);
                 if (acc2 == 3) {
                     manejador.setConnection("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/pat");
                     rsCursos = manejador.executeQuery("SELECT id_curso, Nombre FROM cursos");
@@ -42,7 +44,7 @@
                     rs = manejador.executeQuery("SELECT * FROM profesores;");
                 } else {
                     System.out.println("Acceso denegado");
-                    response.sendRedirect("index.jsp");
+                    response.sendRedirect("errors.jsp?id=500");
                 }
             } catch (Exception e) {
                 response.sendRedirect("index.jsp");
@@ -96,10 +98,14 @@
                             </label>
                             <select id="id" name="id" class="form-control">
                                 <%
-                                    while (rs.next()) {
-                                        out.println("<option value=\""
-                                                + rs.getString("profesores.id_usu") + "\">"
-                                                + rs.getString("profesores.nom_prof") + "</option>");
+                                    try {
+                                        while (rs.next()) {
+                                            out.println("<option value=\""
+                                                    + rs.getString("profesores.id_usu") + "\">"
+                                                    + rs.getString("profesores.nom_prof") + "</option>");
+                                        }
+                                    } catch (Exception e) {
+                                        System.out.println(e);
                                     }
                                 %>
                             </select>
@@ -122,12 +128,15 @@
                             </label>
                             <!--<input type="text" name="curso" id="curso" class="form-control"/>-->
                             <select id="curso" name="curso" class="form-control">
-                                <option value="0">Ninguno</option>
                                 <%
-                                    while (rsCursos.next()) {
-                                        out.println("<option value=\""
-                                                + rsCursos.getString("cursos.id_curso") + "\">"
-                                                + rsCursos.getString("cursos.Nombre") + "</option>");
+                                    try {
+                                        while (rsCursos.next()) {
+                                            out.println("<option value=\""
+                                                    + rsCursos.getString("cursos.id_curso") + "\">"
+                                                    + rsCursos.getString("cursos.Nombre") + "</option>");
+                                        }
+                                    } catch (Exception e) {
+                                        System.out.println(e);
                                     }
                                 %>
                             </select>
@@ -171,7 +180,7 @@
                         </thead>
                         <tbody class="searchable">
                             <%
-                                //try {
+                                try {
                                     while (rs2.next()) {
                                         out.println("<tr>");
                                         //out.println("<th>" + rs2.getString("oats.id_oat") + "</th>");
@@ -187,9 +196,9 @@
                                         out.println("</th>");
                                         out.println("</tr>");
                                     }
-                                //} catch (Exception e) {
-                                //    response.sendRedirect("index.jsp");
-                                //}
+                                } catch (Exception e) {
+                                    System.out.println(e);
+                                }
                             %>
                         </tbody>
                     </table>
