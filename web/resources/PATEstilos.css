@@ -9,6 +9,9 @@ and open the template in the editor.
 */
 
 /* Gradient transparent - color - transparent */
+.right {
+    float: right
+}​
 
 hr {
     border: 0;
