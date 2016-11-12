@@ -3,7 +3,6 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <html lang="es">
     <head>
-        <!-- Theme Made By www.w3schools.com - No Copyright -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>PAT</title>
         <meta charset="utf-8">
@@ -47,13 +46,19 @@
                 <div class="text-center">
                     <h2>Cursos en los que estas inscrito actualmente: </h2><br>
                 </div>
-                
+            </div>
+        </div>
                 
         <%@ page import="java.sql.*" %>
         <jsp:useBean id="manejador" scope="session" class="paquete.DB"></jsp:useBean>
         <%
         try{
             String user = (String)session.getAttribute("username");
+            String acc = (String)session.getAttribute("acc");
+            int acc2 = Integer.parseInt(acc);
+            if(acc.equals(null)){
+                response.sendRedirect("index.jsp");
+            }
             int idu = 1;
             ResultSet rs=null;
             ResultSet rs2 = null; 
@@ -87,12 +92,20 @@
             out.println("</tbody>");
             out.println("</table>");
             out.println("</div>");
+            
+            if(acc2==1){
+                out.println("<br><br><br>");
+                out.println("<h2>Realizar registro como usuario avanzado:</h2>");
+                out.println("<a href='registrostd.jsp?id="+idu+"' class='btn btn-success btn-lg btn-block'>Alumno</a>");
+                out.println("<br>");
+                out.println("<a href='registroprf.jsp?id="+idu+"' class='btn btn-success btn-lg btn-block'>Profesor escolar</a>");
+                
+            }
          }catch (Exception e) {
                 response.sendRedirect("index.jsp");
         }
         %>
-                </div>
-            </div>
+                
 
         <footer class="container-fluid text-center">
             <a href="#myPage" title="To Top">

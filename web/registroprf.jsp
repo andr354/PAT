@@ -1,12 +1,15 @@
 <%-- 
-    Document   : registro
-    Created on : 07-nov-2016, 21:46:33
-    Author     : Andrés Z
+    Document   : registroprf
+    Created on : 11-nov-2016, 22:34:09
+    Author     : Asus
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
+<%
+        int Id = Integer.parseInt(request.getParameter("id"));
+%>
 <html>
     <head>
         <title>Registro PAT</title>
@@ -32,30 +35,26 @@
     <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
     
     <div id="login" class="container-fluid"> 
-            <h2 class="text-center">Registro en PAT:</h2>
+            <h2 class="text-center">Registro como Profesor en PAT:</h2>
             <div class="col-md-4 text-center col-md-offset-4 well">
-                <s:form action="/Add" class="form-group">
+                <s:form action="/AddProfEsc" class="form-group">
                     <div class="row form-group">
+                        <input type="hidden" name="id_usuario" id="id_usuario" value=<%out.println(Id);%>/>
                         <div class="row-xs-3 form-group">
-                            <label for="usuario">Nombre de usuario: </label>
-                            <input type="text" name="username" placeholder="Usuario" id="usuario" class="btn-block form-group" required/>
+                            <label for="nombre">Nombre(s): </label>
+                            <input type="text" name="nombre" placeholder="Nombre(s)" id="nombre" class="btn-block form-group" required/>
                         </div>
                         <div class="row-xs-3 form-group">                        
-                            <label for="contra">Contraseña: </label>
-                            <input type="password"  name="password" placeholder="Contraseña" id="contra" class="btn-block form-group" required/>
+                            <label for="apellidos">Apellido(s): </label>
+                            <input type="text"  name="apellidos" placeholder="Apellido(s)" id="apellidos" class="btn-block form-group" required/>
                         </div>
                         <div class="row-xs-3 form-group">                        
-                            <label for="contra">Correo electronico: </label>
-                            <input type="email"  name="mail" placeholder="Correo electronico" id="contra" class="btn-block form-group" required/>
+                            <label for="escuela">Escuela: </label>
+                            <input type="text"  name="escuela" placeholder="Escuela" id="escuela" class="btn-block form-group" required/>
                         </div>
                         <div class="row-xs-3 form-group">
                             <br>
-                            <input type="submit" class="btn btn-primary form-group btn-block" value="Acceder"/>
-                        </div>
-                        <div class="row-xs-3 form-group">
-                            <br>
-                            ¿Ya tiene cuenta en PAT?<br>
-                            <a href="login.jsp" class="btn btn-danger btn-block">Ingresar</a>
+                            <input type="submit" class="btn btn-primary form-group btn-block" value="Registrarse"/>
                         </div>
                     </div>
                 </s:form>
@@ -85,3 +84,5 @@
             </div>
     </body>
 </html>
+
+

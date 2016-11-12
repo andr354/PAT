@@ -58,7 +58,7 @@
         try{
             String user = (String)session.getAttribute("username");
             String acc = (String)session.getAttribute("acc");
-            if(acc==null){
+            if(acc.equals(null)){
                 response.sendRedirect("index.jsp");
             }
             int acc2 = Integer.parseInt(acc);  
