@@ -20,9 +20,9 @@
     ResultSet rsCurso = null;
     try {
         rsOATs = manejador.executeQuery("SELECT * FROM oats, profesores WHERE oats.id_prof=profesores.id_usu AND oats.curso=" + Id + ";");
-        rsCurso = manejador.executeQuery("SELECT * FROM cursos WHERE cursos.id_curso = " + Id + ";");
+        rsCurso = manejador.executeQuery("SELECT * FROM cursos, profesores WHERE cursos.id_curso = " + Id + ";");
         System.out.println("Obteniendo los datos de la BD para Ver curso");
-    }catch(Exception e){
+    } catch (Exception e) {
         System.out.println(e);
         response.sendRedirect("errors.jsp?id=404");
     }
@@ -82,64 +82,45 @@
             <p>PLATAFORMA DE APRENDIZAJE TURISTICO</p> 
         </div>
         <!-- Container (About Section) -->
-        <div id="about" class="container-fluid">
-            <div class="row">
-                <div class="col-sm-8">
-                    <h2>OATs recientes</h2><br>
-                </div>
-                <div class="col-sm-4">
-                </div>
-                <div>
-                    <%
-                        try {
-                            ResultSet rs = null;
-                            ResultSet rs2 = null;
-                            //manejador.setConnection("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/pat");
-                            rs2 = manejador.executeQuery("SELECT * FROM oats, profesores where oats.id_prof=profesores.id_usu and oats.curso=" + Id + ";");
-                            out.println("<table class=\"table table-striped table-bordered table-responsive\">");
-                            out.println("<thead>");
-                            out.println("<tr>");
-                            out.println("<th>Autor</th>");
-                            out.println("<th>Titulo</th>");
-                            out.println("<th>Descripción</th>");
-                            out.println("<th>Fecha</th>");
-                            out.println("<th>Acciones</th>");
-                            out.println("</tr>");
-                            out.println("</thead>");
-                            out.println("<tbody>");
-
-                            while (rs2.next()) {
-                                out.println("<tr>");
-                                out.println("<th>" + rs2.getString("profesores.nom_prof") + " " + rs2.getString("profesores.apps_prof") + "</th>");
-                                out.println("<th>" + rs2.getString("oats.titulo") + "</th>");
-                                out.println("<th>" + rs2.getString("oats.descrip") + "</th>");
-                                out.println("<th>" + rs2.getString("oats.fecha") + "</th>");
-                                out.println("<th>");
-                                out.println(" <a href='veroat.jsp?id=" + rs2.getString("oats.id_oat") + "'>Ver</a>");
-                                out.println("</th>");
-                                out.println("</tr>");
-                            }
-                            out.println("</tbody>");
-                            out.println("</table>");
-                        } catch (Exception e) {
-                            //response.sendRedirect("index.jsp");
-                        }
-
-                    %>
-                </div>
-            </div>
-        </div>
         <div class="container-fluid">
             <%
+                int i = 0;
                 rsCurso.next();
                 out.println("<div class='titulo'>"
                         + rsCurso.getString("cursos.Nombre")
-                        + "</div>"
+                        + "</div><div>Por <b class='by-author'>"
+                        + rsCurso.getString("profesores.nom_prof")
+                        + " " + rsCurso.getString("profesores.apps_prof")
+                        + "</b> </div>"
                         + "<div>"
                         + rsCurso.getString("cursos.Descripcion")
                         + "</div>");
-                while(rsOATs.next()){
-                    out.println("<hr><div class='row'>"+rsOATs.getString("oats.diagrama")+"</div>");
+                while (rsOATs.next()) {
+                    i = i + 1;
+                    if (rsOATs.next()) {
+                        rsOATs.previous();
+                        if (i == 1) {
+                            out.println("<div class='row' id='oat-" + i + "'><hr>"
+                                    + "<div class='row'><span class='right'>"
+                                    + "<a href='#oat-" + (i + 1) + "' class='btn btn-info'>Siguiente</a>"
+                                    + "</span></div><br><br>"
+                                    + rsOATs.getString("oats.diagrama") + "</div>");
+                        } else {
+                            out.println("<div class='row' id='oat-" + i + "'><hr>"
+                                    + "<div class='row'>"
+                                    + "<a href='#oat-" + (i - 1) + "' class='btn btn-info'>Anterior</a><span class='right'>"
+                                    + "<a href='#oat-" + (i + 1) + "' class='btn btn-info'>Siguiente</a>"
+                                    + "</span></div><br><br>"
+                                    + rsOATs.getString("oats.diagrama") + "</div>");
+                        }
+                    } else {
+                        rsOATs.previous();
+                        out.println("<div class='row' id='oat-" + i + "'><hr>"
+                                + "<div class='row'>"
+                                + "<a href='#oat-" + (i - 1) + "' class='btn btn-info'>Anterior</a>"
+                                + "</div><br><br>"
+                                + rsOATs.getString("oats.diagrama") + "</div>");
+                    }
                 }
             %>
         </div>

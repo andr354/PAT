@@ -116,7 +116,7 @@
         <!----><!--Eliminar perfil de profesor escolar--> 
         <action name="BorrarProfEsc" class="paquete.BorrarProfEscAction">
             <result name="exitoso">profs.jsp</result>
-            <result name="error">profs.jsp</result>
+            <result name="error">profs.jsp</result>     
         </action>
         <!----><!--Modificar un Objeto de Aprendizaje--> 
         <action name="ModOAT" class="paquete.ModOatAction">
