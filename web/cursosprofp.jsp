@@ -116,7 +116,7 @@
       </div>
   </div>
       <h2>Crear un nuevo curso</h2>
-        <s:form action="/AddProfesorG" id="ncurso">
+        <s:form action="/AddCurso" id="ncurso">
             <input type="hidden" name="idu" value=<%out.println(idus);%>/>
             Nombre del curso: <br><input type="text" name = "nombre"/><br>
             Descripción: <br><textarea name="desc" form="ncurso" id="texto" rows="5" cols="50"></textarea><br>

@@ -24,6 +24,11 @@
             <result name="error">admin.jsp</result>
         </action>
         <!---->
+        <action name="AddCurso" class="paquete.AddCursoAction">
+            <result name="exitoso">cursos.jsp</result>
+            <result name="error">cursos.jsp</result>
+        </action>
+        <!---->
         <action name="insc" class="paquete.inscAction">
             <result name="exitoso">indexnus.jsp</result>
             <result name="error">indexnus.jsp</result>

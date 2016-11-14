@@ -333,6 +333,23 @@ class LoginBean {
 
         return status;
     }
+    
+    public int addCurso(int id, String nombre, String desc) {
+        int status = 0;
+        try {
+            con = DataSource.getInstance().getConnection();
+            String consulta = "insert into cursos(id_prof, nombre, Descripcion) values("+id+", '"+nombre+"', '"+desc+"');";
+            System.out.println(consulta);
+            pst = con.prepareStatement(consulta);
+            int cols = pst.executeUpdate(consulta);
+            status = 1;
+        } catch (Exception e) {
+            System.out.println(status);
+            System.out.println(e);
+        }
+
+        return status;
+    }
 
     public boolean modificaOAT(String titulo, String descrip, String grupo, String diagrama, int id) {
         String table_name = "oats";
