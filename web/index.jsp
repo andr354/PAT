@@ -27,7 +27,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>                        
                     </button>
-                    <a class="navbar-brand" href="#myPage">Logo</a>
+                    <a class="navbar-brand" href="index.jsp"><img src="resources/logo.png" class="logo"/></a>
                     <!--<a class="navbar-brand" href="#myPage"><img src="logoSita.png" alt="Logo" width="50" height="80"></a>-->
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
@@ -66,9 +66,11 @@
                 <div class="col-sm-8">
                     <h2>Acerca de nuestra plataforma</h2><br>
                     <h4>PAT es una nueva manera de llevar el conocimiento a las personas, de una manera interactiva y entretanida.</h4><br>
-                    <p><center>PAT permite inscribirse a cursos acerca de los temas presentados en la plataforma, tambien permite a los profesores escolares crear grupos para sus alumnos dentro de la plataforma y asignarles actividades a sus alumnos.
+                    <p><center>
+                        PAT permite inscribirse a cursos acerca de los temas presentados en la plataforma, tambien permite a los profesores escolares crear grupos para sus alumnos dentro de la plataforma y asignarles actividades a sus alumnos.
                         PAT busca llevar el conocimiento (en esta primera etapa sobre las zonas aqrqueologicas de nuestro pais) a una nueva generación de personas
-                        de una manera interesante, entretenida e interactiva</center></p>
+                        de una manera interesante, entretenida e interactiva
+                    </center>
 
                     <br><button class="btn btn-default btn-lg" onclick="location.href = '#contact';">Ponerse en contacto</button>
                 </div>
@@ -81,15 +83,8 @@
         <div class="container-fluid bg-grey">
             <div class="row">
                 <div class="col-sm-4">
-                    <span class="glyphicon glyphicon-globe logo slideanim"></span>
                 </div>
                 <div class="col-sm-8">
-                    <h2>NUESTROS VALORES</h2><br>
-                    <p>Responsabilidad</p>
-                    <p>Compromiso</p>
-                    <p></p>
-                    <h4><strong>MISIÓN:</strong> Nuestra misión.</h4><br>
-                    <p><strong>VISIÓN:</strong> Nuestra vision.</p>
                 </div>
             </div>
         </div>-->
@@ -101,38 +96,23 @@
             <br>
             <div class="row slideanim">
                 <div class="col-sm-4">
-                    <span class="glyphicon glyphicon-off logo-small"></span>
-                    <h4>PODER</h4>
-                    <p>Controle su información en todo momento y desde cualquier lugar.</p>
+                    <span class="glyphicon glyphicon-leaf logo-small"></span>
+                    <h4>ECO</h4>
+                    <p>El cambio del papel a lo digital nos ayuda a salvar el planeta</p>
                 </div>
                 <div class="col-sm-4">
                     <span class="glyphicon glyphicon-heart logo-small"></span>
                     <h4>INTERACCIÓN</h4>
-                    <p>Acérquese a sus pacientes y mantenga un contacto permanente con ellos.</p>
+                    <p>Interacción entre usuarios, profesores y alumnos, el conocimiento pertenece a todos.</p>
                 </div>
                 <div class="col-sm-4">
                     <span class="glyphicon glyphicon-lock logo-small"></span>
                     <h4>CALIDAD</h4>
-                    <p>Realice sus operaciones con la confianza en la calidad y seguridad de nuestro sistema.</p>
+                    <p>Ofrecemos una plataforma robusta y confiable que siempre este ahi para tí.</p>
                 </div>
             </div>
             <br><br>
             <div class="row slideanim">
-                <div class="col-sm-4">
-                    <span class="glyphicon glyphicon-leaf logo-small"></span>
-                    <h4>ECO</h4>
-                    <p>Deshágase del papel y las agendas, ayudenos a salvar el planeta.</p>
-                </div>
-                <div class="col-sm-4">
-                    <span class="glyphicon glyphicon-certificate logo-small"></span>
-                    <h4>CERTIFICADOS</h4>
-                    <p>Contamos con las certificaciones mas importantes y exigentes de la industria.</p>
-                </div>
-                <div class="col-sm-4">
-                    <span class="glyphicon glyphicon-wrench logo-small"></span>
-                    <h4 style="color:#303030;">TRABAJO DURO</h4>
-                    <p>Nuestro equipo estará siempre disponible para ayudarlo, trabajamos día y noche para su beneficio.</p>
-                </div>
             </div>
         </div>
 
@@ -208,57 +188,15 @@
                 <div class="col-sm-4 col-xs-12">
                     <div class="panel panel-default text-center">
                         <div class="panel-heading">
-                            <h1>Los Mayas, su cultura y su influencia</h1>
+                            <h1>Introducción a la civilización maya</h1>
                         </div>
                         <div class="panel-body">
-                            <p><strong>1</strong> Médico</p>
-                            <p><strong>500</strong> Pacientes</p>
-                            <p><strong>1</strong> Ubicación</p>
-                            <p><strong>1GB</strong> Almacenamiento</p>
-                            <p><strong>Ilimitadas</strong> Consultas</p>
+                            <p><strong>1</strong> En este curso te introduciremos a la civilización maya mediante su historia, sus costumbres, religión, obras y hasta su estado actual. Todo de una manera simple, clara y concisa, ¡Esperamos que te guste!</p>
                         </div>
                         <div class="panel-footer plan">
-                            <h3>12</h3>
+                            <h3>30</h3>
                             <h4>Lugares disponibles</h4>
                             <button class="btn btn-lg">Inscribirse</button>
-                        </div>
-                    </div>      
-                </div>     
-                <div class="col-sm-4 col-xs-12">
-                    <div class="panel panel-default text-center">
-                        <div class="panel-heading">
-                            <h1>Premium</h1>
-                        </div>
-                        <div class="panel-body">
-                            <p><strong>5</strong> Médicos</p>
-                            <p><strong>2500</strong> Pacientes</p>
-                            <p><strong>1</strong> Ubicación</p>
-                            <p><strong>3GB</strong> Almacenamiento</p>
-                            <p><strong>Ilimitadas</strong> Consultas</p>
-                        </div>
-                        <div class="panel-footer plan">
-                            <h3>$109</h3>
-                            <h4>mensuales</h4>
-                            <button class="btn btn-lg">Pedir</button>
-                        </div>
-                    </div>      
-                </div>       
-                <div class="col-sm-4 col-xs-12">
-                    <div class="panel panel-default text-center">
-                        <div class="panel-heading">
-                            <h1>Total</h1>
-                        </div>
-                        <div class="panel-body">
-                            <p><strong>20</strong> Médicos</p>
-                            <p><strong>Ilimitados</strong> Pacientes</p>
-                            <p><strong>3</strong> Ubicación</p>
-                            <p><strong>Ilimitado</strong> Almacenamiento</p>
-                            <p><strong>Ilimitadas</strong> Consultas</p>
-                        </div>
-                        <div class="panel-footer plan">
-                            <h3>$169</h3>
-                            <h4>mensuales</h4>
-                            <button class="btn btn-lg">Pedir</button>
                         </div>
                     </div>      
                 </div>    
@@ -270,10 +208,10 @@
             <h2 class="text-center">CONTÁCTO</h2>
             <div class="row">
                 <div class="col-sm-5">
-                    <p>Póngase en contacto con nosotros y le responderemos en las próximas 24 horas.</p>
+                    <p>¿Te interesa saber más acerca de PAT? Llena el formulario de contacto.</p>
                     <p><span class="glyphicon glyphicon-map-marker"></span> México, DF</p>
                     <p><span class="glyphicon glyphicon-phone"></span> +52 5585647042</p>
-                    <p><span class="glyphicon glyphicon-envelope"></span> sita@nazeer.com</p>	   
+                    <p><span class="glyphicon glyphicon-envelope"></span> info.at.pat@gmail.com</p>	   
                 </div>
                 <div class="col-sm-7 slideanim">
                     <div class="row">
@@ -294,76 +232,43 @@
             </div>
         </div>
 
-        <div id="googleMap" style="height:400px;width:100%;"></div>
+
 
         <br>
         <br>
         <!-- SECCION LOGIN -->
         <div id="login" class="container-fluid">
-
-            <%
-                if (user == null && acc == null) {
-                    out.println("<h2 class=\"text-center\">Inicio de Sesión</h2>");
-                } else {
-                    out.println("<h2 class=\"text-center\">Cerrar Sesión</h2>");
-                    out.println("    <center>");
-                    out.println("<button type=\"button\" onclick=\"loadDoc();\" class=\"btn btn-danger\">Cerrar Sesión</button>");
-                    out.println("</h2>");
-                    out.println("    </center>");
-                }
-            %>
-
-            <!--<h2 class="text-center"></h2>-->
             <div class="col-md-4 slideanim text-center col-md-offset-4 well">
                 <s:form action="/Login" class="form-group">
-                    <div class="row form-group">
-                        <div class="row-xs-3 form-group">
-                            <label for="usuario">Nombre de usuario: </label>
-                            <input type="text" name="username" placeholder="Usuario" id="usuario" class="btn-block form-control"/>
-                        </div>
-                        <div class="row-xs-3 form-group">                        
-                            <label for="contra">Contraseña: </label>
-                            <input type="password"  name="password" placeholder="Contraseña" id="contra" class="btn-block form-control"/>
-                        </div>
-                        <div class="row-xs-3 form-group">
-                            <br>
-                            <input type="submit" class="btn btn-primary form-control btn-block" value="Acceder"/>
-                        </div>
-                        <div class="row-xs-3 form-group">
-                            <br>
-                            ¿No tiene cuenta en PAT?<br>
-                            <a href="registro.jsp" class="btn btn-danger btn-block">Registrarse en la plataforma</a>
-                        </div>
-                    </div>
+                    <%
+                        if (user == null && acc == null) {
+                            out.println("<h2 class=\"text-center\">Inicio de Sesión</h2>"
+                                    + "<div class='row form-group'>"
+                                    + "<div class='row-xs-3 form-group'>"
+                                    + "<label for='usuario'>Nombre de usuario: </label>"
+                                    + "<input type='text' name='username' placeholder='Usuario' id='usuario' class='btn-block form-control'/>"
+                                    + "</div><div class='row-xs-3 form-group'>"
+                                    + "<label for='contra'>Contraseña: </label>"
+                                    + "<input type='password'  name='password' placeholder='Contraseña' id='contra' class='btn-block form-control'/>"
+                                    + "</div><div class='row-xs-3 form-group'>"
+                                    + "<br><input type='submit' class='btn btn-primary form-control btn-block' value='Acceder'/>"
+                                    + "</div><div class='row-xs-3 form-group'>"
+                                    + "<hr><b>¿No tiene cuenta en PAT?</b><br>"
+                                    + "<a href='registro.jsp' class='btn btn-danger btn-block'>Registrarse en la plataforma</a>"
+                                    + "</div></div>");
+                        } else {
+                            out.println("<h2 class=\"text-center\">Cerrar Sesión</h2>");
+                            out.println("<center>");
+                            out.println("<button type=\"button\" onclick=\"loadDoc();\" class=\"btn btn-danger\">Cerrar Sesión</button>");
+                            out.println("</h2>");
+                            out.println("</center>");
+                        }
+                    %>
                 </s:form>
             </div>
         </div>
 
-        <!-- Add Google Maps -->
-        <script src="http://maps.googleapis.com/maps/api/js"></script>
-        <script>
-                  var myCenter = new google.maps.LatLng(19.50419, -99.1487605);
 
-                  function initialize() {
-                      var mapProp = {
-                          center: myCenter,
-                          zoom: 15,
-                          scrollwheel: false,
-                          draggable: false,
-                          mapTypeId: google.maps.MapTypeId.ROADMAP
-                      };
-
-                      var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-
-                      var marker = new google.maps.Marker({
-                          position: myCenter,
-                      });
-
-                      marker.setMap(map);
-                  }
-
-                  google.maps.event.addDomListener(window, 'load', initialize);
-        </script>
 
         <footer class="container-fluid text-center">
             <a href="#myPage" title="To Top">

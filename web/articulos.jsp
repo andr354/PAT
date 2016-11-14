@@ -38,7 +38,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>                        
                     </button>
-                    <a class="navbar-brand" href="index.jsp">Logo </a>
+                    <a class="navbar-brand" href="index.jsp"><img src="resources/logo.png" class="logo"/></a>
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
@@ -81,6 +81,7 @@
                         String img = "";
                         String imgP = "";
                         String styleImg = "";
+                        String styleImg2 = "width:280px;height:200px;";
                         while (rs2.next()) {
                             try {
                                 imagen = rs2.getString("diagrama").split("<img ");
@@ -95,15 +96,15 @@
                                 if(img!=""){
                                     styleImg = imgP.split("style=\"")[1];
                                     styleImg = styleImg.split("\"")[0];
-                                    img = img + "\" style=\"" + styleImg + "\"";
+                                    img = img + "\" style=\"" + styleImg2 + "";
                                     img = "<img src=\"" + img + "\">";
                                     System.out.println(img);
                                 }else{
-                                    img = "<img src=\"resources/default_image.png\" class=\"giant img-rounded\">";
+                                    img = "<img src=\"resources/default_image.png\" class=\"giant img-rounded\" style=\"width:320px;height:241px;\">";
                                 }
                             } catch (Exception e) {
                                 if (img != "") {
-                                    img = "<img src=\"" + img + "\" class=\"giant img-rounded\">";
+                                    img = "<img src=\"" + img + "\" class=\"giant img-rounded\" ";
                                 }else{
                                     img = "<img src=\"resources/default_image.png\" class=\"giant img-rounded\">";
                                 }

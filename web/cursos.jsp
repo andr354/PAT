@@ -44,7 +44,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>                        
                     </button>
-                    <a class="navbar-brand" href="index.jsp">Logo</a>
+                    <a class="navbar-brand" href="index.jsp"><img src="resources/logo.png" class="logo"/></a>
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
@@ -66,7 +66,7 @@
         </div>
         <div class="text-center" id="creacion">
             <h2>Crear nuevo curso</h2>
-            <s:form action="/AddProfesorG" id="ncurso" class="form-group">
+            <s:form action="/AddCurso" id="ncurso" class="form-group">
                 <div class="col-sm-3">
                     <label for="idu">ID de profesor responsable: </label>
                     <!--<input type ="number" name="idu" id="idu" class="form-control"/>-->

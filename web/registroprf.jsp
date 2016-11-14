@@ -8,7 +8,7 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
 <%
-        int Id = Integer.parseInt(request.getParameter("id"));
+    int Id = Integer.parseInt(request.getParameter("id"));
 %>
 <html>
     <head>
@@ -31,57 +31,36 @@
             }
         </style>
     </head>
-    
+
     <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
-    
-    <div id="login" class="container-fluid"> 
+
+        <div id="login" class="container-fluid"> 
             <h2 class="text-center">Registro como Profesor en PAT:</h2>
             <div class="col-md-4 text-center col-md-offset-4 well">
                 <s:form action="/AddProfEsc" class="form-group">
-                    <div class="row form-group">
+                    <div class="row">
                         <input type="hidden" name="id_usuario" id="id_usuario" value=<%out.println(Id);%>/>
-                        <div class="row-xs-3 form-group">
+                        <div class="row-xs-3">
                             <label for="nombre">Nombre(s): </label>
-                            <input type="text" name="nombre" placeholder="Nombre(s)" id="nombre" class="btn-block form-group" required/>
+                            <input type="text" name="nombre" placeholder="Nombre(s)" id="nombre" class="btn-block form-control" required/>
                         </div>
-                        <div class="row-xs-3 form-group">                        
+                        <div class="row-xs-3">
                             <label for="apellidos">Apellido(s): </label>
-                            <input type="text"  name="apellidos" placeholder="Apellido(s)" id="apellidos" class="btn-block form-group" required/>
+                            <input type="text"  name="apellidos" placeholder="Apellido(s)" id="apellidos" class="btn-block form-control" required/>
                         </div>
-                        <div class="row-xs-3 form-group">                        
+                        <div class="row-xs-3">                        
                             <label for="escuela">Escuela: </label>
-                            <input type="text"  name="escuela" placeholder="Escuela" id="escuela" class="btn-block form-group" required/>
+                            <input type="text"  name="escuela" placeholder="Escuela" id="escuela" class="btn-block form-control" required/>
                         </div>
-                        <div class="row-xs-3 form-group">
-                            <br>
-                            <input type="submit" class="btn btn-primary form-group btn-block" value="Registrarse"/>
-                        </div>
-                    </div>
-                </s:form>
-            </div>
-    </div>
-    
-                <!--<h2 class="text-center"></h2>-->
-            <div class="col-md-4 slideanim text-center col-md-offset-4 well">
-                <s:form action="/Login" class="form-group">
-                    <div class="row form-group">
-                        <!--<div class="col-sm-6 form-group">-->
-                        <div class="row-xs-3 form-group">
-                            <label for="usuario">Nombre de usuario: </label>
-                            <input type="text" name="username" placeholder="Usuario" id="usuario" class="btn-block form-group"/>
-                        </div>
-                        <div class="row-xs-3 form-group">                        
-                            <label for="contra">Contraseña: </label>
-                            <input type="password"  name="password" placeholder="Contraseña" id="contra" class="btn-block form-group"/>
-                        </div>
-                        <!--</div>-->
-                        <div class="row-xs-3 form-group">
-                            <br>
-                            <input type="submit" class="btn btn-primary form-group btn-block" value="Acceder"/>
+                        <div class="row-xs-3">
+                            <hr>
+                            <input type="submit" class="btn btn-primary form-control btn-block" value="Registrarse"/><br>
+                            <a href="indexnus.jsp" class="btn btn-info form-control">Volver</a>
                         </div>
                     </div>
                 </s:form>
             </div>
+        </div>
     </body>
 </html>
 
