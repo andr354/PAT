@@ -82,7 +82,7 @@
             <p>PLATAFORMA DE APRENDIZAJE TURISTICO</p> 
         </div>
         <!-- Container (About Section) -->
-        <div class="container-fluid">
+        <div class="container-fluid col-sm-12 col-md-offset-2">
             <%
                 int i = 0;
                 rsCurso.next();
@@ -102,14 +102,14 @@
                         if (i == 1) {
                             out.println("<div class='row' id='oat-" + i + "'><hr>"
                                     + "<div class='row'><span class='right'>"
-                                    + "<a href='#oat-" + (i + 1) + "' class='btn btn-info'>Siguiente</a>"
+                                    //+ "<a href='#oat-" + (i + 1) + "' class='btn btn-info'>Siguiente</a>"
                                     + "</span></div><br><br>"
                                     + rsOATs.getString("oats.diagrama") + "</div>");
                         } else {
                             out.println("<div class='row' id='oat-" + i + "'><hr>"
                                     + "<div class='row'>"
-                                    + "<a href='#oat-" + (i - 1) + "' class='btn btn-info'>Anterior</a><span class='right'>"
-                                    + "<a href='#oat-" + (i + 1) + "' class='btn btn-info'>Siguiente</a>"
+                                    //+ "<a href='#oat-" + (i - 1) + "' class='btn btn-info'>Anterior</a><span class='right'>"
+                                    //+ "<a href='#oat-" + (i + 1) + "' class='btn btn-info'>Siguiente</a>"
                                     + "</span></div><br><br>"
                                     + rsOATs.getString("oats.diagrama") + "</div>");
                         }
@@ -117,7 +117,7 @@
                         rsOATs.previous();
                         out.println("<div class='row' id='oat-" + i + "'><hr>"
                                 + "<div class='row'>"
-                                + "<a href='#oat-" + (i - 1) + "' class='btn btn-info'>Anterior</a>"
+                                //+ "<a href='#oat-" + (i - 1) + "' class='btn btn-info'>Anterior</a>"
                                 + "</div><br><br>"
                                 + rsOATs.getString("oats.diagrama") + "</div>");
                     }

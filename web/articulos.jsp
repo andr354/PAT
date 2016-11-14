@@ -92,11 +92,15 @@
                             }
 
                             try {
-                                styleImg = imgP.split("style=\"")[1];
-                                styleImg = styleImg.split("\"")[0];
-                                img = img + "\" style=\"" + styleImg + "\"";
-                                img = "<img src=\"" + img + "\">";
-                                System.out.println(img);
+                                if(img!=""){
+                                    styleImg = imgP.split("style=\"")[1];
+                                    styleImg = styleImg.split("\"")[0];
+                                    img = img + "\" style=\"" + styleImg + "\"";
+                                    img = "<img src=\"" + img + "\">";
+                                    System.out.println(img);
+                                }else{
+                                    img = "<img src=\"resources/default_image.png\" class=\"giant img-rounded\">";
+                                }
                             } catch (Exception e) {
                                 if (img != "") {
                                     img = "<img src=\"" + img + "\" class=\"giant img-rounded\">";
