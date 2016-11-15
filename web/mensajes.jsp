@@ -6,6 +6,52 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<%
+    String user = null;
+    String uDestino = null;
+    String acc = null;
+    ResultSet userData = null;
+    ResultSet mensajes = null;
+    ResultSet uDestinoD = null;
+    ResultSet users = null;
+    String idUser = null;
+    String idUserD = null;
+    String uDestinoS = "Mensajes";
+    String uDestinoSP = "Mensajes";
+    int nivelAceeso = 0;
+    try{
+        user = (String) session.getAttribute("username");
+        acc = (String) session.getAttribute("acc");
+        if(acc==null || user==null){
+            response.sendRedirect("errors.jsp?id=500");
+        }
+        //Obtenemos el id del usuario destino desde la sesion
+        uDestinoSP = (String)session.getAttribute("usuDest");
+        //Obtenemos el id del usuario destino desde los parametros
+        uDestino = (String) request.getParameter("idFriend");
+        System.out.println("acc = "+acc);
+        //Si el parametro no es nulo...
+        if(uDestino!=null){
+            //Si el parametro y el atributo son distintos...
+            if(uDestinoSP!=uDestino){
+                System.out.println(uDestino +" "+ uDestinoSP);
+                //Guardamos el valor del parametro lo guardamos en la sesion.
+                session.setAttribute("usuDest", uDestino);
+                //System.out.println(uDestino +" "+ uDestinoSP);
+            }
+        }else{
+            //Si el parametro es nulo...
+            //Si el valor del atributo no es nulo...
+            if(uDestinoSP!=null){
+                //Obtenemos el valor guardado en la sesion.
+                uDestino = (String)session.getAttribute("usuDest");
+            }
+        }
+    }catch(Exception e){
+        System.out.println("No se pudo recuperar la sesion: username o acc");
+        System.out.println(e);
+    }
+%>
 <html lang="es">
     <head>
         <!-- Theme Made By www.w3schools.com - No Copyright -->
@@ -31,11 +77,37 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>                        
                     </button>
-                    <a class="navbar-brand" href="index.jsp">Logo</a>
+                    <a class="navbar-brand" href="index.jsp"><img src="resources/logo.png" class="logo"/></a>
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="mensajes.jsp">PAT</a></li>
+                        <li>
+                            <%
+                                if(acc.equals("1")){
+                                    out.println("<a href='indexnus.jsp'>Inicio</a>");
+                                }
+                                if(acc.equals("2")){
+                                    out.println("<a href='indexalumn.jsp'>Inicio</a>");
+                                }
+                                if(acc.equals("3")){
+                                    out.println("<a href='admin.jsp'>Inicio</a>");
+                                }
+                                if(acc.equals("4")){
+                                    out.println("<a href='indexprofp.jsp'>Inicio</a>");
+                                }
+                                if(acc.equals("5")){
+                                    out.println("<a href='indexprofesc.jsp'>Inicio</a>");
+                                }
+                            %>
+                        </li>
+                            <%
+                                if (user == null && acc == null){
+                                    out.println("<li><a href='indexnus.jsp'>LOGIN</a></li>");
+                                } else {
+                                    out.println("<li><a href='indexnus.jsp'>" + user + "</a></li>");
+                                }
+                            %>
                     </ul>
                 </div>
             </div>
@@ -49,21 +121,7 @@
         <%@ page import="java.sql.*" %>
         <jsp:useBean id="manejador" scope="session" class="paquete.DB"></jsp:useBean>
         <%
-            String user = null;
-            String uDestino = null;
-            String acc = null;
-            ResultSet userData = null;
-            ResultSet mensajes = null;
-            ResultSet uDestinoD = null;
-            ResultSet users = null;
-            String idUser = null;
-            String idUserD = null;
-            String uDestinoS = "Mensajes";
-            int nivelAceeso = 0;
             try {
-                user = (String) session.getAttribute("username");
-                acc = (String) session.getAttribute("acc");
-                uDestino = (String) request.getParameter("idFriend");
                 manejador.setConnection("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/pat");
                 //*******[Obtenemos los usuarios que existen en la bd]***********
                 users = manejador.executeQuery("SELECT * FROM users;");
@@ -76,17 +134,22 @@
                     idUserD = uDestinoD.getString("users.idUser");
                 }
                 //***************************************************************
+                //************[Seleccionamos los id numericos de los usuarios]****************
                 userData = manejador.executeQuery("SELECT idUser FROM users WHERE users.id='" + user + "';");
                 userData.next();
                 idUser = userData.getString("users.idUser");
+                //***************************************************************
+                //*******************[Obtenemos todos los mensajes, provenientes y dirigidos a otro usuario]*******************
                 if (idUser != null) {
-                    mensajes = manejador.executeQuery(
-                            "SELECT mensajes.* FROM mensajes WHERE ( idUsuEnvia="+idUserD+" AND idUsuRecibe="+idUser+" )OR( idUsuEnvia="+idUser+" AND idUsuRecibe="+idUserD+" ) ORDER BY fecha DESC;"
-                    );
-                    //System.out.println("SELECT mensajes.* FROM mensajes, users WHERE (idUsuEnvia=users.idUser AND users.id='"+user+"') OR (idUsuRecibe=users.idUser AND users.id='"+user+"') ORDER BY fecha DESC;");
+                    mensajes = manejador.executeQuery("SELECT mensajes.* FROM mensajes WHERE ( idUsuEnvia=" + idUserD + " AND idUsuRecibe=" + idUser + " )OR( idUsuEnvia=" + idUser + " AND idUsuRecibe=" + idUserD + " ) ORDER BY fecha DESC;");
+                } else {
+                    //*****[En el caso de que el id numerico del usuario actual no exista]*********************
+                    System.out.println("No existe el usuario en la BD.");
+                    response.sendRedirect("errors.jsp?id=500");
                 }
+                //***************************************************************
             } catch (Exception e) {
-                System.out.println(e + "\nUserId: " + idUser);
+                response.sendRedirect("errors.jsp?id=500");
             }
         %>
         <div id="main" class="container-fluid">
@@ -100,71 +163,81 @@
                 <div class="row">
                     <hr>
                     <ul>
-                            <%
-                                while (users.next()) {
-                                    if(!users.getString("users.idUser").toUpperCase().equals(uDestinoS.toUpperCase())){
-                                        out.println("<li><a href='mensajes.jsp?idFriend=" + users.getString("users.idUser") + "'>" + users.getString("users.id") + "</a></li>");
-                                    }
+                        <%
+                            while (users.next()) {
+                                if (!users.getString("users.id").toUpperCase().equals(user.toUpperCase())) {
+                                    out.println("<li><a href='mensajes.jsp?idFriend=" + users.getString("users.idUser") + "'>" + users.getString("users.id") + "</a></li>");
                                 }
-                            %>
+                            }
+                        %>
                     </ul>
                 </div>
             </div><span class="col-sm-1"></span>
             <div class="col col-sm-8">
                 <div class="row row-xs-3 titulo-seccion text-center">
                     <%
-                        if(!user.toUpperCase().equals(uDestinoS.toUpperCase())){
+                        if (!user.toUpperCase().equals(uDestinoS.toUpperCase())) {
                             out.println(uDestinoS);
-                        }else{
+                        } else {
                             out.println("Mensajes");
                         }
                     %>
                 </div>
                 <s:form action="/EnviarM" id="mensajes" class="form-group">
                     <%
-                        out.println(
-                                "<div class='row'>"
-                                + "<input type='hidden' value="+idUserD+" name='usuario'/>"
-                                + "<input type='hidden' value='Mensaje' name='titulo'/>"
-                                + "<input type='hidden' value="+idUser+" name='idenvia'/>"
-                                + "<div class='col col-sm-9'>"
-                                + "<input type='text' class='form-control' name='texto'  form='mensajes' placeholder='Escribe aquí.'/>"
-                                + "</div>"
-                                + "<div class='col col-sm-3'>"
-                                + "<input type='submit' class='btn btn-default form-control' value='Enviar'/>"
-                                + "</div>"
-                                );
+                        if (uDestino != null) {
+                            out.println(
+                                    "<div class='row'>"
+                                    + "<input type='hidden' value=" + idUserD + " name='usuario'/>"
+                                    + "<input type='hidden' value='Mensaje' name='titulo'/>"
+                                    + "<input type='hidden' value=" + idUser + " name='idenvia'/>"
+                                    + "<div class='col col-sm-9'>"
+                                    + "<input type='text' class='form-control' name='texto'  form='mensajes' placeholder='Escribe aquí.'/>"
+                                    + "</div>"
+                                    + "<div class='col col-sm-2'>"
+                                    + "<input type='submit' class='btn btn-default form-control' value='Enviar'/>"
+                                    + "</div>"
+                                    + "<div class='col col-sm-1'>"
+                                    + "<a href='mensajes.jsp?idFriend="+uDestino+"' class='btn btn-default'><img src='resources/reload.png' width='20' height='20'/></a>"
+                                    + "</div>"
+                            );
+                        }
                     %>
                 </s:form>
                 <hr>
                 <div class="row  well">
                     <%
-                        if(!user.toUpperCase().equals(uDestinoS.toUpperCase())){
-                            try {
-                                while (mensajes.next()) {
-                                    if (mensajes.getString("mensajes.idUsuEnvia").equals(idUser)) {
-                                        out.println("<div class='row row-sm-3 btn-info center-block'>"
-                                                + "<div class='col-sm-2'><img src='resources/user.png' class='chat img-rounded'/></div>"
-                                                + "<div class='col-sm-10'>"
-                                                + "<div class='row msg-author'>"+user+"</div>"
-                                                + "<div class='row'>" + mensajes.getString("mensajes.Texto") + "</div>"
-                                                + "<div class='row time-chat pull-right'>" + mensajes.getString("mensajes.fecha") + "</div>"
-                                                + "</div></div>");
-                                    } else {
-                                        out.println("<div class='row row-sm-3 btn-default center-block'>"
-                                                + "<div class='col-sm-2'><img src='resources/user.png' class='chat img-rounded'/></div>"
-                                                + "<div class='col-sm-10'>"
-                                                + "<div class='row msg-author'>"+uDestinoS+"</div>"
-                                                + "<div class='row'>" + mensajes.getString("mensajes.Texto") + "</div>"
-                                                + "<div class='row time-chat pull-right'>" + mensajes.getString("mensajes.fecha") + "</div>"
-                                                + "</div></div>");
+                        if (!user.toUpperCase().equals(uDestinoS.toUpperCase()) && uDestino != null) {
+                            if (mensajes.next() == true) {
+                                mensajes.previous();
+                                try {
+                                    while (mensajes.next()) {
+                                        if (mensajes.getString("mensajes.idUsuEnvia").equals(idUser)) {
+                                            out.println("<div class='row row-sm-3 btn-info center-block'>"
+                                                    + "<div class='col-sm-2'><img src='resources/user.png' class='chat img-rounded'/></div>"
+                                                    + "<div class='col-sm-10'>"
+                                                    + "<div class='row msg-author'>" + user + "</div>"
+                                                    + "<div class='row'>" + mensajes.getString("mensajes.Texto") + "</div>"
+                                                    + "<div class='row time-chat pull-right'>" + mensajes.getString("mensajes.fecha") + "</div>"
+                                                    + "</div></div>");
+                                        } else {
+                                            out.println("<div class='row row-sm-3 btn-default center-block'>"
+                                                    + "<div class='col-sm-2'><img src='resources/user.png' class='chat img-rounded'/></div>"
+                                                    + "<div class='col-sm-10'>"
+                                                    + "<div class='row msg-author'>" + uDestinoS + "</div>"
+                                                    + "<div class='row'>" + mensajes.getString("mensajes.Texto") + "</div>"
+                                                    + "<div class='row time-chat pull-right'>" + mensajes.getString("mensajes.fecha") + "</div>"
+                                                    + "</div></div>");
+                                        }
                                     }
+                                } catch (Exception e) {
+                                    System.out.println(e);
                                 }
-                            } catch (Exception e) {
-                                System.out.println(e);
+                            } else {
+                                out.print("<div class='text-center'>Sin Mensajes</div>");
                             }
-                        }else{
-                            out.println("");
+                        } else {
+                            out.println("<div class='text-center'><img src='resources/default_image.png'/></div>");
                         }
                     %>
                 </div>

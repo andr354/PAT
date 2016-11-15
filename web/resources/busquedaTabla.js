@@ -16,8 +16,6 @@ $(document).ready(function () {
                 return rex.test($(this).text());
             }).show();
 
-        })
-
+        });
     }(jQuery));
-
 });

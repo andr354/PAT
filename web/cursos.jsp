@@ -32,6 +32,8 @@
         <link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script src="resources/bootbox.min.js"></script>
+        <script src="resources/formularios.js"></script>
         <link rel="stylesheet" type="text/css" href="resources/PATEstilos.css">
 
     </head>
@@ -44,7 +46,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>                        
                     </button>
-                    <a class="navbar-brand" href="index.jsp">Logo</a>
+                    <a class="navbar-brand" href="index.jsp"><img src="resources/logo.png" class="logo"/></a>
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
@@ -103,6 +105,9 @@
                 <div>
                     <h2>Administración de Cursos</h2><br>
                 </div>
+                <s:form action="/DelCurso" id="delForm">
+                    <input type="hidden" value="null" name="id_curso" id="hIn"/>
+                </s:form>
                 <div>
                     <table class="table table-striped table-bordered table-responsive">
                         <thead>
@@ -117,9 +122,11 @@
                         </thead>
                         <tbody>
                             <%
+                                int i =0;
                                 if (acc2 == 3) {
                                     //out.println("Acceso autorizado<br>");
                                     while (rs2.next()) {
+                                        i += 1;
                                         out.println("<tr>");
                                         out.println("<th>" + rs2.getString("cursos.id_curso") + "</th>");
                                         out.println("<th>" + rs2.getString("cursos.Nombre") + "</th>");
@@ -128,12 +135,14 @@
                                         out.println("<th>" + rs2.getString("cursos.Lugares") + "</th>");
                                         //out.println("<th>"+rs2.getString("usuarios.acc_usu")+"</th>");
                                         out.println("<th>");
+
                                         out.println(" <a href='vercurso.jsp?id=" + rs2.getString("cursos.id_curso") + "' class=\"btn btn-info btn-md\" >Ver curso</a>");
+                                        out.println("<input type=\"button\" onclick=\"submitform(\'delForm\', \'hIn\', '" + rs2.getString("cursos.id_curso") + "', '" + rs2.getString("cursos.Nombre") + "')\" value=\"Borrar\" class=\"btn btn-warning\"/>");
                                         out.println("</th>");
                                         out.println("</tr>");
                                     }
                                 } else {
-                                    response.sendRedirect("index.jsp");
+                                    //response.sendRedirect("errors.jsp");
                                 }
                             %>
                         </tbody>

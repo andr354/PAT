@@ -7,7 +7,8 @@ function loadDoc() {
     //Para cerrar sesión
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState === 4 && xhttp.status === 200) {
-            alert("Cerrando sesión.");
+            //alert("Cerrando sesión.");
+            console.log("Sesión cerrada");
         }
     };
 

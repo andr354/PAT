@@ -9,9 +9,9 @@
 <html>
     <%
         int Id = 1;
-        try{
+        try {
             Id = Integer.parseInt(request.getParameter("id"));
-        }catch(Exception e){
+        } catch (Exception e) {
             out.print(e);
             response.sendRedirect("index.jsp");
         }
@@ -38,7 +38,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>                        
                     </button>
-                    <a class="navbar-brand" href="index.jsp">Logo</a>
+                    <a class="navbar-brand" href="index.jsp"><img src="resources/logo.png" class="logo"/></a>
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
@@ -71,49 +71,49 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <%
-                                try{
-                                    //String user = (String)session.getAttribute("userName");
-                                    ResultSet rs=null;
-                                    manejador.setConnection("com.mysql.jdbc.Driver","jdbc:mysql://localhost:3306/pat");
-                                    rs=manejador.executeQuery("SELECT id_profe, id_usu, nom_prof, apps_prof, escuela FROM profesc WHERE id_profe='"+Id+"'");
-                                    //while(rs.next()){
-                                    rs.next();
-                                    out.println("<input "
-                                        + "type=\"hidden\""
-                                        + "name=\"id\""
-                                        + "value="+Id
-                                        + " class=\"form-control\""
-                                        + " />");
-                                    out.println("<tr>");
-                                    out.println("\t<th><input "
-                                            + "type=\"text\" "
-                                            + "name=\"nombre\" "
-                                            + "class=\"form-control\""
-                                            + "placeholder=\"" + rs.getString("profesc.nom_prof")
-                                            + "\" value=\"" + rs.getString("profesc.nom_prof")
-                                            + "\"/></th>");
-                                    out.println("\t<th><input "
-                                            + "type=\"text\" "
-                                            + "name=\"apellidos\" "
-                                            + "class=\"form-control\" "
-                                            + "placeholder=\"" + rs.getString("profesc.apps_prof")
-                                            + "\" value=\"" + rs.getString("profesc.apps_prof")
-                                            +"\"/></th>");
-                                    out.println("\t<th><input "
-                                            + "type=\"text\" "
-                                            + "name=\"escuela\" "
-                                            + "class=\"form-control\" "
-                                            + "placeholder=\"" + rs.getString("profesc.escuela")
-                                            + "\" value=\"" + rs.getString("profesc.escuela")
-                                            + "\"/></th>");
-                                    out.println("</tr>");
-                                    //}
-                                } catch (Exception e) {
-                                    out.print(e);
-                                    response.sendRedirect("index.jsp");
-                                }
-                            %>
+                                <%
+                                    try {
+                                        //String user = (String)session.getAttribute("userName");
+                                        ResultSet rs = null;
+                                        manejador.setConnection("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/pat");
+                                        rs = manejador.executeQuery("SELECT id_profe, id_usu, nom_prof, apps_prof, escuela FROM profesc WHERE id_profe='" + Id + "'");
+                                        //while(rs.next()){
+                                        rs.next();
+                                        out.println("<input "
+                                                + "type=\"hidden\""
+                                                + "name=\"id\""
+                                                + "value=" + Id
+                                                + " class=\"form-control\""
+                                                + " />");
+                                        out.println("<tr>");
+                                        out.println("\t<th><input "
+                                                + "type=\"text\" "
+                                                + "name=\"nombre\" "
+                                                + "class=\"form-control\""
+                                                + "placeholder=\"" + rs.getString("profesc.nom_prof")
+                                                + "\" value=\"" + rs.getString("profesc.nom_prof")
+                                                + "\"/></th>");
+                                        out.println("\t<th><input "
+                                                + "type=\"text\" "
+                                                + "name=\"apellidos\" "
+                                                + "class=\"form-control\" "
+                                                + "placeholder=\"" + rs.getString("profesc.apps_prof")
+                                                + "\" value=\"" + rs.getString("profesc.apps_prof")
+                                                + "\"/></th>");
+                                        out.println("\t<th><input "
+                                                + "type=\"text\" "
+                                                + "name=\"escuela\" "
+                                                + "class=\"form-control\" "
+                                                + "placeholder=\"" + rs.getString("profesc.escuela")
+                                                + "\" value=\"" + rs.getString("profesc.escuela")
+                                                + "\"/></th>");
+                                        out.println("</tr>");
+                                        //}
+                                    } catch (Exception e) {
+                                        out.print(e);
+                                        response.sendRedirect("index.jsp");
+                                    }
+                                %>
                             </tbody>
                         </table>
                         <input type="submit" value="Actualizar" class="btn btn-danger btn-xl col-sm-6"/>

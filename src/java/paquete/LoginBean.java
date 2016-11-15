@@ -1,5 +1,7 @@
 package paquete;
 
+import java.beans.PropertyVetoException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -251,7 +253,7 @@ class LoginBean {
         int status = 0;
         try {
             con = Conexion.getConexion();
-            String consulta = "insert into profesc( id_usu, nom_prof, apps_prof, escuela) values('"
+            String consulta = "INSERT INTO profesc( id_usu, nom_prof, apps_prof, escuela) VALUES('"
                     + id_usuario + "', '"
                     + nombre + "', '"
                     + apellidos + "', '"
@@ -259,6 +261,9 @@ class LoginBean {
                     + "');";//ya se que esta al reves pero nimodo :D
             pst = con.prepareStatement(consulta);
             int cols = pst.executeUpdate(consulta);
+            consulta = "UPDATE users SET rol='PROFESOR', nivel='5' WHERE  idUser='"+id_usuario+"';";
+            pst = con.prepareStatement(consulta);
+            cols = pst.executeUpdate(consulta);
             status = 1;
         } catch (Exception e) {
             System.out.println(e);
@@ -376,4 +381,24 @@ class LoginBean {
         System.out.println("Consulta Erronea");
         return false;
     }
+    
+    public String borrarCurso(int id_curso) {
+        try {
+            con = DataSource.getInstance().getConnection();
+            String consulta = "DELETE FROM cursos WHERE id_curso='" + id_curso + "';";
+            pst = con.prepareStatement(consulta);
+            int cols = pst.executeUpdate(consulta);
+            return "exitoso";
+        } catch (IOException e) {
+            System.out.println(e);
+            return "error";
+        } catch (SQLException e) {
+            System.out.println(e);
+            return "error";
+        } catch (PropertyVetoException e) {
+            System.out.println(e);
+            return "error";
+        }
+    }
+    
 }
