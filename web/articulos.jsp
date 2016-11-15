@@ -81,7 +81,6 @@
                         String img = "";
                         String imgP = "";
                         String styleImg = "";
-                        String styleImg2 = "width:280px;height:200px;";
                         while (rs2.next()) {
                             try {
                                 imagen = rs2.getString("diagrama").split("<img ");
@@ -91,20 +90,19 @@
                                 img = "";
                                 System.out.println("----[No tiene imagen]----");
                             }
-
                             try {
                                 if(img!=""){
                                     styleImg = imgP.split("style=\"")[1];
-                                    styleImg = styleImg.split("\"")[0];
-                                    img = img + "\" style=\"" + styleImg2 + "";
-                                    img = "<img src=\"" + img + "\">";
+                                    //styleImg = styleImg.split("\"")[0];
+                                    //img = img + "\" style=\"" + styleImg + "\"";
+                                    img = "<img src=\"" + img + " \" class=\"giant img-rounded\">";
                                     System.out.println(img);
                                 }else{
-                                    img = "<img src=\"resources/default_image.png\" class=\"giant img-rounded\" style=\"width:320px;height:241px;\">";
+                                    img = "<img src=\"resources/default_image.png\" class=\"giant img-rounded\">";
                                 }
                             } catch (Exception e) {
                                 if (img != "") {
-                                    img = "<img src=\"" + img + "\" class=\"giant img-rounded\" ";
+                                    img = "<img src=\"" + img + "\" class=\"giant img-rounded\">";
                                 }else{
                                     img = "<img src=\"resources/default_image.png\" class=\"giant img-rounded\">";
                                 }
