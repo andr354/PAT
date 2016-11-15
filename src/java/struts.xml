@@ -128,5 +128,10 @@
             <result name="exitoso">oats.jsp</result>
             <result name="error">errors.jsp?id=400</result>
         </action>
+        <!--Borrar un curso --> 
+        <action name="DelCurso" class="paquete.DelCursoAction">
+            <result name="exitoso">cursos.jsp</result>
+            <result name="error">errors.jsp?id=400</result>
+        </action>
     </package>
 </struts>
