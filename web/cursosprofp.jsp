@@ -62,7 +62,7 @@
                             String user = (String) session.getAttribute("username");
                             String acc = (String) session.getAttribute("acc");
                             int acc2 = Integer.parseInt(acc);
-                            if (acc2 == 4) {
+                            if (acc2==4 || acc2==3) {
                                 //out.println("Acceso autorizado<br>");
 
                                 String rol = "";
