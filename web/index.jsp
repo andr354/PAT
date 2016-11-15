@@ -27,7 +27,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>                        
                     </button>
-                    <a class="navbar-brand" href="#myPage">Logo</a>
+                    <a class="navbar-brand" href="index.jsp"><img src="resources/logo.png" class="logo"/></a>
                     <!--<a class="navbar-brand" href="#myPage"><img src="logoSita.png" alt="Logo" width="50" height="80"></a>-->
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
@@ -238,41 +238,32 @@
         <br>
         <!-- SECCION LOGIN -->
         <div id="login" class="container-fluid">
-
-            <%
-                if (user == null && acc == null) {
-                    out.println("<h2 class=\"text-center\">Inicio de Sesión</h2>");
-                } else {
-                    out.println("<h2 class=\"text-center\">Cerrar Sesión</h2>");
-                    out.println("    <center>");
-                    out.println("<button type=\"button\" onclick=\"loadDoc();\" class=\"btn btn-danger\">Cerrar Sesión</button>");
-                    out.println("</h2>");
-                    out.println("    </center>");
-                }
-            %>
-
-            <!--<h2 class="text-center"></h2>-->
             <div class="col-md-4 slideanim text-center col-md-offset-4 well">
                 <s:form action="/Login" class="form-group">
-                    <div class="row form-group">
-                        <div class="row-xs-3 form-group">
-                            <label for="usuario">Nombre de usuario: </label>
-                            <input type="text" name="username" placeholder="Usuario" id="usuario" class="btn-block form-control"/>
-                        </div>
-                        <div class="row-xs-3 form-group">                        
-                            <label for="contra">Contraseña: </label>
-                            <input type="password"  name="password" placeholder="Contraseña" id="contra" class="btn-block form-control"/>
-                        </div>
-                        <div class="row-xs-3 form-group">
-                            <br>
-                            <input type="submit" class="btn btn-primary form-control btn-block" value="Acceder"/>
-                        </div>
-                        <div class="row-xs-3 form-group">
-                            <br>
-                            ¿No tiene cuenta en PAT?<br>
-                            <a href="registro.jsp" class="btn btn-danger btn-block">Registrarse en la plataforma</a>
-                        </div>
-                    </div>
+                    <%
+                        if (user == null && acc == null) {
+                            out.println("<h2 class=\"text-center\">Inicio de Sesión</h2>"
+                                    + "<div class='row form-group'>"
+                                    + "<div class='row-xs-3 form-group'>"
+                                    + "<label for='usuario'>Nombre de usuario: </label>"
+                                    + "<input type='text' name='username' placeholder='Usuario' id='usuario' class='btn-block form-control'/>"
+                                    + "</div><div class='row-xs-3 form-group'>"
+                                    + "<label for='contra'>Contraseña: </label>"
+                                    + "<input type='password'  name='password' placeholder='Contraseña' id='contra' class='btn-block form-control'/>"
+                                    + "</div><div class='row-xs-3 form-group'>"
+                                    + "<br><input type='submit' class='btn btn-primary form-control btn-block' value='Acceder'/>"
+                                    + "</div><div class='row-xs-3 form-group'>"
+                                    + "<hr><b>¿No tiene cuenta en PAT?</b><br>"
+                                    + "<a href='registro.jsp' class='btn btn-danger btn-block'>Registrarse en la plataforma</a>"
+                                    + "</div></div>");
+                        } else {
+                            out.println("<h2 class=\"text-center\">Cerrar Sesión</h2>");
+                            out.println("<center>");
+                            out.println("<button type=\"button\" onclick=\"loadDoc();\" class=\"btn btn-danger\">Cerrar Sesión</button>");
+                            out.println("</h2>");
+                            out.println("</center>");
+                        }
+                    %>
                 </s:form>
             </div>
         </div>

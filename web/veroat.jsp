@@ -48,7 +48,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>                        
                     </button>
-                    <a class="navbar-brand" href="index.jsp">Logo</a>
+                    <a class="navbar-brand" href="index.jsp"><img src="resources/logo.png" class="logo"/></a>
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
@@ -83,19 +83,19 @@
                 <div>
                     <div id="encabezado">
                         <!--<div id="titulo">-->
-                            <h1 class="titulo">
-                                <%  out.println("" + rs2.getString("oats.titulo")); %>
-                            </h1>
+                        <h1 class="titulo">
+                            <%  out.println("" + rs2.getString("oats.titulo")); %>
+                        </h1>
                         <!--</div>-->
                         <h5>
                             <b>Por:</b> <b class="autor">
                                 <% out.print("" + rs2.getString("profesores.nom_prof") + " " + rs2.getString("profesores.apps_prof")); %>
                             </b> <b class="time">
-                            <% 
-                                String date=rs2.getString("oats.fecha").split(" ")[0];
-                                String hour=rs2.getString("oats.fecha").split(" ")[1];
-                                out.print("" +date+"  "+hour.split(":")[0]+":"+hour.split(":")[1]);%>
-                                </b>
+                                <%
+                                    String date = rs2.getString("oats.fecha").split(" ")[0];
+                                    String hour = rs2.getString("oats.fecha").split(" ")[1];
+                                    out.print("" + date + "  " + hour.split(":")[0] + ":" + hour.split(":")[1]);%>
+                            </b>
                         </h5>
                     </div>
                     <div class="well text-center">

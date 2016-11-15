@@ -35,27 +35,29 @@
             <h2 class="text-center">Registro en PAT:</h2>
             <div class="col-md-4 text-center col-md-offset-4 well">
                 <s:form action="/Add" class="form-group">
-                    <div class="row form-group">
-                        <div class="row-xs-3 form-group">
+                    <input type="hidden" value="1" name="rol"/>
+                    <div class="row">
+                        <div class="row-xs-3">
                             <label for="usuario">Nombre de usuario: </label>
-                            <input type="text" name="username" placeholder="Usuario" id="usuario" class="btn-block form-group" required/>
+                            <input type="text" name="username" placeholder="Usuario" id="usuario" class="btn-block form-control" required/>
                         </div>
-                        <div class="row-xs-3 form-group">                        
+                        <div class="row-xs-3">                        
                             <label for="contra">Contraseña: </label>
-                            <input type="password"  name="password" placeholder="Contraseña" id="contra" class="btn-block form-group" required/>
+                            <input type="password"  name="password" placeholder="Contraseña" id="contra" class="btn-block form-control" required/>
                         </div>
-                        <div class="row-xs-3 form-group">                        
+                        <div class="row-xs-3">                        
                             <label for="contra">Correo electronico: </label>
-                            <input type="email"  name="mail" placeholder="Correo electronico" id="contra" class="btn-block form-group" required/>
+                            <input type="email"  name="mail" placeholder="Correo electronico" id="contra" class="btn-block form-control" required/>
                         </div>
-                        <div class="row-xs-3 form-group">
+                        <div class="row-xs-3">
                             <br>
-                            <input type="submit" class="btn btn-primary form-group btn-block" value="Acceder"/>
+                            <input type="submit" class="btn btn-primary form-control btn-block" value="Registrar"/>
                         </div>
-                        <div class="row-xs-3 form-group">
-                            <br>
-                            ¿Ya tiene cuenta en PAT?<br>
-                            <a href="login.jsp" class="btn btn-danger btn-block">Ingresar</a>
+                        <div class="row-xs-3">
+                            <hr>
+                            <!--<br>
+                            ¿Ya tiene cuenta en PAT?<br>-->
+                            <a href="index.jsp#login" class="btn btn-warning btn-block">Volver</a>
                         </div>
                     </div>
                 </s:form>
