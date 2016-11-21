@@ -31,13 +31,25 @@
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="admin.jsp">INICIO</a></li>
+                        <li><a href="admin.jsp">Inicio</a></li>
                         <li><a href="alumnos.jsp">Alumnos</a></li>
                         <li><a href="profs.jsp">Profesores</a></li>
-                        <li><a href="profsp.jsp">Profesores+</a></li>
-                        <li><a href="oats.jsp">OATs</a></li>
-                        <li><a href="cursos.jsp">CURSOS</a></li>
-                        <li><a href="mensajes.jsp">MENSAJES</a></li>
+                        <li><a href="profsp.jsp">Colaboradores</a></li>
+                        <li><a href="oats.jsp">OA</a></li>
+                        <li><a href="cursos.jsp">Cursos</a></li>
+                        <li><a href="mensajes.jsp">Mensajes</a></li>
+                        <%
+                                try {
+                                    String user = (String) session.getAttribute("username");
+                                    String acc = (String) session.getAttribute("acc");
+                                    if (user == null && acc == null) {
+                                        out.println("<li><a href=\"login.jsp\">LOGIN</a></li>");
+                                    } else {
+                                        out.println("<li><a href=\"indexnus.jsp\">" + user + "</a></li>");
+                                    }
+                                } catch (Exception e) {
+                                }
+                            %>
                     </ul>
                 </div>
             </div>
@@ -66,7 +78,7 @@
                                 <option value=1>Usuario registrado</option>
                                 <option value=2>Estudiante</option>
                                 <option value=3>Administrador</option>
-                                <option value=4>Contribuidor</option>
+                                <option value=4>Colaborador</option>
                                 <option value=5>Profesor escolar</option>
                             </select>
                         </div>
@@ -130,7 +142,7 @@
                                             } else if (rs2.getInt("users.nivel") == 3) {
                                                 acceso = "Administrador";
                                             } else if (rs2.getInt("users.nivel") == 4) {
-                                                acceso = "Contribuidor";
+                                                acceso = "Colaborador";
                                             } else if (rs2.getInt("users.nivel") == 5) {
                                                 acceso = "Profesor Escolar";
                                             }

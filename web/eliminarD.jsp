@@ -25,7 +25,7 @@
     <center>
 	<h1>Confirmar eliminar</h1>
         <br><br><br>
-        <h2>¿Seguro que desea eliminar el diagrama "<%out.println(desc);%>"?</h2>
+        <h2>¿Seguro que desea eliminar el OA "<%out.println(desc);%>"?</h2>
         <br><br><br>
         <s:form action="/Deld">
             <input type="hidden" name="id" value=<%out.println(Id);%>/>

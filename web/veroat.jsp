@@ -6,8 +6,8 @@
     <jsp:useBean id="manejador" scope="session" class="paquete.DB"></jsp:useBean>
     <%
         int Id = Integer.parseInt(request.getParameter("id"));
-        String user = "Anoimo";
-        String acc = "User";
+        String user = "";
+        String acc = "";
         try {
             user = (String) session.getAttribute("username");
             acc = (String) session.getAttribute("acc");
@@ -52,20 +52,16 @@
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="admin.jsp">INICIO</a></li>
-                        <li><a href="alumnos.jsp#about">Alumnos</a></li>
-                        <li><a href="profs.jsp#about">Profesores</a></li>
-                        <li><a href="profsp.jsp#about">Profesores+</a></li>
-                        <li><a href="oats.jsp#myPage">OATs</a></li>
-                        <li><a href="cursos.jsp#about">CURSOS</a></li>
-                        <li><a href="mensajes.jsp#about">MENSAJES</a></li>
-                        <li>
-                            <a href="admin.jsp#focused  ">
-                                <%
-                                    out.println(user);
-                                %>
-                            </a>
-                        </li>
+                        <li><a href="index.jsp">Inicio</a></li>
+                        <li><a href="cursosgen.jsp">Cursos</a></li>
+                        <li><a href="mensajes.jsp">Mensajes</a></li>
+                            <%
+                                if (user == null && acc == null) {
+                                    out.println("<li><a href=\"login.jsp\">LOGIN</a></li>");
+                                } else {
+                                    out.println("<li><a href=\"indexnus.jsp\">" + user + "</a></li>");
+                                }
+                            %>
                     </ul>
                 </div>
             </div>

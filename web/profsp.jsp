@@ -30,13 +30,13 @@
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="admin.jsp">INICIO</a></li>
+                        <li><a href="admin.jsp">Inicio</a></li>
                         <li><a href="alumnos.jsp">Alumnos</a></li>
                         <li><a href="profs.jsp">Profesores</a></li>
-                        <li><a href="profsp.jsp">Profesores+</a></li>
-                        <li><a href="oats.jsp">OATs</a></li>
-                        <li><a href="cursos.jsp">CURSOS</a></li>
-                        <li><a href="mensajes.jsp">MENSAJES</a></li>
+                        <li><a href="profsp.jsp">Colaboradores</a></li>
+                        <li><a href="oats.jsp">OA</a></li>
+                        <li><a href="cursos.jsp">Cursos</a></li>
+                        <li><a href="mensajes.jsp">Mensajes</a></li>
                     </ul>
                 </div>
             </div>

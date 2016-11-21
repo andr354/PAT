@@ -31,7 +31,7 @@
             ResultSet rs = null;
             ResultSet rs2 = null;
             ResultSet rsCursos = null;
-            String consulta = "SELECT * FROM oats, profesores, cursos where oats.id_prof=profesores.id_usu;";
+            String consulta = "SELECT DISTINCT profesores.nom_prof, profesores.apps_prof, oats.titulo, oats.descrip, oats.fecha, cursos.Nombre, oats.id_oat FROM oats, profesores, cursos where oats.id_prof=profesores.id_usu and oats.curso=cursos.id_curso;";
             try {
                 user = (String) session.getAttribute("username");
                 acc = (String) session.getAttribute("acc");
@@ -62,13 +62,13 @@
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="admin.jsp#about">INICIO</a></li>
-                        <li><a href="alumnos.jsp#about">Alumnos</a></li>
-                        <li><a href="profs.jsp#about">Profesores</a></li>
-                        <li><a href="profsp.jsp#about">Profesores+</a></li>
-                        <li><a href="oats.jsp#about#myPage">OATs</a></li>
-                        <li><a href="cursos.jsp#about">CURSOS</a></li>
-                        <li><a href="mensajes.jsp#about">MENSAJES</a></li>
+                        <li><a href="admin.jsp">Inicio</a></li>
+                        <li><a href="alumnos.jsp">Alumnos</a></li>
+                        <li><a href="profs.jsp">Profesores</a></li>
+                        <li><a href="profsp.jsp">Colaboradores</a></li>
+                        <li><a href="oats.jsp">OA</a></li>
+                        <li><a href="cursos.jsp">Cursos</a></li>
+                        <li><a href="mensajes.jsp">Mensajes</a></li>
                     </ul>
                 </div>
             </div>
@@ -79,22 +79,22 @@
             <p>PLATAFORMA DE APRENDIZAJE TURISTICO</p> 
         </div>
         <div class="text-center">
-            <h2>Administración de OATs</h2>
+            <h2>Administración de Objetos de Aprendizaje</h2>
         </div>
         <div  class="text-center">
-            <h3>Menú Objetos de Aprendizaje Turistico</h3>
-            <a href="oats.jsp#about" class="btn btn-default btn-lg">Creación de OATS</a>
-            <a href="oats.jsp#lista" class="btn btn-default btn-lg">Lista de OATS</a>
+            <h3>Menú Objetos de Aprendizaje</h3>
+            <a href="oats.jsp#about" class="btn btn-default btn-lg">Creación de OA</a>
+            <a href="oats.jsp#lista" class="btn btn-default btn-lg">Lista de OA</a>
         </div><br><br><br><br><hr>
         <!-- Container (About Section) -->
         <div id="about" class="container-fluid">
             <div class="text-center" id="crear">
-                <h2>Crear un OAT</h2>
+                <h2>Crear un OA</h2>
                 <s:form action="/AddOAT" id="usrform" class="form-group">
                     <div class="text-center">
                         <div class="col-sm-2">
                             <label for="id">
-                                Generador:
+                                Autor:
                             </label>
                             <select id="id" name="id" class="form-control">
                                 <%
@@ -161,7 +161,7 @@
             <div class="row" id="lista">
                 <div class="text-center">
                     <div><br><br>
-                        <h2>OATs creados por profesores generadores de contenido</h2>
+                        <h2>OATs creados por colaboradores de PAT</h2>
                     </div><br>
                     <div class="input-group"> <span class="input-group-addon">Busqueda</span>
                         <input id="filter" type="text" class="form-control" placeholder="Escribe aquí...">
@@ -170,7 +170,7 @@
                         <thead>
                             <tr>
                                 <!--<th>Id oat</th>-->
-                                <th>Creador</th>
+                                <th>Autor</th>
                                 <th>Titulo</th>
                                 <th>Descripción</th>
                                 <th>Fecha</th>

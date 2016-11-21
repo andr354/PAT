@@ -56,10 +56,13 @@
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="admin.jsp">INICIO</a></li>
+                        <li><a href="admin.jsp">Inicio</a></li>
                         <li><a href="alumnos.jsp">Alumnos</a></li>
                         <li><a href="profs.jsp">Profesores</a></li>
-                        <li><a href="profsp.jsp">Profesores+</a></li>
+                        <li><a href="profsp.jsp">Colaboradores</a></li>
+                        <li><a href="oats.jsp">OA</a></li>
+                        <li><a href="cursos.jsp">Cursos</a></li>
+                        <li><a href="mensajes.jsp">Mensajes</a></li>
                     </ul>
                 </div>
             </div>
@@ -71,10 +74,10 @@
         </div>
         <div id="about">
             <div class="row text-center">
-                <h2>Modificar Usuario Profesor Generador</h2><br>
+                <h2>Modificar Objeto de aprendizaje</h2><br>
             </div>
             <div class="row text-center">
-                <h3 class="time">Datos actuales del usuario</h3>
+                <h3 class="time">Información actual del OA</h3>
                 <div class="col-sm-8 col-sm-offset-2 text-center">
                     <%
                         try {

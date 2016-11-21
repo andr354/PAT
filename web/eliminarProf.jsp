@@ -44,10 +44,13 @@
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="admin.jsp">INICIO</a></li>
+                        <li><a href="admin.jsp">Inicio</a></li>
                         <li><a href="alumnos.jsp">Alumnos</a></li>
                         <li><a href="profs.jsp">Profesores</a></li>
-                        <li><a href="profsp.jsp">Profesores+</a></li>
+                        <li><a href="profsp.jsp">Colaboradores</a></li>
+                        <li><a href="oats.jsp">OA</a></li>
+                        <li><a href="cursos.jsp">Cursos</a></li>
+                        <li><a href="mensajes.jsp">Mensajes</a></li>
                     </ul>
                 </div>
             </div>
@@ -62,7 +65,7 @@
                 <div class="col-md-6 col-md-offset-3">
                     <div class="row">
                         <h1 class="text-center">Confirmación de eliminación</h1>
-                        <h3 class="text-center">¿Seguro que desea revocar privilegios de <b>Profesor generador </b>al usuario<b> <%out.println(nomcomp);%></b>?</h3>
+                        <h3 class="text-center">¿Seguro que desea revocar privilegios de <b>Colaborador </b>al usuario<b> <%out.println(nomcomp);%></b>?</h3>
                         <s:form action="/DelProfG">
                             <input type="hidden" name="id" value=<%out.println(Id);%>/>
                             <input type="submit" value="Sí" class="btn btn-danger btn-block"/>

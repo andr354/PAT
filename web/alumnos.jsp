@@ -31,13 +31,13 @@
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="admin.jsp">INICIO</a></li>
+                        <li><a href="admin.jsp">Inicio</a></li>
                         <li><a href="alumnos.jsp">Alumnos</a></li>
                         <li><a href="profs.jsp">Profesores</a></li>
-                        <li><a href="profsp.jsp">Profesores+</a></li>
-                        <li><a href="oats.jsp">OATs</a></li>
-                        <li><a href="cursos.jsp">CURSOS</a></li>
-                        <li><a href="mensajes.jsp">MENSAJES</a></li>
+                        <li><a href="profsp.jsp">Colaboradores</a></li>
+                        <li><a href="oats.jsp">OA</a></li>
+                        <li><a href="cursos.jsp">Cursos</a></li>
+                        <li><a href="mensajes.jsp">Mensajes</a></li>
                     </ul>
                 </div>
             </div>
@@ -52,8 +52,6 @@
                 <div class="col-sm-8">
                     <h2>Administración de Alumnos</h2><br>
                 </div>
-                <div class="col-sm-4">
-                    <span class="glyphicon glyphicon-signal logo"></span>
                 </div>
                 <h2>Agregar nuevo alumno</h2>
                 <div class="form-group">
@@ -193,7 +191,7 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        
         <footer class="container-fluid text-center">
             <a href="#myPage" title="To Top">
                 <span class="glyphicon glyphicon-chevron-up"></span>
