@@ -35,14 +35,16 @@
                         <li><a href="#about">¿Que es PAT?</a></li>
                         <li><a href="#portfolio">MÁS LEIDOS</a></li>
                         <li><a href="#pricing">ULTIMOS CURSOS</a></li>
-                        <li><a href="#contact">CONTÁCTO</a></li>
                             <%
-                                String user = (String) session.getAttribute("username");
-                                String acc = (String) session.getAttribute("acc");
-                                if (user == null && acc == null) {
-                                    out.println("<li><a href=\"login.jsp\">LOGIN</a></li>");
-                                } else {
-                                    out.println("<li><a href=\"indexnus.jsp\">" + user + "</a></li>");
+                                try {
+                                    String user = (String) session.getAttribute("username");
+                                    String acc = (String) session.getAttribute("acc");
+                                    if (user == null && acc == null) {
+                                        out.println("<li><a href=\"#login\">LOGIN</a></li>");
+                                    } else {
+                                        out.println("<li><a href=\"indexnus.jsp\">" + user + "</a></li>");
+                                    }
+                                } catch (Exception e) {
                                 }
                             %>
                         <!--<li><a href="#login">LOGIN</a></li>-->
@@ -72,7 +74,7 @@
                         de una manera interesante, entretenida e interactiva
                     </center>
 
-                    <br><button class="btn btn-default btn-lg" onclick="location.href = '#contact';">Ponerse en contacto</button>
+                    <br><button class="btn btn-default btn-lg" onclick="location.href = 'registro.jsp';">Registrarse</button>
                 </div>
                 <div class="col-sm-4">
                     <span class="glyphicon glyphicon-signal logo"></span>
@@ -121,27 +123,63 @@
             <h2>MÁS LEIDOS</h2><br>
             <h4>Los principales articulos del mes:</h4>
             <div class="row text-center slideanim">
-                <div class="col-sm-4">
-                    <div class="thumbnail">
-                        <img src="imagenes/art1.jpg" alt="1" width="400" height="300">
-                        <p><strong>LA influencia de la medicina Maya</strong></p>
-                        <p>México es un cuenta con muy buenos medicos, pero eso no es algo nuevo....</p>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="thumbnail">
-                        <img src="imagenes/art2.jpg" alt="2" width="400" height="300">
-                        <p><strong>10 datos interesantes sobre Tonantzin</strong></p>
-                        <p>Lo que no te habian contado sobre la diosa madre de las culturas antiguas.</p>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="thumbnail">
-                        <img src="imagenes/art3.jpg" alt="3" width="400" height="300">
-                        <p><strong>Bienvenidos a PAT</strong></p>
-                        <p>LA plataforma de aprendizaje interactiva.</p>
-                    </div>
-                </div>
+             <%@ page import="java.sql.*" %>
+             <jsp:useBean id="manejador" scope="session" class="paquete.DB"></jsp:useBean>
+                <%
+
+                    try {
+                            int i = 0;
+                            ResultSet rs = null;
+                            ResultSet rs2 = null;
+                            String email = null;
+                            String[] imagen;
+                            String img = "";
+                            String imgP = "";
+                            String styleImg = "";
+                            manejador.setConnection("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/pat");
+                            rs2 = manejador.executeQuery("SELECT * FROM oats, profesores where oats.id_prof=profesores.id_usu;");
+                            for(i=0;i<3;i++){
+                                rs2.next();
+                                out.println("<div class=\"col-sm-4\">");
+                                out.println("<div class=\"thumbnail\">");
+                                try {
+                                imagen = rs2.getString("diagrama").split("<img ");
+                                imgP = imagen[1].split("src=\"")[1];
+                                img = imgP.split("\"")[0];
+                                } catch (Exception e) {
+                                    img = "";
+                                    System.out.println("----[No tiene imagen]----");
+                                }
+                                try {
+                                    if(img!=""){
+                                        styleImg = imgP.split("style=\"")[1];
+                                        //styleImg = styleImg.split("\"")[0];
+                                        //img = img + "\" style=\"" + styleImg + "\"";
+                                        img = "<img src=\"" + img + " \" alt=\"1\" width=\"400\" height=\"300\">";
+                                        System.out.println(img);
+                                    }else{
+                                        img = "<img src=\"resources/default_image.png\" alt=\"1\" width=\"400\" height=\"300\">";
+                                    }
+                                } catch (Exception e) {
+                                    if (img != "") {
+                                        img = "<img src=\"" + img + "\" alt=\"1\" width=\"400\" height=\"300\">";
+                                    }else{
+                                        img = "<img src=\"resources/default_image.png\" alt=\"1\" width=\"400\" height=\"300\">";
+                                    }
+                                    System.out.println("----[No tiene estilo de imagen]----");
+                                }
+                                //out.println("<img src=\"imagenes/art1.jpg\" alt=\"1\" width=\"400\" height=\"300\">");
+                                out.println("<a href=\"veroat.jsp?id="+rs2.getString("oats.id_oat")+"\">");
+                                out.println(img + "</a>");
+                                out.println("<p><strong>"+rs2.getString("oats.titulo")+"</strong></p>"); 
+                                out.println("<p>"+rs2.getString("oats.descrip")+"</p>");
+                                out.println("</div>");
+                                out.println("</div>");
+                            }
+                    }catch(Exception e){
+                        System.out.println(e);
+                    }
+                %>
             </div><br>
 
             <h2>Articulos aleatorios:</h2>
@@ -155,15 +193,35 @@
 
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner" role="listbox">
-                    <div class="item active">
-                        <h4>"Mitos y realidades sobre los sacrificios aztecas"<br><span style="font-style:normal;">Por: Andrés Zorraquin</span></h4>
-                    </div>
-                    <div class="item">
-                        <h4>"Nuevo descubrimiento en Tenochtitlan"<br><span style="font-style:normal;">Por: Dillan Barbosa</span></h4>
-                    </div>
-                    <div class="item">
-                        <h4>"Sobre la arquitectura Maya de Tulum"<br><span style="font-style:normal;">Por: Carlos Fuentes</span></h4>
-                    </div>
+                    <!--Items-->
+                    <%
+                        try {
+                                int i = 0;
+                                ResultSet rs = null;
+                                manejador.setConnection("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/pat");
+                                rs = manejador.executeQuery("SELECT * FROM oats, profesores WHERE oats.id_prof=profesores.id_usu and RAND()<(SELECT ((3/COUNT(*))*10) FROM oats) ORDER BY RAND() LIMIT 3;");
+                                rs.next();
+                                out.println(""
+                                            + "<div class=\"item active\">"
+                                            + "<h4>"+rs.getString("oats.titulo")+"<br><span style=\"font-style:normal;\">"
+                                            + "Por: "+rs.getString("profesores.nom_prof") + " " + rs.getString("profesores.apps_prof")+""
+                                            + "<br><button type=\"button\" class=\"btn btn-success\" onclick=\"location.href = 'veroat.jsp?id="+rs.getString("oats.id_oat")+"';\">Ver</button>"
+                                            + "</span></h4></div>"
+                                    );
+                                for(i=0;i<2;i++){
+                                    rs.next();
+                                    out.println(""
+                                            + "<div class=\"item\">"
+                                            + "<h4>"+rs.getString("oats.titulo")+"<br><span style=\"font-style:normal;\">"
+                                            + "Por: "+rs.getString("profesores.nom_prof") + " " + rs.getString("profesores.apps_prof")+""
+                                            + "<br><button type=\"button\" class=\"btn btn-success\" onclick=\"location.href = 'veroat.jsp?id="+rs.getString("oats.id_oat")+"';\">Ver</button>"
+                                            + "</span></h4></div>"
+                                    );
+                                }
+                        }catch(Exception e){
+                            System.out.println(e);
+                        }
+                    %>
                 </div>
 
                 <!-- Left and right controls -->
@@ -184,63 +242,66 @@
                 <h2>Cursos principales</h2>
                 <h4>Los cursos principales de la plataforma.</h4>
             </div>
-            <div class="row slideanim">
-                <div class="col-sm-4 col-xs-12">
-                    <div class="panel panel-default text-center">
-                        <div class="panel-heading">
-                            <h1>Introducción a la civilización maya</h1>
-                        </div>
-                        <div class="panel-body">
-                            <p><strong>1</strong> En este curso te introduciremos a la civilización maya mediante su historia, sus costumbres, religión, obras y hasta su estado actual. Todo de una manera simple, clara y concisa, ¡Esperamos que te guste!</p>
-                        </div>
-                        <div class="panel-footer plan">
-                            <h3>30</h3>
-                            <h4>Lugares disponibles</h4>
-                            <button class="btn btn-lg">Inscribirse</button>
-                        </div>
-                    </div>      
-                </div>    
-            </div>
+            
+            <!--Cursos-->
+            <%
+                        try {
+                                String user = (String) session.getAttribute("username");
+                                String acc = (String) session.getAttribute("acc");
+                                int i = 0;
+                                int iduser = 0;
+                                ResultSet rs = null;
+                                ResultSet rs2 = null;
+                                try {
+                                    rs2 = manejador.executeQuery("select idUser from users where id='" + user + "';");
+                                    rs2.next();
+                                    iduser = rs2.getInt("users.idUser");
+                                } catch (Exception ex) {
+                                    System.out.println(ex);
+                                }
+                                manejador.setConnection("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/pat");
+                                rs = manejador.executeQuery("SELECT * FROM cursos;");
+                                for(i=0;i<3;i++){
+                                    rs.next();
+                                    if(rs.next()){
+                                    out.println("<div class=\"row slideanim\">"
+                                            + "<div class=\"col-sm-4 col-xs-12\">"
+                                            + "<div class=\"panel panel-default text-center\">"
+                                            + "<div class=\"panel-heading\">"
+                                            + "<h1>"+rs.getString("cursos.Nombre")+"</h1></div>"
+                                            + "<div class=\"panel-body\">"
+                                            + "<p><strong></strong>"+rs.getString("cursos.Descripcion")+"</p></div>"
+                                            + "<div class=\"panel-footer plan\"><h3>"+rs.getString("cursos.Lugares")+"</h3>"
+                                            + "<h4>Lugares disponibles</h4>"
+                                    );
+                                    if (user == null && acc == null) {
+                                        out.println("<a href=\"login.jsp\" class=\"btn btn-warning btn-lg\">Ingrese para inscribirse al curso</a>");
+                                    } else {
+                                        out.println(" <a href='inscribirse.jsp?idc=" + rs.getString("cursos.id_curso") + "&idu=" + iduser + "'class=\"btn btn-success btn-lg\">inscribirse</a>");
+                                    }
+
+                                    //out.println("<button class=\"btn btn-lg\">Inscribirse</button>");
+                                    out.println( "</div></div></div>"
+                                            + "</div>"
+                                    );
+                                    }else{
+                                        //Nada
+                                    }
+                                }
+                        }catch(Exception e){
+                            System.out.println(e);
+                        }
+                    %>
+                         
         </div>
 
-        <!-- Container (Contact Section) -->
-        <div id="contact" class="container-fluid bg-grey">
-            <h2 class="text-center">CONTÁCTO</h2>
-            <div class="row">
-                <div class="col-sm-5">
-                    <p>¿Te interesa saber más acerca de PAT? Llena el formulario de contacto.</p>
-                    <p><span class="glyphicon glyphicon-map-marker"></span> México, DF</p>
-                    <p><span class="glyphicon glyphicon-phone"></span> +52 5585647042</p>
-                    <p><span class="glyphicon glyphicon-envelope"></span> info.at.pat@gmail.com</p>	   
-                </div>
-                <div class="col-sm-7 slideanim">
-                    <div class="row">
-                        <div class="col-sm-6 form-group">
-                            <input class="form-control" id="name" name="name" placeholder="Nombre" type="text" required>
-                        </div>
-                        <div class="col-sm-6 form-group">
-                            <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
-                        </div>
-                    </div>
-                    <textarea class="form-control" id="comments" name="comments" placeholder="Comentarios" rows="5"></textarea><br>
-                    <div class="row">
-                        <div class="col-sm-12 form-group">
-                            <button class="btn btn-default pull-right" type="submit">Enviar</button>
-                        </div>
-                    </div>	
-                </div>
-            </div>
-        </div>
-
-
-
-        <br>
-        <br>
         <!-- SECCION LOGIN -->
         <div id="login" class="container-fluid">
             <div class="col-md-4 slideanim text-center col-md-offset-4 well">
                 <s:form action="/Login" class="form-group">
                     <%
+                        String user = (String) session.getAttribute("username");
+                        String acc = (String) session.getAttribute("acc");
                         if (user == null && acc == null) {
                             out.println("<h2 class=\"text-center\">Inicio de Sesión</h2>"
                                     + "<div class='row form-group'>"
