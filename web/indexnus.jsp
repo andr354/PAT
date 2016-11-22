@@ -3,6 +3,7 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <html lang="es">
     <head>
+        <script src="resources/verificar.js" type="text/javascript"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>PAT</title>
         <meta charset="utf-8">
@@ -178,6 +179,10 @@
         </div>
         <div class="row col-md-12">
             <footer class="container-fluid text-center">
+                <h2 class="text-center">Cerrar Sesión</h2>
+                <center>
+                <button type="button" onclick="loadDoc();" class="btn btn-danger">Cerrar Sesión</button>
+                </center>
                 <a href="#myPage" title="To Top">
                     <span class="glyphicon glyphicon-chevron-up"></span>
                 </a>

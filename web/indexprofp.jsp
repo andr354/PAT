@@ -35,6 +35,18 @@
                         <li><a href="indexprofp.jsp">INICIO</a></li>
                         <li><a href="cursosprofp.jsp">CURSOS</a></li>
                         <li><a href="mensajes.jsp">MENSAJES</a></li>
+                        <%
+                                try {
+                                    String user = (String) session.getAttribute("username");
+                                    String acc = (String) session.getAttribute("acc");
+                                    if (user == null && acc == null) {
+                                        out.println("<li><a href=\"#login\">LOGIN</a></li>");
+                                    } else {
+                                        out.println("<li><a href=\"indexnus.jsp\">" + user + "</a></li>");
+                                    }
+                                } catch (Exception e) {
+                                }
+                            %>
                     </ul>
                 </div>
             </div>
@@ -50,7 +62,7 @@
         <div id="about" class="container-fluid">
             <div class="row">
                 <div class="col-sm-8">
-                    <h2>Administración de OATs</h2><br>
+                    <h2>Administración de OA</h2><br>
                 </div>
                 <div class="col-sm-4">
                     <span class="glyphicon glyphicon-signal logo"></span>
@@ -73,12 +85,10 @@
                                 idus = rs.getInt("users.idUser");
                                 rs2 = manejador.executeQuery("SELECT * FROM oats, profesores where oats.id_prof=profesores.id_usu and profesores.id_usu=" + idus + ";");
 
-                                out.println("<h2>OATs creados por ti</h2>");
+                                out.println("<h2>Objetos de aprendizaje creados por ti</h2>");
                                 out.println("<table class=\"table table-striped table-bordered table-responsive\">");
                                 out.println("<thead>");
                                 out.println("<tr>");
-                                out.println("<th>Id oat</th>");
-                                out.println("<th>Creador</th>");
                                 out.println("<th>Titulo</th>");
                                 out.println("<th>Descripción</th>");
                                 out.println("<th>Fecha</th>");
@@ -90,16 +100,14 @@
 
                                 while (rs2.next()) {
                                     out.println("<tr>");
-                                    out.println("<th>" + rs2.getString("oats.id_oat") + "</th>");
-                                    out.println("<th>" + rs2.getString("profesores.nom_prof") + " " + rs2.getString("profesores.apps_prof") + "</th>");
                                     out.println("<th>" + rs2.getString("oats.titulo") + "</th>");
                                     out.println("<th>" + rs2.getString("oats.descrip") + "</th>");
                                     out.println("<th>" + rs2.getString("oats.fecha") + "</th>");
                                     out.println("<th>" + rs2.getString("oats.curso") + "</th>");
                                     out.println("<th>");
-                                    out.println(" <a href='veroat.jsp?id=" + rs2.getString("oats.id_oat") + "'>Ver</a> |");
-                                    out.println(" <a href='modificarOat.jsp?id=" + rs2.getString("oats.id_oat") + "'>Modificar</a> |");
-                                    out.println(" <a href='eliminarOAt.jsp?id=" + rs2.getString("oats.id_oat") + "'>Eliminar</a>");
+                                    out.println(" <a href='veroat.jsp?id=" + rs2.getString("oats.id_oat") + "' class=\"btn btn-success\">Ver</a>");
+                                    out.println(" <a href='modificarOat.jsp?id=" + rs2.getString("oats.id_oat") + "' class=\"btn btn-warning\">Modificar</a>");
+                                    out.println(" <a href='eliminarOAt.jsp?id=" + rs2.getString("oats.id_oat") + "' class=\"btn btn-danger\">Eliminar</a>");
                                     out.println("</th>");
                                     out.println("</tr>");
 
@@ -117,22 +125,51 @@
                     %>
                 </div>
             </div>
-            <h2>Crear un OAT</h2>
-            <s:form action="/AddOAT" id="usrform">
-                <input type="hidden" name="id" value=<%out.println(idus);%>/>
-                Titulo: <br><input type ="text" name="titulo"/><br>
-                Descripción: <br><input type="text" name = "desc"/><br>
-                Curso al que pertenece el OAT: <br><input type="number" name = "curso"/><br>
-                <br><textarea name="contenido" form="usrform" id="contenido" rows="20" cols="80"></textarea>
-                <script>
+            <h2>Crear un OA</h2>
+            
+                
+            <s:form action="/AddOAT" id="usrform" class="form-group">
+                    <div class="text-center">
+                        <input type="hidden" name="id" value=<%out.println(idus);%>/>
+                        <div class="col-sm-3">
+                            <label for="titulo">
+                                Titulo
+                            </label>
+                            <input type="text" name="titulo" id="titulo" class="form-control" placeholder="Tiulo"/>
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="desc">
+                                Descripción:
+                            </label>
+                            <input type="text" name="desc" id="desc" class="form-control" placeholder="Descripción"/>
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="curso">
+                                Curso al que pertenece:
+                            </label>
+                            <input type="number" name="curso" id="curso" class="form-control"/>
+                        </div>
+                        <!--<div class="col-sm-2">
+                            <label for="fecha">
+                                Fecha:
+                            </label>
+                            <input type="text" name="fecha" id="fecha"  disbled="true" class="form-control"/>
+                        </div>-->
+                        <div class="col-sm-1">
+                            <br>
+                            <input type="submit" class="btn btn-md btn-primary" value="Crear"/>
+                        </div>
+                    </div><br><br><br>
+                    <div>
+                        <textarea name="contenido" form="usrform" id="contenido" rows="20" cols="80"></textarea>
+                    </div>
+                    <script>
                     // Replace the <textarea id="editor1"> with a CKEditor
                     // instance, using default configuration.
                     CKEDITOR.replace('contenido');
-                </script>
-                <br>
-                <br>
-                <s:submit/>
-            </s:form>
+                    </script>
+                </s:form>    
+                
         </div>
         <script>
             var f = new Date();

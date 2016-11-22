@@ -72,9 +72,6 @@ f<!DOCTYPE html>
         </div>
         <!-- Container (About Section) -->
         <div id="about" class="container-fluid">
-            <div class="row right">
-                <button type="button" onclick="csesion()" class="btn btn-danger">Cerrar Sesión</button>
-            </div>
             <div class="row">
                 <div class="col-sm-8">
                 </div>
@@ -178,6 +175,10 @@ f<!DOCTYPE html>
             </div>
         </div>   
         <footer class="container-fluid text-center">
+            <div class="center">
+                <button type="button" onclick="csesion()" class="btn btn-danger">Cerrar Sesión</button>
+            </div>
+            <br>
             <a href="#myPage" title="To Top">
                 <span class="glyphicon glyphicon-chevron-up"></span>
             </a>

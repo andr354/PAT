@@ -94,7 +94,7 @@
                 out.println("<th>"+rs2.getString("califs.calif")+"</th>");
                 out.println("<th>"+rs2.getString("califs.notaP")+"</th>");
                 out.println("<th>");
-                out.println("<a href='calificar.jsp?id="+rs2.getString("califs.id_dig")+"'>Calificar</a>");
+                out.println("<a href='calificar.jsp?id="+rs2.getString("califs.id_dig")+"' class=\"btn btn-primary\">Calificar</a>");
                 out.println("</th>");
                 out.println("</tr>");
                 

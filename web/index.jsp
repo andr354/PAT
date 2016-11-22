@@ -33,8 +33,10 @@
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#about">¿Que es PAT?</a></li>
-                        <li><a href="#portfolio">MÁS LEIDOS</a></li>
-                        <li><a href="#pricing">ULTIMOS CURSOS</a></li>
+                        <li><a href="#portfolio">Más leidos</a></li>
+                        <li><a href="#pricing">Últimos cursos</a></li>
+                        <li><a href="cursosgen.jsp">Cursos</a></li>
+                        <li><a href="articulos">Artículos</a></li>
                             <%
                                 try {
                                     String user = (String) session.getAttribute("username");
@@ -57,8 +59,8 @@
             <h1>PAT</h1> 
             <p>PLATAFORMA DE APRENDIZAJE TURISTICO</p> 
             <form class="form-inline">
-                <input type="email" class="form-control" size="50" placeholder="Correo electronico" required>
-                <button type="button" class="btn btn-danger">Solicitar información</button>
+                <!--<input type="email" class="form-control" size="50" placeholder="Correo electronico" required>
+                <button type="button" class="btn btn-danger">Solicitar información</button>-->
             </form>
         </div>
 
@@ -121,7 +123,7 @@
         <!-- Container (Portfolio Section) -->
         <div id="portfolio" class="container-fluid text-center bg-grey">
             <h2>MÁS LEIDOS</h2><br>
-            <h4>Los principales articulos del mes:</h4>
+            <h4>Los principales artículos del mes:</h4>
             <div class="row text-center slideanim">
              <%@ page import="java.sql.*" %>
              <jsp:useBean id="manejador" scope="session" class="paquete.DB"></jsp:useBean>
@@ -182,7 +184,7 @@
                 %>
             </div><br>
 
-            <h2>Articulos aleatorios:</h2>
+            <h2>Artículos aleatorios:</h2>
             <div id="myCarousel" class="carousel slide text-center" data-ride="carousel">
                 <!-- Indicators -->
                 <ol class="carousel-indicators">
@@ -321,7 +323,6 @@
                             out.println("<h2 class=\"text-center\">Cerrar Sesión</h2>");
                             out.println("<center>");
                             out.println("<button type=\"button\" onclick=\"loadDoc();\" class=\"btn btn-danger\">Cerrar Sesión</button>");
-                            out.println("</h2>");
                             out.println("</center>");
                         }
                     %>

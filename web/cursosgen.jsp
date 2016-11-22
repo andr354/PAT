@@ -30,8 +30,7 @@
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="index.jsp">INICIO</a></li>
-                        <li><a href="articulos.jsp">OATs</a></li>
+                        <li><a href="articulos.jsp">Objetos de aprendizaje</a></li>
                             <%
                                 String user = (String) session.getAttribute("username");
                                 String acc = (String) session.getAttribute("acc");
@@ -92,7 +91,7 @@
                 out.println("</tr>");
                 out.println("</thead>");
                 out.println("<tbody>");
-
+                rs2.next();
                 while (rs2.next()) {
                     out.println("<tr>");
                     //out.println("<th>"+rs2.getString("cursos.id_curso")+"</th>");

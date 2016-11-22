@@ -42,7 +42,10 @@
                     //rs2=manejador.executeQuery("SELECT * FROM oats, profesores where oats.id_prof=profesores.id_usu;");
                     rs2 = manejador.executeQuery(consulta);
                     rs = manejador.executeQuery("SELECT * FROM profesores;");
-                } else {
+                } else if(acc2 == 4){
+                    System.out.println("Redirigiendo a colaborador");
+                    response.sendRedirect("indexprofp.jsp");
+                }else {
                     System.out.println("Acceso denegado");
                     response.sendRedirect("errors.jsp?id=500");
                 }
