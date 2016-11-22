@@ -82,7 +82,7 @@
             <p>PLATAFORMA DE APRENDIZAJE TURISTICO</p> 
         </div>
         <!-- Container (About Section) -->
-        <div class="container-fluid col-sm-12 col-md-offset-2">
+        <div class="container-fluid col-sm-10 col-md-offset-2">
             <%
                 int i = 0;
                 rsCurso.next();
@@ -124,6 +124,8 @@
                 }
             %>
         </div>
+        <br>
+   
         <footer class="container-fluid text-center">
             <a href="#myPage" title="To Top">
                 <span class="glyphicon glyphicon-chevron-up"></span>

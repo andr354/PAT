@@ -30,9 +30,21 @@
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="indexnus.jsp">INICIO</a></li>
-                        <li><a href="cursosgen.jsp">CURSOS</a></li>
-                        <li><a href="mensajes.jsp">MENSAJES</a></li>
+                        <li><a href="indexnus.jsp">Inicio</a></li>
+                        <li><a href="cursosgen.jsp">Cursos</a></li>
+                        <li><a href="mensajes.jsp">Mensajes</a></li>
+                        <%
+                                try {
+                                    String user = (String) session.getAttribute("username");
+                                    String acc = (String) session.getAttribute("acc");
+                                    if (user == null && acc == null) {
+                                        out.println("<li><a href=\"#login\">LOGIN</a></li>");
+                                    } else {
+                                        out.println("<li><a href=\"indexnus.jsp\">" + user + "</a></li>");
+                                    }
+                                } catch (Exception e) {
+                                }
+                            %>
                     </ul>
                 </div>
             </div>

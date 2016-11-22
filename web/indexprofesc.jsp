@@ -33,7 +33,7 @@
             }
         %>
     </head>
-    
+    <body>
         <script>
             function capturar()
             {
@@ -112,8 +112,20 @@
                     </div>
                     <div class="collapse navbar-collapse" id="myNavbar">
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="indexprofesc.jsp">INICIO</a></li>
-                            <li><a href="mensajes.jsp">MENSAJES</a></li>
+                            <li><a href="indexprofesc.jsp">Inicio</a></li>
+                            <li><a href="mensajes.jsp">Mensajes</a></li>
+                            <%
+                                try {
+                                    String user = (String) session.getAttribute("username");
+                                    String acc = (String) session.getAttribute("acc");
+                                    if (user == null && acc == null) {
+                                        out.println("<li><a href=\"#login\">LOGIN</a></li>");
+                                    } else {
+                                        out.println("<li><a href=\"indexnus.jsp\">" + user + "</a></li>");
+                                    }
+                                } catch (Exception e) {
+                                }
+                            %>
                             <%
                                 String user = null;
                                 String acc = null;
@@ -128,11 +140,6 @@
                                 try {
                                     user = (String) session.getAttribute("username");
                                     acc = (String) session.getAttribute("acc");
-                                    if (user == null && acc == null) {
-                                        out.println("<li><a href=\"index.jsp#login\">LOGIN</a></li>");
-                                    } else {
-                                        out.println("<li><a href=\"index.jsp#login\">" + user + "</a></li>");
-                                    }
                                     if (Integer.parseInt(acc) != 5) {
                                         response.sendRedirect("index.jsp");
                                     }
@@ -246,9 +253,9 @@
                                     out.println("<td>" + rs3.getInt("oats.grupo") + "</td>");
                                     out.println("<td id=\"" + rs3.getInt("oats.id_oat") + "\">" + rs3.getInt("oats.estado") + "</td>");
                                     out.println("<td>");
-                                    out.println("<button type=\"button\" onclick=\"loadDoc(" + rs3.getInt("oats.id_oat") + "," + rs3.getInt("oats.estado") + ")\">Cambiar estado</button>");
-                                    out.println("<a href='eliminarOAt.jsp?id=" + rs3.getInt("oats.id_oat") + "'>Eliminar | </a>");
-                                    out.println("<a href='veroat2.jsp?id=" + rs3.getInt("oats.id_oat") + "'>Ver</a>");
+                                    out.println("<button type=\"button\" onclick=\"loadDoc(" + rs3.getInt("oats.id_oat") + "," + rs3.getInt("oats.estado") + ")\" class=\"btn btn-info\">Cambiar estado</button>");
+                                    out.println("<a href='eliminarOAt.jsp?id=" + rs3.getInt("oats.id_oat") + "' class=\"btn btn-danger\">Eliminar</a>");
+                                    out.println("<a href='veroat2.jsp?id=" + rs3.getInt("oats.id_oat") + "' class=\"btn btn-success\">Ver</a>");
                                     out.println("</td>");
                                     out.println("</tr>");
 
@@ -294,7 +301,6 @@
                 </script>
             </div>
         </s:form>
-    </div>
     <div class="row">
         <footer class="container-fluid text-center">
             <a href="#myPage" title="To Top">
@@ -303,5 +309,5 @@
             <p>PAT</p>		
         </footer>
     </div>
-
+    </body>
 </html>
