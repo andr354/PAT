@@ -49,7 +49,7 @@
                                     if (user == null && acc == null) {
                                         out.println("<li><a href=\"login.jsp\">LOGIN</a></li>");
                                     } else {
-                                        out.println("<li><a href=\"#login\">" + user + "</a></li>");
+                                        out.println("<li><a href=\"indexnus.jsp\">" + user + "</a></li>");
                                     }
                                 } catch (Exception e) {
                                 }

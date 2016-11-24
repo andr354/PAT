@@ -49,6 +49,7 @@
         }
     }catch(Exception e){
         System.out.println("No se pudo recuperar la sesion: username o acc");
+        response.sendRedirect("index.jsp");
         System.out.println(e);
     }
 %>
@@ -84,20 +85,24 @@
                         <li><a href="mensajes.jsp">PAT</a></li>
                         <li>
                             <%
-                                if(acc.equals("1")){
-                                    out.println("<a href='indexnus.jsp'>Inicio</a>");
-                                }
-                                if(acc.equals("2")){
-                                    out.println("<a href='indexalumn.jsp'>Inicio</a>");
-                                }
-                                if(acc.equals("3")){
-                                    out.println("<a href='admin.jsp'>Inicio</a>");
-                                }
-                                if(acc.equals("4")){
-                                    out.println("<a href='indexprofp.jsp'>Inicio</a>");
-                                }
-                                if(acc.equals("5")){
-                                    out.println("<a href='indexprofesc.jsp'>Inicio</a>");
+                                try{
+                                    if(acc.equals("1")){
+                                        out.println("<a href='indexnus.jsp'>Inicio</a>");
+                                    }
+                                    if(acc.equals("2")){
+                                        out.println("<a href='indexalumn.jsp'>Inicio</a>");
+                                    }
+                                    if(acc.equals("3")){
+                                        out.println("<a href='admin.jsp'>Inicio</a>");
+                                    }
+                                    if(acc.equals("4")){
+                                        out.println("<a href='indexprofp.jsp'>Inicio</a>");
+                                    }
+                                    if(acc.equals("5")){
+                                        out.println("<a href='indexprofesc.jsp'>Inicio</a>");
+                                    }
+                                } catch (Exception e) {
+                                    
                                 }
                             %>
                         </li>
@@ -149,6 +154,7 @@
                 }
                 //***************************************************************
             } catch (Exception e) {
+                System.out.println(e);
                 response.sendRedirect("errors.jsp?id=500");
             }
         %>

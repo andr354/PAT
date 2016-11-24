@@ -35,8 +35,6 @@
                         <li><a href="#about">¿Que es PAT?</a></li>
                         <li><a href="#portfolio">Más leidos</a></li>
                         <li><a href="#pricing">Últimos cursos</a></li>
-                        <li><a href="cursosgen.jsp">Cursos</a></li>
-                        <li><a href="articulos">Artículos</a></li>
                             <%
                                 try {
                                     String user = (String) session.getAttribute("username");
