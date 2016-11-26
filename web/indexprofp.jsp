@@ -40,7 +40,7 @@
                                     String user = (String) session.getAttribute("username");
                                     String acc = (String) session.getAttribute("acc");
                                     if (user == null && acc == null) {
-                                        out.println("<li><a href=\"#login\">LOGIN</a></li>");
+                                        out.println("<li><a href=\"login.jsp\">LOGIN</a></li>");
                                     } else {
                                         out.println("<li><a href=\"indexnus.jsp\">" + user + "</a></li>");
                                     }

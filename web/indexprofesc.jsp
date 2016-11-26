@@ -119,7 +119,7 @@
                                     String user = (String) session.getAttribute("username");
                                     String acc = (String) session.getAttribute("acc");
                                     if (user == null && acc == null) {
-                                        out.println("<li><a href=\"#login\">LOGIN</a></li>");
+                                        out.println("<li><a href=\"login.jsp\">LOGIN</a></li>");
                                     } else {
                                         out.println("<li><a href=\"indexnus.jsp\">" + user + "</a></li>");
                                     }
@@ -133,9 +133,11 @@
                                 int idP = 1;
                                 int idPr = 1;
                                 int nivel = 1;
+                                int idus = 0;
                                 ResultSet rs = null;
                                 ResultSet rs2 = null;
                                 ResultSet rs3 = null;
+                                ResultSet rs4 = null;
                                 ResultSet rss = null;
                                 try {
                                     user = (String) session.getAttribute("username");
@@ -145,6 +147,9 @@
                                     }
                                     manejador.setConnection("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/pat");
                                     rs = manejador.executeQuery("SELECT rol, nivel, idUser FROM users WHERE users.id='" + user + "'"); //"+user+"
+                                    rs4 = manejador.executeQuery("select idUser from users where id='" + user + "'");
+                                    rs4.next();
+                                    idus = rs4.getInt("users.idUser");
                                     if (grupo == 0) {
                                         rs2 = manejador.executeQuery("SELECT * FROM users, students WHERE nivel=2 and idUser=id_usu ");
                                     } else {
@@ -268,17 +273,16 @@
                     </table>
                 </div>
             </div>
-        </div>
+        
         <h2>Agregar nuevo OAT</h2>
         <s:form action="/AddOAT" id="usrform">
             <div class="row col-md-6 col-md-offset-3 text-center">
                 <input type="submit" class="btn btn-info form-control" value="Crear">
             </div>
             <div class="row col-md-10 col-md-offset-1 text-center">
-                <div class="col col-md-2 text-center">
-                    <label for="id">ID de generador</label>
-                    <input type="number" name="id" class="form-control" id="id" placeholder="ID de generador"/>
-                </div>
+                
+                    <input type="hidden" name="id" value=<%out.println(idus);%>/>
+
                 <div class="col col-md-3 text-center">
                     <label for="titulo">Titulo</label>
                     <input type ="text" name="titulo" id="titulo" class="form-control"/>
@@ -288,7 +292,7 @@
                     <input type="text" name = "desc" id="desc" class="form-control"/>
                 </div>
                 <div class="col col-md-2 text-center">
-                    <label for="curso">Curso del (OAT)</label>
+                    <label for="curso">Grupo a asignar</label>
                     <input type="number" name = "curso" id="curso" class="form-control"/>
                 </div>
             </div>
@@ -301,13 +305,14 @@
                 </script>
             </div>
         </s:form>
-    <div class="row">
+
+        </div>
+    
         <footer class="container-fluid text-center">
             <a href="#myPage" title="To Top">
                 <span class="glyphicon glyphicon-chevron-up"></span>
             </a>
             <p>PAT</p>		
         </footer>
-    </div>
-    </body>
+        </body>
 </html>
