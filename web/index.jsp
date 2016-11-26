@@ -252,6 +252,7 @@
                                 int iduser = 0;
                                 ResultSet rs = null;
                                 ResultSet rs2 = null;
+                                ResultSet rs3 = null;
                                 try {
                                     rs2 = manejador.executeQuery("select idUser from users where id='" + user + "';");
                                     rs2.next();

@@ -33,11 +33,12 @@ public class LoginAction extends ActionSupport implements SessionAware
  
 	public String execute() {
             LoginBeanX lb = new LoginBeanX();
-            sessionMap.put("username", username);
+            
             System.out.println("Usuario: " + username);
         //check to see if this user/password combination are valid
             int acc = lb.validateUser(username, password);
         if(acc!=0){
+            sessionMap.put("username", username);
             sessionMap.put("acc", Integer.toString(acc));
             if(acc==3){
                 return "exitoso";
