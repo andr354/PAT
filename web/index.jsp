@@ -260,11 +260,12 @@
                                 } catch (Exception ex) {
                                     System.out.println(ex);
                                 }
-                                manejador.setConnection("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/pat");
                                 rs = manejador.executeQuery("SELECT * FROM cursos;");
                                 for(i=0;i<3;i++){
                                     rs.next();
                                     if(rs.next()){
+                                        rs3 = manejador.executeQuery("select count(id) from inscritos where id_curso="+rs.getInt("cursos.id_curso")+";");
+                                        rs3.next();
                                     out.println("<div class=\"row slideanim\">"
                                             + "<div class=\"col-sm-4 col-xs-12\">"
                                             + "<div class=\"panel panel-default text-center\">"
@@ -272,7 +273,7 @@
                                             + "<h1>"+rs.getString("cursos.Nombre")+"</h1></div>"
                                             + "<div class=\"panel-body\">"
                                             + "<p><strong></strong>"+rs.getString("cursos.Descripcion")+"</p></div>"
-                                            + "<div class=\"panel-footer plan\"><h3>"+rs.getString("cursos.Lugares")+"</h3>"
+                                            + "<div class=\"panel-footer plan\"><h3>"+(30-rs3.getInt("count(id)"))+"</h3>"
                                             + "<h4>Lugares disponibles</h4>"
                                     );
                                     if (user == null && acc == null) {
