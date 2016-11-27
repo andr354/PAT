@@ -32,13 +32,15 @@
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
+                        
                         <li><a href="#about">¿Que es PAT?</a></li>
                         <li><a href="#portfolio">Más leidos</a></li>
                         <li><a href="#pricing">Últimos cursos</a></li>
                             <%
+                                String acc = "";
                                 try {
                                     String user = (String) session.getAttribute("username");
-                                    String acc = (String) session.getAttribute("acc");
+                                    acc = (String) session.getAttribute("acc");
                                     if (user == null && acc == null) {
                                         out.println("<li><a href=\"#login\">LOGIN</a></li>");
                                     } else {
@@ -48,6 +50,29 @@
                                 }
                             %>
                         <!--<li><a href="#login">LOGIN</a></li>-->
+                        <li>
+                            <%
+                                try{
+                                    if(acc.equals("1")){
+                                        out.println("<a href='indexnus.jsp'>Inicio</a>");
+                                    }
+                                    if(acc.equals("2")){
+                                        out.println("<a href='indexalumn.jsp'>Inicio</a>");
+                                    }
+                                    if(acc.equals("3")){
+                                        out.println("<a href='admin.jsp'>Inicio</a>");
+                                    }
+                                    if(acc.equals("4")){
+                                        out.println("<a href='indexprofp.jsp'>Inicio</a>");
+                                    }
+                                    if(acc.equals("5")){
+                                        out.println("<a href='indexprofesc.jsp'>Inicio</a>");
+                                    }
+                                } catch (Exception e) {
+                                    
+                                }
+                            %>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -122,6 +147,8 @@
         <div id="portfolio" class="container-fluid text-center bg-grey">
             <h2>MÁS LEIDOS</h2><br>
             <h4>Los principales artículos del mes:</h4>
+            <a href="articulos.jsp" class="btn btn-success">Ver todos los artículos</a>
+            <br><br>
             <div class="row text-center slideanim">
              <%@ page import="java.sql.*" %>
              <jsp:useBean id="manejador" scope="session" class="paquete.DB"></jsp:useBean>
@@ -241,13 +268,16 @@
             <div class="text-center">
                 <h2>Cursos principales</h2>
                 <h4>Los cursos principales de la plataforma.</h4>
+                <br><br>
+                <a href="cursosgen.jsp" class="btn btn-success">Ver todos los cursos</a>
+                <br><br>
             </div>
             
             <!--Cursos-->
             <%
                         try {
                                 String user = (String) session.getAttribute("username");
-                                String acc = (String) session.getAttribute("acc");
+                                acc = (String) session.getAttribute("acc");
                                 int i = 0;
                                 int iduser = 0;
                                 ResultSet rs = null;
@@ -303,7 +333,7 @@
                 <s:form action="/Login" class="form-group">
                     <%
                         String user = (String) session.getAttribute("username");
-                        String acc = (String) session.getAttribute("acc");
+                        acc = (String) session.getAttribute("acc");
                         if (user == null && acc == null) {
                             out.println("<h2 class=\"text-center\">Inicio de Sesión</h2>"
                                     + "<div class='row form-group'>"

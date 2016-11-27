@@ -40,6 +40,29 @@
                                     out.println("<li><a href=\"indexnus.jsp\">" + user + "</a></li>");
                                 }
                             %>
+                        <li>
+                            <%
+                                try{
+                                    if(acc.equals("1")){
+                                        out.println("<a href='indexnus.jsp'>Inicio</a>");
+                                    }
+                                    if(acc.equals("2")){
+                                        out.println("<a href='indexalumn.jsp'>Inicio</a>");
+                                    }
+                                    if(acc.equals("3")){
+                                        out.println("<a href='admin.jsp'>Inicio</a>");
+                                    }
+                                    if(acc.equals("4")){
+                                        out.println("<a href='indexprofp.jsp'>Inicio</a>");
+                                    }
+                                    if(acc.equals("5")){
+                                        out.println("<a href='indexprofesc.jsp'>Inicio</a>");
+                                    }
+                                } catch (Exception e) {
+                                    
+                                }
+                            %>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -78,7 +101,7 @@
                 } catch (Exception ex) {
                     System.out.println(ex);
                 }
-                rs2 = manejador.executeQuery("select * from cursos, profesores where cursos.id_prof=profesores.id_usu;");
+                rs2 = manejador.executeQuery("select * from cursos, profesores where cursos.id_prof=profesores.id_usu AND (select count(id) from inscritos where id_curso=cursos.id_curso)<30;");
                 out.println("<table class=\"table table-responsive\">");
                 //out.println("<table class=\"table table-striped table-bordered table-responsive\">");
                 out.println("<thead>");

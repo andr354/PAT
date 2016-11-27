@@ -2,7 +2,6 @@ package paquete;
 
 import java.beans.PropertyVetoException;
 import java.io.IOException;
-import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,7 +11,7 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-class LoginBean implements Serializable{
+class LoginBean {
 
     Connection con = null;
     PreparedStatement pst = null;
@@ -225,12 +224,7 @@ class LoginBean implements Serializable{
         int status = 0;
         int count  = 0;
         try {
-            pst = con.prepareStatement("select count(id) from inscritos where id_curso="+idc+";");
-            rs = pst.executeQuery("select count(id) from inscritos where id_curso="+idc+";");
-            count = rs.getInt("count(id)");
-            
-            
-            if(count<=29){
+            if(1==1){
                 String consulta = "insert into inscritos(id_curso, id_usu) values(" + idc + ", " + idu + ");";
                 pst = con.prepareStatement(consulta);
                 int cols = pst.executeUpdate(consulta);

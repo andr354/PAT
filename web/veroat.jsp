@@ -52,7 +52,29 @@
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="index.jsp">Inicio</a></li>
+                        <li>
+                            <%
+                                try{
+                                    if(acc.equals("1")){
+                                        out.println("<a href='indexnus.jsp'>Inicio</a>");
+                                    }
+                                    if(acc.equals("2")){
+                                        out.println("<a href='indexalumn.jsp'>Inicio</a>");
+                                    }
+                                    if(acc.equals("3")){
+                                        out.println("<a href='admin.jsp'>Inicio</a>");
+                                    }
+                                    if(acc.equals("4")){
+                                        out.println("<a href='indexprofp.jsp'>Inicio</a>");
+                                    }
+                                    if(acc.equals("5")){
+                                        out.println("<a href='indexprofesc.jsp'>Inicio</a>");
+                                    }
+                                } catch (Exception e) {
+                                    
+                                }
+                            %>
+                        </li>
                         <li><a href="cursosgen.jsp">Cursos</a></li>
                         <li><a href="mensajes.jsp">Mensajes</a></li>
                             <%
