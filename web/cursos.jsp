@@ -7,8 +7,8 @@
     ResultSet profesores = null;
     ResultSet rs2 = null;
     int acc2 = 1;
-    String acc;
-    String user;
+    String acc=null;
+    String user=null;
     try {
         manejador.setConnection("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/pat");
         rs2 = manejador.executeQuery("select * from cursos, profesores where cursos.id_prof=profesores.id_usu;");
@@ -50,13 +50,51 @@
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="admin.jsp">Inicio</a></li>
-                        <li><a href="alumnos.jsp">Alumnos</a></li>
-                        <li><a href="profs.jsp">Profesores</a></li>
-                        <li><a href="profsp.jsp">Colaboradores</a></li>
-                        <li><a href="oats.jsp">OA</a></li>
-                        <li><a href="cursos.jsp">Cursos</a></li>
-                        <li><a href="mensajes.jsp">Mensajes</a></li>
+                            <%
+                                String opciones = null;
+                                try {
+                                    //String user = (String) session.getAttribute("username");
+                                    //String acc = (String) session.getAttribute("acc");
+                                    //System.out.println("myAcc=" + acc);
+                                    if (user == null && acc == null) {
+                                        opciones = "<li><a href=\"articulos.jsp\">Artículos</a></li>"
+                                                + "<li><a href=\"mensajes.jsp\">Mensajes</a></li>"
+                                                + "<li><a href=\"#login\">LOGIN</a></li>";
+                                    } else if (acc.equals("1")) {
+                                        opciones = "<li><a href=\"index.jsp\">Inicio</a></li>"
+                                                + "<li><a href=\"articulos.jsp\">Artículos</a></li>"
+                                                + "<li><a href=\"mensajes.jsp\">Mensajes</a></li>"
+                                                + "<li><a href=\"indexnus.jsp\">" + user + "</a></li>";
+                                    } else if (acc.equals("2")) {
+                                        opciones = "<li><a href=\"articulos.jsp\">Artículos</a></li>"
+                                                + "<li><a href=\"mensajes.jsp\">Mensajes</a></li>"
+                                                + "<li><a href=\"cursosgen.jsp\">Cursos</a></li>"
+                                                + "<li><a href=\"indexalumn.jsp\">" + user + "</a></li>";
+                                    } else if (acc.equals("3")) {
+                                        opciones = "<li><a href=\"admin.jsp\">Inicio</a></li>"
+                                                + "<li><a href=\"articulos.jsp\">Artículos</a></li>"
+                                                + "<li><a href=\"alumnos.jsp\">Alumnos</a></li>"
+                                                + "<li><a href=\"profs.jsp\">Profesores</a></li>"
+                                                + "<li><a href=\"profsp.jsp\">Colaboradores</a></li>"
+                                                + "<li><a href=\"oats.jsp\">OA</a></li>"
+                                                + "<li><a href=\"cursos.jsp\">Cursos</a></li>"
+                                                + "<li><a href=\"mensajes.jsp\">Mensajes</a></li>"
+                                                + "<li><a href=\"indexnus.jsp\">" + user + "</a></li>";
+                                    } else if (acc.equals("4")) {
+                                        opciones = "<li><a href=\"articulos.jsp\">Artículos</a></li>"
+                                                + "<li><a href=\"mensajes.jsp\">Mensajes</a></li>"
+                                                + "<li><a href=\"indexprofp.jsp\">" + user + "</a></li>";
+                                    } else if (acc.equals("5")) {
+                                        opciones = "<li><a href=\"indexprofesc.jsp\">Inicio</a></li>"
+                                                + "<li><a href=\"articulos.jsp\">Artículos</a></li>"
+                                                + "<li><a href=\"mensajes.jsp\">Mensajes</a></li>"
+                                                + "<li><a href=\"indexnus.jsp\">Mi cuenta</a></li>";
+                                    }
+                                    out.println(opciones);
+                                } catch (Exception e) {
+                                    System.err.println(e);
+                                }
+                            %>
                     </ul>
                 </div>
             </div>
@@ -71,7 +109,7 @@
             <h2>Crear nuevo curso</h2>
             <s:form action="/AddCurso" id="ncurso" class="form-group">
                 <div class="col-sm-3">
-                    <label for="idu">ID de profesor responsable: </label>
+                    <label for="idu">Profesor responsable</label>
                     <!--<input type ="number" name="idu" id="idu" class="form-control"/>-->
                     <select type ="number" name="idu" id="idu" class="form-control">
                         <%

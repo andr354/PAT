@@ -83,7 +83,7 @@
                                         String usuario = "<option value=1>Usuario registrado</option>";
                                         String alumno = "<option value=2>Alumno</option>";
                                         String admin = "<option value=3>Administrador</option>";
-                                        String contribuidor = "<option value=4>Contribuidor</option>";
+                                        String contribuidor = "<option value=4>Colaborador</option>";
                                         String profesor = "<option value=5>Profesor escolar</option>";
                                         manejador.setConnection("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/pat");
                                         rs2 = manejador.executeQuery("SELECT idUser, id, password, nivel, email, intereses   FROM users WHERE idUser='" + Id + "' ");
@@ -108,7 +108,7 @@
                                                         + profesor
                                                         + contribuidor;
                                             } else if (rs2.getInt("users.nivel") == 4) {
-                                                acceso += "Contribuidor</option>"
+                                                acceso += "Colaborador</option>"
                                                         + usuario
                                                         + alumno
                                                         + profesor

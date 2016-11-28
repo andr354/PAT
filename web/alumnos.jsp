@@ -56,7 +56,7 @@
                 <h2>Agregar nuevo alumno</h2>
                 <div class="form-group">
                     <s:form action="/AddAlumno" class="form-group">
-                        <div class="col-xs-2">
+                        <div class="col-sm-2">
                             <label for="idu">Alumno: </label> 
                             <select name="idu" id="idu" class="form-control" type ="number">
                                 <%
@@ -79,15 +79,15 @@
                             </select>
                         </div>
 
-                        <div class="col-xs-2">
+                        <div class="col-sm-2">
                             <label for="nombre">Nombre(s): </label>
                             <input type="text" name="nombre" id="nombre" class="form-control"/>
                         </div>
-                        <div class="col-xs-3">
+                        <div class="col-sm-3">
                             <label for="apellidos">Apellido(s)</label>
                             <input type="text" name="apps" id="apellidos" class="form-control"/>
                         </div>
-                        <div class="col-xs-2">
+                        <div class="col-sm-2">
                             <label for="idProfesor">Profesor: </label> 
                             <select name="idp" id="idProfesor" class="form-control" type ="number">
                                 <%
@@ -110,7 +110,7 @@
                                 %>
                             </select>
                         </div>
-                        <div class="col-xs-2">
+                        <div class="col-sm-2">
                             <label for="submit">.</label><br>
                             <input type="submit" class="btn btn-primary btn-block" id="submit" value="Registrar">
                         </div>
