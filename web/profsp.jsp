@@ -60,7 +60,7 @@
                         <span class="glyphicon glyphicon-signal logo"></span>
                     </div>
                     <div>
-                        <h2>Agregar nuevo Profesor Generador de Contenido</h2>
+                        <h2>Agregar nuevo Colaborador</h2>
                     <s:form action="/AddProfesorG">
                         <div class="form-group">
                             <div class="col-xs-2">
