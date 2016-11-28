@@ -114,6 +114,7 @@
                     <div class="collapse navbar-collapse" id="myNavbar">
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="indexprofesc.jsp">Inicio</a></li>
+                            <li><a href="articulos.jsp">Artículos</a></li>
                             <li><a href="mensajes.jsp">Mensajes</a></li>
                             <%
                                 try {
@@ -122,7 +123,8 @@
                                     if (user == null && acc == null) {
                                         out.println("<li><a href=\"login.jsp\">LOGIN</a></li>");
                                     } else {
-                                        out.println("<li><a href=\"indexnus.jsp\">" + user + "</a></li>");
+                                        out.println("<li><a href=\"indexnus.jsp\">Mi Cuenta</a></li>");
+                                        //out.println("<li><a href=\"indexnus.jsp\">" + user + "</a></li>");
                                     }
                                 } catch (Exception e) {
                                 }
@@ -189,6 +191,10 @@
         </div>
         <!-- Container (About Section) -->
         <div id="about" class="row container-fluid col-md-offset-1">
+            <div id="hola" class="row">
+                <h2 class="titulo-seccion">Bienvenido <%out.println(user);%></h2>
+                <br><br><br><hr>
+            </div>
             <div class="row">
                 <h2 class="titulo-apartado">Alumnos inscritos</h2>
                 <div class="container">
@@ -200,6 +206,7 @@
                         try{
                             if(!alumnosRS.next()){
                                 hide = "style=\"display:none;\"";
+                                out.println("<h2 class=\"text-center\">Sin alumnos inscritos</h2>");
                             }
                             alumnosRS.previous();
                         }catch(Exception e){
@@ -239,7 +246,7 @@
             </div>
             <hr>
             <div class="row container">
-                <h2 class="titulo-apartado">Actividades</h2>
+                <h2 class="titulo-apartado">Objetos de aprendizaje</h2>
                 <div class="row container">
                     <table id="table2" class="table table-striped table-bordered table-responsive">
                         <!--<thead>-->
@@ -282,7 +289,7 @@
             </div>
 
             <hr>
-            <div class="row container">
+            <div class="row">
                 <h2 class="titulo-apartado">Agregar nuevo OAT</h2>
                 <s:form action="/AddOAT" id="usrform">
                     <div class="row col-md-10 col-md-offset-1 text-center">

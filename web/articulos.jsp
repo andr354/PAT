@@ -43,16 +43,50 @@
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="index.jsp">INICIO</a></li>
-                            <%                                try {
+                        <!--<li><a href="index.jsp">INICIO</a></li>-->
+                            <%
+                                String opciones = null;
+                                try {
                                     String user = (String) session.getAttribute("username");
                                     String acc = (String) session.getAttribute("acc");
+                                    //System.out.println("myAcc=" + acc);
                                     if (user == null && acc == null) {
-                                        out.println("<li><a href=\"login.jsp\">LOGIN</a></li>");
-                                    } else {
-                                        out.println("<li><a href=\"indexnus.jsp\">" + user + "</a></li>");
+                                        opciones = "<li><a href=\"articulos.jsp\">Artículos</a></li>"
+                                                + "<li><a href=\"mensajes.jsp\">Mensajes</a></li>"
+                                                + "<li><a href=\"#login\">LOGIN</a></li>";
+                                    } else if (acc.equals("1")) {
+                                        opciones = "<li><a href=\"index.jsp\">Inicio</a></li>"
+                                                + "<li><a href=\"articulos.jsp\">Artículos</a></li>"
+                                                + "<li><a href=\"mensajes.jsp\">Mensajes</a></li>"
+                                                + "<li><a href=\"indexnus.jsp\">" + user + "</a></li>";
+                                    } else if (acc.equals("2")) {
+                                        opciones = "<li><a href=\"articulos.jsp\">Artículos</a></li>"
+                                                + "<li><a href=\"mensajes.jsp\">Mensajes</a></li>"
+                                                + "<li><a href=\"cursosgen.jsp\">Cursos</a></li>"
+                                                + "<li><a href=\"indexalumn.jsp\">" + user + "</a></li>";
+                                    } else if (acc.equals("3")) {
+                                        opciones = "<li><a href=\"admin.jsp\">Inicio</a></li>"
+                                                + "<li><a href=\"articulos.jsp\">Artículos</a></li>"
+                                                + "<li><a href=\"alumnos.jsp\">Alumnos</a></li>"
+                                                + "<li><a href=\"profs.jsp\">Profesores</a></li>"
+                                                + "<li><a href=\"profsp.jsp\">Colaboradores</a></li>"
+                                                + "<li><a href=\"oats.jsp\">OA</a></li>"
+                                                + "<li><a href=\"cursos.jsp\">Cursos</a></li>"
+                                                + "<li><a href=\"mensajes.jsp\">Mensajes</a></li>"
+                                                + "<li><a href=\"indexnus.jsp\">" + user + "</a></li>";
+                                    } else if (acc.equals("4")) {
+                                        opciones = "<li><a href=\"articulos.jsp\">Artículos</a></li>"
+                                                + "<li><a href=\"mensajes.jsp\">Mensajes</a></li>"
+                                                + "<li><a href=\"indexprofp.jsp\">" + user + "</a></li>";
+                                    } else if (acc.equals("5")) {
+                                        opciones = "<li><a href=\"indexprofesc.jsp\">Inicio</a></li>"
+                                                + "<li><a href=\"articulos.jsp\">Artículos</a></li>"
+                                                + "<li><a href=\"mensajes.jsp\">Mensajes</a></li>"
+                                                + "<li><a href=\"indexnus.jsp\">Mi cuenta</a></li>";
                                     }
+                                    out.println(opciones);
                                 } catch (Exception e) {
+                                    System.err.println(e);
                                 }
                             %>
                     </ul>
@@ -92,19 +126,19 @@
                                 System.out.println("----[No tiene imagen]----");
                             }
                             try {
-                                if(img!=""){
+                                if (img != "") {
                                     styleImg = imgP.split("style=\"")[1];
                                     //styleImg = styleImg.split("\"")[0];
                                     //img = img + "\" style=\"" + styleImg + "\"";
                                     img = "<img src=\"" + img + " \" class=\"img-responsive img-rounded\">";
                                     System.out.println(img);
-                                }else{
+                                } else {
                                     img = "<img src=\"resources/default_image.png\" class=\"img-responsive img-rounded\">";
                                 }
                             } catch (Exception e) {
                                 if (img != "") {
                                     img = "<img src=\"" + img + "\" class=\"giant img-rounded\">";
-                                }else{
+                                } else {
                                     img = "<img src=\"resources/default_image.png\" class=\"giant img-rounded\">";
                                 }
                                 System.out.println("----[No tiene estilo de imagen]----");

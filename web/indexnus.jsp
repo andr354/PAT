@@ -40,18 +40,22 @@
                             String user = (String) session.getAttribute("username");
                             acc = (String) session.getAttribute("acc");
                             if (user == null && acc == null) {
-                                opciones = "<li><a href=\"mensajes.jsp\">Mensajes</a></li>"
+                                opciones = "<li><a href=\"articulos.jsp\">Artículos</a></li>"
+                                        + "<li><a href=\"mensajes.jsp\">Mensajes</a></li>"
                                         + "<li><a href=\"#login\">LOGIN</a></li>";
                             } else if (acc.equals("1")) {
                                 opciones = "<li><a href=\"index.jsp\">Inicio</a></li>"
+                                        + "<li><a href=\"articulos.jsp\">Artículos</a></li>"
                                         + "<li><a href=\"mensajes.jsp\">Mensajes</a></li>"
                                         + "<li><a href=\"indexnus.jsp\">" + user + "</a></li>";
                             } else if (acc.equals("2")) {
-                                opciones = "<li><a href=\"mensajes.jsp\">Mensajes</a></li>"
+                                opciones = "<li><a href=\"articulos.jsp\">Artículos</a></li>"
+                                        + "<li><a href=\"mensajes.jsp\">Mensajes</a></li>"
                                         + "<li><a href=\"cursosgen.jsp\">Cursos</a></li>"
                                         + "<li><a href=\"indexalumn.jsp\">" + user + "</a></li>";
                             } else if (acc.equals("3")) {
                                 opciones = "<li><a href=\"admin.jsp\">Inicio</a></li>"
+                                        + "<li><a href=\"articulos.jsp\">Artículos</a></li>"
                                         + "<li><a href=\"alumnos.jsp\">Alumnos</a></li>"
                                         + "<li><a href=\"profs.jsp\">Profesores</a></li>"
                                         + "<li><a href=\"profsp.jsp\">Colaboradores</a></li>"
@@ -60,13 +64,17 @@
                                         + "<li><a href=\"mensajes.jsp\">Mensajes</a></li>"
                                         + "<li><a href=\"indexnus.jsp\">" + user + "</a></li>";
                             } else if (acc.equals("4")) {
-                                opciones = "<li><a href=\"mensajes.jsp\">Mensajes</a></li>"
+                                opciones = "<li><a href=\"articulos.jsp\">Artículos</a></li>"
+                                        + "<li><a href=\"mensajes.jsp\">Mensajes</a></li>"
                                         + "<li><a href=\"indexprofp.jsp\">" + user + "</a></li>";
                             } else if (acc.equals("5")) {
-                                opciones = "<li><a href=\"mensajes.jsp\">Mensajes</a></li>"
+                                opciones = "<li><a href=\"indexprofesc.jsp\">Inicio</a></li>"
+                                        + "<li><a href=\"articulos.jsp\">Artículos</a></li>"
+                                        + "<li><a href=\"mensajes.jsp\">Mensajes</a></li>"
                                         + "<li><a href=\"indexprofesc.jsp\">" + user + "</a></li>";
                             }
                         } catch (Exception e) {
+                            System.err.println(e);
                         }
                     %>
                     <ul class="nav navbar-nav navbar-right">
@@ -91,8 +99,8 @@
             }
               %>>
             <div class="row">
-                <div class="text-center">
-                    <h2>Cursos en los que estas inscrito actualmente: </h2><br>
+                <div>
+                    <h3 class="titulo-apartado">Cursos en los que estas inscrito actualmente</h3><br>
                 </div>
             </div>
             <!--</div>-->
@@ -149,7 +157,7 @@
         <div id="about" class="container-fluid text-center row col-md-10 col-md-offset-1">
             <div class="row">       
                 <div class="text-center">
-                    <h3 class="titulo-seccion">Información de la cuenta</h3>
+                    <h3 class="titulo-apartado">Información de la cuenta</h3>
                     <s:form action="/Mod" class="form-group">
                         <table class="table table-striped table-bordered table-responsive">
                             <thead>
@@ -167,16 +175,20 @@
                                     idu = 0;
                                     ResultSet rs = null;
                                     ResultSet rs2 = null;
+                                    String nivel = "0";
                                     manejador.setConnection("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/pat");
-                                    rs = manejador.executeQuery("SELECT idUser FROM users WHERE users.id='" + user + "'");
+                                    rs = manejador.executeQuery("SELECT idUser, nivel FROM users WHERE users.id='" + user + "'");
                                     out.println(user);
                                     if (rs.next()) {
                                         idu = rs.getInt("users.idUser");
+                                        nivel = rs.getString("users.nivel");
                                     }
                                     rs2 = manejador.executeQuery("SELECT idUser, id, password, nivel, email, intereses FROM users WHERE idUser='" + idu + "' ");
                                     while (rs2.next()) {
-                                        out.println("<tr><input type=\"hidden\" name=\"id\" value=" + idu + " class=\"form-control\"/>");
-                                        out.println("<th><input type=\"text\" name=\"username\" placeholder=\"" + rs2.getString("users.id") + "\" value=\"" + rs2.getString("users.id") + "\" class=\"form-control\"/></th>");
+                                        out.println("<tr><input type=\"hidden\" name=\"id\" value=" + idu + " class=\"form-control\"/>"
+                                                + "<input type=\"hidden\" name=\"username\"  value=\"" + rs2.getString("users.id") + "\" class=\"form-control\"/>"
+                                                + "<input type=\"hidden\" name=\"rol\"  value=\"" + nivel + "\" class=\"form-control\"/>");
+                                        out.println("<th><input type=\"text\" placeholder=\"" + rs2.getString("users.id") + "\" value=\"" + rs2.getString("users.id") + "\" class=\"form-control\"/ disabled></th>");
                                         out.println("<th><input type=\"password\" name=\"password\" placeholder=\"Contraseña\" value=\"" + rs2.getString("users.password") + "\" class=\"form-control\"/></th>");
                                         if (rs2.getString("users.email") != null) {
                                             out.println("<th><input type=\"email\" name=\"mail\" placeholder=\"" + rs2.getString("users.email") + "\" value=\"" + rs2.getString("users.email") + "\" class='form-control'/></th>");
