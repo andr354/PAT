@@ -222,17 +222,13 @@ class LoginBean {
 
     public int inscribirC(int idc, int idu) {
         int status = 0;
-        int count  = 0;
         try {
-            if(1==1){
-                String consulta = "insert into inscritos(id_curso, id_usu) values(" + idc + ", " + idu + ");";
-                pst = con.prepareStatement(consulta);
-                int cols = pst.executeUpdate(consulta);
-                status = 1;
-            }else{
-                status = 0;
-            }
-            
+            con = DataSource.getInstance().getConnection();
+            //String consulta = "insert into diagramas(calif, notaP) values('"+calif+"', '"+nota+"') where id_dig='"+id+"';";
+            String consulta = "insert into inscritos(id_curso, id_usu) values(" + idc + ", " + idu + ");";
+            pst = con.prepareStatement(consulta);
+            int cols = pst.executeUpdate(consulta);
+            status = 1;
         } catch (Exception e) {
             System.out.println(e);
         }
