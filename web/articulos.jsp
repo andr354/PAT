@@ -16,6 +16,7 @@
         <!--<script src="ckeditor/ckeditor.js"></script>-->
         <script src="//cdn.ckeditor.com/4.5.1/full-all/ckeditor.js"></script>
         <link rel="stylesheet" type="text/css" href="resources/PATEstilos.css">
+        <link rel="stylesheet" type="text/css" href="resources/responsividad.css">
         <%@ page import="java.sql.*" %>
         <jsp:useBean id="manejador" scope="session" class="paquete.DB"></jsp:useBean>
         <%
@@ -69,13 +70,13 @@
         <div id="about" class="container-fluid">
             <div class="row">
                 <div>
-                    <h2 class="titulo-seccion">Articulos recientes</h2><br><hr>
+                    <h2 class="titulo-seccion ">Articulos recientes</h2><br><hr>
                 </div>
                 <div>
                     <%
-                        String divRow = "<div class=\"row\">";
-                        String divCol2 = "<div class=\"col-sm-2 col-md-offset-3 text-center\">";
-                        String divCol3 = "<div class=\"col-md-5\" well>";
+                        String divRow = "<div class=\"row flex-items-xs-middle\">";
+                        String divCol2 = "<div class=\"col-sm-3 col-md-offset-2 flex-items-xs-middle\">";
+                        String divCol3 = "<div class=\"col-md-6\">";
                         String divClose = "</div>";
                         String[] imagen;
                         String img = "";
@@ -95,10 +96,10 @@
                                     styleImg = imgP.split("style=\"")[1];
                                     //styleImg = styleImg.split("\"")[0];
                                     //img = img + "\" style=\"" + styleImg + "\"";
-                                    img = "<img src=\"" + img + " \" class=\"giant img-rounded\">";
+                                    img = "<img src=\"" + img + " \" class=\"img-responsive img-rounded\">";
                                     System.out.println(img);
                                 }else{
-                                    img = "<img src=\"resources/default_image.png\" class=\"giant img-rounded\">";
+                                    img = "<img src=\"resources/default_image.png\" class=\"img-responsive img-rounded\">";
                                 }
                             } catch (Exception e) {
                                 if (img != "") {
@@ -111,16 +112,16 @@
                             out.println(
                                     divRow
                                     + divCol2
-                                    + "<a href='veroat.jsp?id=" + rs2.getString("oats.id_oat") + "' class=\"link-titulo\">"
+                                    + "<a href='veroat.jsp?id=" + rs2.getString("oats.id_oat") + "' >"
                                     + img + "</a>"
                                     + divClose
                                     + divCol3
-                                    + "<a href='veroat.jsp?id=" + rs2.getString("oats.id_oat") + "' class=\"link-titulo\">"
+                                    + "<div class='row onMinCenter'><a href='veroat.jsp?id=" + rs2.getString("oats.id_oat") + "' class=\"link-titulo\">"
                                     + rs2.getString("oats.titulo")
                                     //+ rs2.getString("oats.descrip")
-                                    + "</a>"
-                                    + "<div class=\"descripcion\">" + rs2.getString("oats.descrip") + "</div>"
-                                    + "<b class=\"margin\">Por:</b> <b class=\"by-author\">" + rs2.getString("profesores.nom_prof") + " " + rs2.getString("profesores.apps_prof") + "</b>"
+                                    + "</a></div>"
+                                    + "<div class=\"descripcion justificado\">" + rs2.getString("oats.descrip") + "</div>"
+                                    + "<b class=\"por\">Por:</b> <b class=\"by-author\">" + rs2.getString("profesores.nom_prof") + " " + rs2.getString("profesores.apps_prof") + "</b>"
                                     + divClose
                                     + divClose
                                     + "<hr>");

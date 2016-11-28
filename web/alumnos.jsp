@@ -72,7 +72,7 @@
                                             }
                                         }
                                     } catch (Exception e) {
-                                        out.print(e);
+                                        System.err.print(e);
                                         response.sendRedirect("index.jsp");
                                     }
                                 %>
@@ -104,8 +104,7 @@
                                             }
                                         }
                                     } catch (Exception e) {
-
-                                        out.print(e);
+                                        System.err.print(e);
                                         response.sendRedirect("index.jsp");
                                     }
                                 %>
@@ -136,10 +135,12 @@
                     </thead>
                     <tbody class="searchable">
                         <%
+                            int acc2 = 0;
+                            String acc = null;
                             try {
                                 String user = (String) session.getAttribute("username");
-                                String acc = (String) session.getAttribute("acc");
-                                int acc2 = Integer.parseInt(acc);
+                                acc = (String) session.getAttribute("acc");
+                                acc2 = Integer.parseInt(acc);
                                 if (acc2 == 3) {
                                     ResultSet rs = null;
                                     ResultSet rs2 = null;
@@ -183,6 +184,11 @@
                                     response.sendRedirect("index.jsp");
                                 }
                             } catch (Exception e) {
+                                System.err.println(e);
+                                if(acc==null){
+                                    System.out.println("Usuario no logueado");
+                                    response.sendRedirect("errors.jsp?id='Sin privilegios suficientes'");
+                                }
                                 response.sendRedirect("index.jsp");
                             }
 
