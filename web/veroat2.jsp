@@ -59,7 +59,7 @@
                         ResultSet rs = null;
                         ResultSet rs2 = null;
                         manejador.setConnection("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/pat");
-                        rs2 = manejador.executeQuery("SELECT * FROM oats, profesc WHERE id_oat='" + Id + "' ");
+                        rs2 = manejador.executeQuery("SELECT * FROM oats, profesc WHERE id_oat=" + Id + " and oats.id_prof = profesc.id_usu ");
                         rs2.next();
                         out.println("<h1><center>" + rs2.getString("oats.titulo") + "</h1>");
                         out.println("<table class=\"table table-striped table-bordered table-responsive\">");
