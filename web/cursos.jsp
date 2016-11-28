@@ -10,12 +10,20 @@
     String acc=null;
     String user=null;
     try {
-        manejador.setConnection("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/pat");
-        rs2 = manejador.executeQuery("select * from cursos, profesores where cursos.id_prof=profesores.id_usu;");
-        profesores = manejador.executeQuery("SELECT id_usu, nom_prof, apps_prof from profesores;");
         user = (String) session.getAttribute("username");
         acc = (String) session.getAttribute("acc");
         acc2 = Integer.parseInt(acc);
+        if (acc2 == 3) {
+            manejador.setConnection("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/pat");
+            rs2 = manejador.executeQuery("select * from cursos, profesores where cursos.id_prof=profesores.id_usu;");
+            profesores = manejador.executeQuery("SELECT id_usu, nom_prof, apps_prof from profesores;");
+            user = (String) session.getAttribute("username");
+            acc = (String) session.getAttribute("acc");
+            acc2 = Integer.parseInt(acc);
+        }else if(acc2==4){
+            System.out.println("Redirigiendo a colaborador");
+            response.sendRedirect("indexprofp.jsp");
+        }
     } catch (Exception e) {
         response.sendRedirect("index.jsp");
     }

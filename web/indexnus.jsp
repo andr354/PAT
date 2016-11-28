@@ -46,6 +46,7 @@
                             } else if (acc.equals("1")) {
                                 opciones = "<li><a href=\"index.jsp\">Inicio</a></li>"
                                         + "<li><a href=\"articulos.jsp\">Artículos</a></li>"
+                                        + "<li><a href=\"cursosgen.jsp\">Cursos</a></li>"
                                         + "<li><a href=\"mensajes.jsp\">Mensajes</a></li>"
                                         + "<li><a href=\"indexnus.jsp\">" + user + "</a></li>";
                             } else if (acc.equals("2")) {
@@ -66,11 +67,13 @@
                             } else if (acc.equals("4")) {
                                 opciones = "<li><a href=\"articulos.jsp\">Artículos</a></li>"
                                         + "<li><a href=\"mensajes.jsp\">Mensajes</a></li>"
+                                        + "<li><a href=\"cursosgen.jsp\">Cursos</a></li>"
                                         + "<li><a href=\"indexprofp.jsp\">" + user + "</a></li>";
                             } else if (acc.equals("5")) {
                                 opciones = "<li><a href=\"indexprofesc.jsp\">Inicio</a></li>"
                                         + "<li><a href=\"articulos.jsp\">Artículos</a></li>"
                                         + "<li><a href=\"mensajes.jsp\">Mensajes</a></li>"
+                                        + "<li><a href=\"cursosgen.jsp\">Cursos</a></li>"
                                         + "<li><a href=\"indexprofesc.jsp\">" + user + "</a></li>";
                             }
                         } catch (Exception e) {

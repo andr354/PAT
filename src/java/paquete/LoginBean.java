@@ -224,10 +224,12 @@ class LoginBean {
         int status = 0;
         try {
             con = DataSource.getInstance().getConnection();
-            //String consulta = "insert into diagramas(calif, notaP) values('"+calif+"', '"+nota+"') where id_dig='"+id+"';";
             String consulta = "insert into inscritos(id_curso, id_usu) values(" + idc + ", " + idu + ");";
+            String consulta2 = "update cursos set lugares=30-(select count(id) from inscritos where id_curso="+idc+") where id_curso="+idc+";";
             pst = con.prepareStatement(consulta);
             int cols = pst.executeUpdate(consulta);
+            pst = con.prepareStatement(consulta2);
+            cols = pst.executeUpdate(consulta2);
             status = 1;
         } catch (Exception e) {
             System.out.println(e);
