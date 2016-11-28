@@ -30,19 +30,51 @@
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="indexprofp.jsp">Inicio</a></li>
-                        <li><a href="cursosprofp.jsp">Cursos</a></li>
-                        <li><a href="mensajes.jsp">Mensajes</a></li>
-                        <%
+                            <%
+                                String opciones = null;
                                 try {
                                     String user = (String) session.getAttribute("username");
                                     String acc = (String) session.getAttribute("acc");
+                                    //System.out.println("myAcc=" + acc);
                                     if (user == null && acc == null) {
-                                        out.println("<li><a href=\"#login\">LOGIN</a></li>");
-                                    } else {
-                                        out.println("<li><a href=\"indexnus.jsp\">" + user + "</a></li>");
+                                        opciones = "<li><a href=\"articulos.jsp\">Artículos</a></li>"
+                                                + "<li><a href=\"mensajes.jsp\">Mensajes</a></li>"
+                                                + "<li><a href=\"#login\">LOGIN</a></li>";
+                                    } else if (acc.equals("1")) {
+                                        opciones = "<li><a href=\"index.jsp\">Inicio</a></li>"
+                                                + "<li><a href=\"articulos.jsp\">Artículos</a></li>"
+                                                + "<li><a href=\"mensajes.jsp\">Mensajes</a></li>"
+                                                + "<li><a href=\"indexnus.jsp\">" + user + "</a></li>";
+                                    } else if (acc.equals("2")) {
+                                        opciones = "<li><a href=\"articulos.jsp\">Artículos</a></li>"
+                                                + "<li><a href=\"mensajes.jsp\">Mensajes</a></li>"
+                                                + "<li><a href=\"cursosgen.jsp\">Cursos</a></li>"
+                                                + "<li><a href=\"indexalumn.jsp\">" + user + "</a></li>";
+                                    } else if (acc.equals("3")) {
+                                        opciones = "<li><a href=\"admin.jsp\">Inicio</a></li>"
+                                                + "<li><a href=\"articulos.jsp\">Artículos</a></li>"
+                                                + "<li><a href=\"alumnos.jsp\">Alumnos</a></li>"
+                                                + "<li><a href=\"profs.jsp\">Profesores</a></li>"
+                                                + "<li><a href=\"profsp.jsp\">Colaboradores</a></li>"
+                                                + "<li><a href=\"oats.jsp\">OA</a></li>"
+                                                + "<li><a href=\"cursos.jsp\">Cursos</a></li>"
+                                                + "<li><a href=\"mensajes.jsp\">Mensajes</a></li>"
+                                                + "<li><a href=\"indexnus.jsp\">" + user + "</a></li>";
+                                    } else if (acc.equals("4")) {
+                                        opciones = "<li><a href=\"indexprofp.jsp\">Inicio</a></li>"
+                                                + "<li><a href=\"articulos.jsp\">Artículos</a></li>"
+                                                + "<li><a href=\"cursosprofp.jsp.jsp\">Cursos</a></li>"
+                                                + "<li><a href=\"mensajes.jsp\">Mensajes</a></li>"
+                                                + "<li><a href=\"indexnus.jsp\">Mi cuenta</a></li>";
+                                    } else if (acc.equals("5")) {
+                                        opciones = "<li><a href=\"indexprofesc.jsp\">Inicio</a></li>"
+                                                + "<li><a href=\"articulos.jsp\">Artículos</a></li>"
+                                                + "<li><a href=\"mensajes.jsp\">Mensajes</a></li>"
+                                                + "<li><a href=\"indexnus.jsp\">Mi cuenta</a></li>";
                                     }
+                                    out.println(opciones);
                                 } catch (Exception e) {
+                                    System.err.println(e);
                                 }
                             %>
                     </ul>

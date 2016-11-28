@@ -63,7 +63,7 @@
                         <h2>Agregar nuevo Colaborador</h2>
                     <s:form action="/AddProfesorG">
                         <div class="form-group">
-                            <div class="col-xs-2">
+                            <div class="col-sm-2">
                                 <label for="idu">Usuario: </label>
                                 <select name="idu" id="idu" class="form-control">
                                     <%
@@ -89,20 +89,20 @@
                                 </select>
                                 <!--<input type="text" name="idu" id="idu" class="form-control"/>-->
                             </div>
-                            <div class="col-xs-3">
+                            <div class="col-sm-3">
                                 <label for="nombre">Nombre(s): </label>
                                 <input type="text" name="nombre" id="nombre" class="form-control"/>
                             </div>
-                            <div class="col-xs-3">
+                            <div class="col-sm-3">
                                 <label for="apps">Apellido(s): </label>
                                 <input type="text" name="apps" id="apps" class="form-control"/>
                             </div>
-                            <div class="col-xs-3">
+                            <div class="col-sn-3">
                                 <label for="esp">Especialidad:(s): </label>
                                 <input type="text" name="esp" id="esp" class="form-control"/>
                             </div>
                             <br>
-                            <div class="col-xs-1">
+                            <div class="col-sm-1">
                                 <input type="submit" value="Agregar" class="btn btn-md btn-primary form-control" id="sub"/>
                             </div>
                         </div>
@@ -154,7 +154,8 @@
                                         response.sendRedirect("index.jsp");
                                     }
                                 } catch (Exception e) {
-                                    response.sendRedirect("index.jsp");
+                                    System.err.println(e);
+                                    //response.sendRedirect("index.jsp");
                                 }
                             %>
                         </tbody>

@@ -60,7 +60,7 @@
                     <h3>Agregar nuevo profesor escolar</h3>
                     <s:form action="/AddProfEsc" class="form-horizontal">
                         <div class="form-group">
-                            <div class="col-xs-2">
+                            <div class="col-sm-2">
                                 <label for="id_usuario">Usuario: </label> 
                                 <select name="id_usuario" id="id_usuario" class="form-control">
                                     <%
@@ -79,19 +79,19 @@
                                     %>
                                 </select>
                             </div>
-                            <div class="col-xs-3">
+                            <div class="col-sm-3">
                                 <label for="nombre">Nombre(s): </label>
                                 <input type="text" name="nombre" id="nombre" class="form-control"/>
                             </div>
-                            <div class="col-xs-3">
+                            <div class="col-sm-3">
                                 <label for="apellidos">Apellido(s)</label>
                                 <input type="text" name="apellidos" id="apellidos" class="form-control"/>
                             </div>
-                            <div class="col-xs-3">
+                            <div class="col-sm-3">
                                 <label for="escuela">Escuela</label>
                                 <input type="text" name="escuela" id="escuela" class="form-control"/>
                             </div>
-                            <div class="col-xs-1">
+                            <div class="col-sm-1">
                                 <label for="accept">.</label><br>
                                 <button type="submit" class="btn btn-default" id="accept">Aceptar</button>
                             </div>
