@@ -19,35 +19,33 @@
     String uDestinoS = "Mensajes";
     String uDestinoSP = "Mensajes";
     int nivelAceeso = 0;
-    try{
+    try {
         user = (String) session.getAttribute("username");
         acc = (String) session.getAttribute("acc");
-        if(acc==null || user==null){
+        if (acc == null || user == null) {
             response.sendRedirect("errors.jsp?id=500");
         }
         //Obtenemos el id del usuario destino desde la sesion
-        uDestinoSP = (String)session.getAttribute("usuDest");
+        uDestinoSP = (String) session.getAttribute("usuDest");
         //Obtenemos el id del usuario destino desde los parametros
         uDestino = (String) request.getParameter("idFriend");
-        System.out.println("acc = "+acc);
+        System.out.println("acc = " + acc);
         //Si el parametro no es nulo...
-        if(uDestino!=null){
+        if (uDestino != null) {
             //Si el parametro y el atributo son distintos...
-            if(uDestinoSP!=uDestino){
-                System.out.println(uDestino +" "+ uDestinoSP);
+            if (uDestinoSP != uDestino) {
+                System.out.println(uDestino + " " + uDestinoSP);
                 //Guardamos el valor del parametro lo guardamos en la sesion.
                 session.setAttribute("usuDest", uDestino);
                 //System.out.println(uDestino +" "+ uDestinoSP);
             }
-        }else{
-            //Si el parametro es nulo...
-            //Si el valor del atributo no es nulo...
-            if(uDestinoSP!=null){
-                //Obtenemos el valor guardado en la sesion.
-                uDestino = (String)session.getAttribute("usuDest");
-            }
+        } else //Si el parametro es nulo...
+        //Si el valor del atributo no es nulo...
+        if (uDestinoSP != null) {
+            //Obtenemos el valor guardado en la sesion.
+            uDestino = (String) session.getAttribute("usuDest");
         }
-    }catch(Exception e){
+    } catch (Exception e) {
         System.out.println("No se pudo recuperar la sesion: username o acc");
         response.sendRedirect("index.jsp");
         System.out.println(e);
@@ -82,37 +80,53 @@
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="mensajes.jsp">PAT</a></li>
                         <li>
                             <%
-                                try{
-                                    if(acc.equals("1")){
-                                        out.println("<a href='indexnus.jsp'>Inicio</a>");
+                                String opciones = null;
+                                try {
+                                    //String user = (String) session.getAttribute("username");
+                                    //acc = (String) session.getAttribute("acc");
+                                    //System.out.println("myAcc=" + acc);
+                                    if (user == null && acc == null) {
+                                        opciones = "<li><a href=\"articulos.jsp\">Artículos</a></li>"
+                                                + "<li><a href=\"mensajes.jsp\">Mensajes</a></li>"
+                                                + "<li><a href=\"#login\">LOGIN</a></li>";
+                                    } else if (acc.equals("1")) {
+                                        opciones = "<li><a href=\"index.jsp\">Inicio</a></li>"
+                                                + "<li><a href=\"articulos.jsp\">Artículos</a></li>"
+                                                + "<li><a href=\"mensajes.jsp\">Mensajes</a></li>"
+                                                + "<li><a href=\"indexnus.jsp\">" + user + "</a></li>";
+                                    } else if (acc.equals("2")) {
+                                        opciones = "<li><a href=\"articulos.jsp\">Artículos</a></li>"
+                                                + "<li><a href=\"mensajes.jsp\">Mensajes</a></li>"
+                                                + "<li><a href=\"cursosgen.jsp\">Cursos</a></li>"
+                                                + "<li><a href=\"indexalumn.jsp\">" + user + "</a></li>";
+                                    } else if (acc.equals("3")) {
+                                        opciones = "<li><a href=\"admin.jsp\">Inicio</a></li>"
+                                                + "<li><a href=\"articulos.jsp\">Artículos</a></li>"
+                                                + "<li><a href=\"alumnos.jsp\">Alumnos</a></li>"
+                                                + "<li><a href=\"profs.jsp\">Profesores</a></li>"
+                                                + "<li><a href=\"profsp.jsp\">Colaboradores</a></li>"
+                                                + "<li><a href=\"oats.jsp\">OA</a></li>"
+                                                + "<li><a href=\"cursos.jsp\">Cursos</a></li>"
+                                                + "<li><a href=\"mensajes.jsp\">Mensajes</a></li>"
+                                                + "<li><a href=\"indexnus.jsp\">" + user + "</a></li>";
+                                    } else if (acc.equals("4")) {
+                                        opciones = "<li><a href=\"articulos.jsp\">Artículos</a></li>"
+                                                + "<li><a href=\"mensajes.jsp\">Mensajes</a></li>"
+                                                + "<li><a href=\"indexprofp.jsp\">" + user + "</a></li>";
+                                    } else if (acc.equals("5")) {
+                                        opciones = "<li><a href=\"indexprofesc.jsp\">Inicio</a></li>"
+                                                + "<li><a href=\"articulos.jsp\">Artículos</a></li>"
+                                                + "<li><a href=\"mensajes.jsp\">Mensajes</a></li>"
+                                                + "<li><a href=\"indexnus.jsp\">Mi cuenta</a></li>";
                                     }
-                                    if(acc.equals("2")){
-                                        out.println("<a href='indexalumn.jsp'>Inicio</a>");
-                                    }
-                                    if(acc.equals("3")){
-                                        out.println("<a href='admin.jsp'>Inicio</a>");
-                                    }
-                                    if(acc.equals("4")){
-                                        out.println("<a href='indexprofp.jsp'>Inicio</a>");
-                                    }
-                                    if(acc.equals("5")){
-                                        out.println("<a href='indexprofesc.jsp'>Inicio</a>");
-                                    }
+                                    out.println(opciones);
                                 } catch (Exception e) {
-                                    
+                                    System.err.println(e);
                                 }
                             %>
                         </li>
-                            <%
-                                if (user == null && acc == null){
-                                    out.println("<li><a href='indexnus.jsp'>LOGIN</a></li>");
-                                } else {
-                                    out.println("<li><a href='indexnus.jsp'>" + user + "</a></li>");
-                                }
-                            %>
                     </ul>
                 </div>
             </div>
@@ -204,7 +218,7 @@
                                     + "<input type='submit' class='btn btn-default form-control' value='Enviar'/>"
                                     + "</div>"
                                     + "<div class='col col-sm-1'>"
-                                    + "<a href='mensajes.jsp?idFriend="+uDestino+"' class='btn btn-default'><img src='resources/reload.png' width='20' height='20'/></a>"
+                                    + "<a href='mensajes.jsp?idFriend=" + uDestino + "' class='btn btn-default'><img src='resources/reload.png' width='20' height='20'/></a>"
                                     + "</div>"
                             );
                         }
