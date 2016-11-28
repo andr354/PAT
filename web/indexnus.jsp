@@ -14,6 +14,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="resources/PATEstilos.css">
+        <link rel="stylesheet" type="text/css" href="resources/responsividad.css">
         <script src="resources/busquedaTabla.js"></script>
 
     </head>
@@ -30,22 +31,47 @@
                     <a class="navbar-brand" href="index.jsp"><img src="resources/logo.png" class="logo"/></a>
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
+                    <%
+                        int acc2 = 0;
+                        int idu = 0;
+                        String acc = "0";
+                        String opciones = null;
+                        try {
+                            String user = (String) session.getAttribute("username");
+                            acc = (String) session.getAttribute("acc");
+                            if (user == null && acc == null) {
+                                opciones = "<li><a href=\"mensajes.jsp\">Mensajes</a></li>"
+                                        + "<li><a href=\"#login\">LOGIN</a></li>";
+                            } else if (acc.equals("1")) {
+                                opciones = "<li><a href=\"index.jsp\">Inicio</a></li>"
+                                        + "<li><a href=\"mensajes.jsp\">Mensajes</a></li>"
+                                        + "<li><a href=\"indexnus.jsp\">" + user + "</a></li>";
+                            } else if (acc.equals("2")) {
+                                opciones = "<li><a href=\"mensajes.jsp\">Mensajes</a></li>"
+                                        + "<li><a href=\"cursosgen.jsp\">Cursos</a></li>"
+                                        + "<li><a href=\"indexalumn.jsp\">" + user + "</a></li>";
+                            } else if (acc.equals("3")) {
+                                opciones = "<li><a href=\"admin.jsp\">Inicio</a></li>"
+                                        + "<li><a href=\"alumnos.jsp\">Alumnos</a></li>"
+                                        + "<li><a href=\"profs.jsp\">Profesores</a></li>"
+                                        + "<li><a href=\"profsp.jsp\">Colaboradores</a></li>"
+                                        + "<li><a href=\"oats.jsp\">OA</a></li>"
+                                        + "<li><a href=\"cursos.jsp\">Cursos</a></li>"
+                                        + "<li><a href=\"mensajes.jsp\">Mensajes</a></li>"
+                                        + "<li><a href=\"indexnus.jsp\">" + user + "</a></li>";
+                            } else if (acc.equals("4")) {
+                                opciones = "<li><a href=\"mensajes.jsp\">Mensajes</a></li>"
+                                        + "<li><a href=\"indexprofp.jsp\">" + user + "</a></li>";
+                            } else if (acc.equals("5")) {
+                                opciones = "<li><a href=\"mensajes.jsp\">Mensajes</a></li>"
+                                        + "<li><a href=\"indexprofesc.jsp\">" + user + "</a></li>";
+                            }
+                        } catch (Exception e) {
+                        }
+                    %>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="indexnus.jsp">Inicio</a></li>
-                        <li><a href="cursosgen.jsp">Cursos</a></li>
-                        <li><a href="mensajes.jsp">Mensajes</a></li>
-                        <%
-                                try {
-                                    String user = (String) session.getAttribute("username");
-                                    String acc = (String) session.getAttribute("acc");
-                                    if (user == null && acc == null) {
-                                        out.println("<li><a href=\"#login\">LOGIN</a></li>");
-                                    } else {
-                                        out.println("<li><a href=\"indexnus.jsp\">" + user + "</a></li>");
-                                    }
-                                } catch (Exception e) {
-                                }
-                            %>
+
+                        <%out.println(opciones);%>
                     </ul>
                 </div>
             </div>
@@ -55,7 +81,15 @@
             <p>PLATAFORMA DE APRENDIZAJE TURISTICO</p> 
         </div>
 
-        <div id="focused" class="row container-fluid" >
+        <div id="focused" class="row container-fluid" <%
+            try{
+                if(acc.equals("3")||acc.equals("5")){
+                    out.println("style=\"display:none;\"");
+                }
+            }catch(Exception e){
+                System.out.println(e);
+            }
+              %>>
             <div class="row">
                 <div class="text-center">
                     <h2>Cursos en los que estas inscrito actualmente: </h2><br>
@@ -74,11 +108,9 @@
                         <%@ page import="java.sql.*" %>
                         <jsp:useBean id="manejador" scope="session" class="paquete.DB"></jsp:useBean>
                         <%
-                            int acc2 = 0;
-                            int idu = 0;
                             try {
                                 String user = (String) session.getAttribute("username");
-                                String acc = (String) session.getAttribute("acc");
+                                acc = (String) session.getAttribute("acc");
                                 acc2 = Integer.parseInt(acc);
                                 if (acc.equals(null)) {
                                     response.sendRedirect("index.jsp");
@@ -117,7 +149,7 @@
         <div id="about" class="container-fluid text-center row col-md-10 col-md-offset-1">
             <div class="row">       
                 <div class="text-center">
-                    <h3>Editar perfil</h3>
+                    <h3 class="titulo-seccion">Información de la cuenta</h3>
                     <s:form action="/Mod" class="form-group">
                         <table class="table table-striped table-bordered table-responsive">
                             <thead>
@@ -164,7 +196,7 @@
                         <div class="col-sm-4 col-md-offset-4">
                             <input type="submit" class="btn-warning btn-xl  form-control" value="Actualizar perfil"/>      
                         </div>
-                    </s:form><br><hr>
+                    </s:form><br>
                     <%
                         if (acc2 == 1) {
                             out.println("<h3>Cambiar privilegios</h3>"
@@ -177,17 +209,21 @@
                 </div>
             </div>
         </div>
-        <div class="row col-md-12">
-            <footer class="container-fluid text-center">
-                <h2 class="text-center">Cerrar Sesión</h2>
-                <center>
-                <button type="button" onclick="loadDoc();" class="btn btn-danger">Cerrar Sesión</button>
-                </center>
-                <a href="#myPage" title="To Top">
-                    <span class="glyphicon glyphicon-chevron-up"></span>
-                </a>
-                <p>PAT</p>		
-            </footer>
+        <div class="row col-md-12 ">
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4 text-center well">
+                    <h2 class="text-center ">Cerrar Sesión</h2>
+                    <button type="button" onclick="loadDoc();" class="btn btn-danger">Cerrar Sesión</button>
+                </div>
+            </div>
+            <div class="row">
+                <footer class="container-fluid text-center">
+                    <a href="#myPage" title="To Top">
+                        <span class="glyphicon glyphicon-chevron-up"></span>
+                    </a>
+                    <p>PAT</p>		
+                </footer>
+            </div>
         </div>
     </body>
 </html>

@@ -14,7 +14,9 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="resources/PATEstilos.css">
+        <link rel="stylesheet" type="text/css" href="resources/responsividad.css">
         <script src="resources/busquedaTabla.js"></script>
+        <script src="resources/busquedaT.js"></script>
 
     </head>
     <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
@@ -65,7 +67,7 @@
         <div id="focused" class="container-fluid" >
             <div class="row">
                 <div class="text-center">
-                    <h2>Administración de Usuarios</h2><br>
+                    <h2 class="titulo-seccion">Administración de Usuarios</h2><br>
                 </div>
                 <div class="text-center">
                     <h3>Agregar nuevo usuario</h3>
@@ -105,9 +107,9 @@
                     <div class="input-group"> <span class="input-group-addon">Busqueda</span>
                         <input id="filter" type="text" class="form-control" placeholder="Escribe aquí...">
                     </div>  
-                    <table class="table table-striped table-bordered table-responsive">
+                    <table id="table" class="table table-striped table-bordered table-responsive" >
                         <thead>
-                            <tr>
+                            <tr class="header">
                                 <!--<th>Id</th>-->
                                 <th>Nombre</th>
                                 <th>Email</th>
@@ -148,19 +150,19 @@
                                             }
                                             email = rs2.getString("users.email");
                                             out.println("<tr>");
-                                            //out.println("<th>" + rs2.getString("users.idUser") + "</th>");
-                                            out.println("<th>" + rs2.getString("users.id") + "</th>");
+                                            //out.println("<td>" + rs2.getString("users.idUser") + "</td>");
+                                            out.println("<td>" + rs2.getString("users.id") + "</td>");
                                             if (email != null) {
-                                                out.println("<th>" + rs2.getString("users.email") + "</th>");
+                                                out.println("<td>" + rs2.getString("users.email") + "</td>");
                                             } else {
-                                                out.println("<th> No tiene correo </th>");
+                                                out.println("<td> No tiene correo </td>");
                                             }
-                                            out.println("<th>" + acceso + "</th>");
-                                            //out.println("<th>"+rs2.getString("usuarios.acc_usu")+"</th>");
-                                            out.println("<th>");
+                                            out.println("<td>" + acceso + "</td>");
+                                            //out.println("<td>"+rs2.getString("usuarios.acc_usu")+"</td>");
+                                            out.println("<td>");
                                             out.println(" <a href='modificar.jsp?id=" + rs2.getString("users.idUser") + "#about' class=\"btn btn-info btn-sm\">Modificar usuario</a> ");
                                             out.println(" <a href='eliminar.jsp?id=" + rs2.getString("users.idUser") + "' class=\"btn btn-info btn-sm\">Eliminar usuario</a> ");
-                                            out.println("</th>");
+                                            out.println("</td>");
                                             out.println("</tr>");
 
                                         }

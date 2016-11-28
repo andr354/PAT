@@ -14,6 +14,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="resources/PATEstilos.css">
+        <link rel="stylesheet" type="text/css" href="resources/responsividad.css">
         <script src="//cdn.ckeditor.com/4.5.1/full-all/ckeditor.js"></script>
         <script src="resources/jquery-1.7.1.min"></script>
         <script src="resources/busquedaT.js"></script>
@@ -78,17 +79,17 @@
                 //alert("Cambiando: "+snd+" estado: "+std);
                 var xhttp = new XMLHttpRequest();
                 var est = 0;
-                if (std == 0) {
+                if (std === 0) {
                     est = 1;
                 }
                 var eestd = document.getElementById("" + snd + "").innerHTML;
-                if (eestd == 0) {
-                    eestd = 1;
+                if (eestd === 'Inactiva') {
+                    eestd = 'Activa';
                 } else {
-                    eestd = 0;
+                    eestd = 'Inactiva';
                 }
                 xhttp.onreadystatechange = function () {
-                    if (xhttp.readyState == 4 && xhttp.status == 200) {
+                    if (xhttp.readyState === 4 && xhttp.status === 200) {
                         document.getElementById("" + snd + "").innerHTML = eestd;
                     }
                 };
@@ -135,7 +136,7 @@
                                 int nivel = 1;
                                 int idus = 0;
                                 ResultSet rs = null;
-                                ResultSet rs2 = null;
+                                ResultSet alumnosRS = null;
                                 ResultSet rs3 = null;
                                 ResultSet rs4 = null;
                                 ResultSet rss = null;
@@ -151,9 +152,9 @@
                                     rs4.next();
                                     idus = rs4.getInt("users.idUser");
                                     if (grupo == 0) {
-                                        rs2 = manejador.executeQuery("SELECT * FROM users, students WHERE nivel=2 and idUser=id_usu ");
+                                        alumnosRS = manejador.executeQuery("SELECT * FROM users, students WHERE nivel=2 and idUser='"+idus+"'");
                                     } else {
-                                        rs2 = manejador.executeQuery("SELECT * FROM users, students WHERE nivel=2 and idUser=id_usu and grp_std='" + grupo + "' ");
+                                        alumnosRS = manejador.executeQuery("SELECT * FROM users, students WHERE nivel=2 and idUser=id_usu and grp_std='" + grupo + "' ");
                                     }
                                     if (rs.next()) {
                                         rol = rs.getString("Users.rol");
@@ -185,25 +186,26 @@
         <div class="jumbotron text-center">
             <h1>PAT</h1> 
             <p>PLATAFORMA DE APRENDIZAJE TURISTICO</p> 
-
         </div>
         <!-- Container (About Section) -->
-        <div id="about" class="container-fluid">
+        <div id="about" class="row container-fluid col-md-offset-1">
             <div class="row">
-                <br><br>
-                <h2>Alumnos activos actualmente:</h2>
-                <!--<div class="row col-sm-4 col-md-offset-2">
-                    Ver solo el grupo: 
-                    <form id="form1">
-                        <br><input type="number" id="nombre" class="formulario">
-                    </form>
-                    <input type="button" value="Filtrar" onclick="capturar()">
-                </div>-->
+                <h2 class="titulo-apartado">Alumnos inscritos</h2>
                 <div class="container">
                     <!--<input type="text" id="search" placeholder="Ingrese el numero de grupo">-->
                     <label for="search">Filtrar por grupo:</label>
                     <input type="number" id="search" class="form-control" placeholder="Ingrese el numero de grupo"/>
-                    <table id="table" class="table table-striped table-bordered table-responsive" >
+                    <%
+                        String hide = "";                        
+                        try{
+                            if(!alumnosRS.next()){
+                                hide = "style=\"display:none;\"";
+                            }
+                            alumnosRS.previous();
+                        }catch(Exception e){
+                            System.out.println(e);
+                        }%>
+                        <table id="table" class="table table-striped table-bordered table-responsive" <%out.println(hide);%> >
                         <!--<thead>-->
                         <tr class="header">
                             <th>Nombre</th>
@@ -216,12 +218,12 @@
                             //String user = (String)session.getAttribute("username");
                             try {
                                 //System.out.println("-" + rol + "-");
-                                while (rs2.next()) {
+                                while (alumnosRS.next()) {
                                     out.println("<tr>");
-                                    out.println("<td>" + rs2.getString("students.nom_std") + " " + rs2.getString("students.app_std") + "</td>");
-                                    out.println("<td>" + rs2.getString("students.grp_std") + "</td>");
-                                    out.println("<td><a class=\"btn btn-info\" href='diagramas.jsp?id=" + rs2.getString("students.id_std") + "&idu=" + rs2.getString("users.idUser") + "&idp=" + idP + "'>Ver participaciones</a>");
-                                    out.println("<a class=\"btn btn-info\" href='asignargpo.jsp?id=" + rs2.getString("students.id_usu") + "'>Asignar grupo</a>");
+                                    out.println("<td>" + alumnosRS.getString("students.nom_std") + " " + alumnosRS.getString("students.app_std") + "</td>");
+                                    out.println("<td>" + alumnosRS.getString("students.grp_std") + "</td>");
+                                    out.println("<td><a class=\"btn btn-info\" href='diagramas.jsp?id=" + alumnosRS.getString("students.id_std") + "&idu=" + alumnosRS.getString("users.idUser") + "&idp=" + idP + "'>Ver participaciones</a>");
+                                    out.println("<a class=\"btn btn-info\" href='asignargpo.jsp?id=" + alumnosRS.getString("students.id_usu") + "'>Asignar grupo</a>");
                                     out.println("</td>");
                                     out.println("</tr>");
 
@@ -234,14 +236,15 @@
                         <!--</tbody>-->
                     </table>
                 </div>
-
-                <br><br>
-                <h2>OATs creados:</h2>
-                <div class="container">
+            </div>
+            <hr>
+            <div class="row container">
+                <h2 class="titulo-apartado">Actividades</h2>
+                <div class="row container">
                     <table id="table2" class="table table-striped table-bordered table-responsive">
                         <!--<thead>-->
                         <tr class="header">
-                            <th>Id</th>
+                            <!--<th>Id</th>-->
                             <th>Descripción</th>
                             <th>Grupo</th>
                             <th>Estado</th>
@@ -253,10 +256,14 @@
                             try {
                                 while (rs3.next()) {
                                     out.println("<tr>");
-                                    out.println("<td>" + rs3.getInt("oats.id_oat") + "</td>");
+                                    //out.println("<td>" + rs3.getInt("oats.id_oat") + "</td>");
                                     out.println("<td>" + rs3.getString("oats.descrip") + "</td>");
                                     out.println("<td>" + rs3.getInt("oats.grupo") + "</td>");
-                                    out.println("<td id=\"" + rs3.getInt("oats.id_oat") + "\">" + rs3.getInt("oats.estado") + "</td>");
+                                    if(rs3.getInt("oats.estado")==1){
+                                        out.println("<td id=\"" + rs3.getInt("oats.id_oat") + "\">Activa</td>");   
+                                    }else{
+                                        out.println("<td id=\"" + rs3.getInt("oats.id_oat") + "\">Inactiva</td>");   
+                                    }
                                     out.println("<td>");
                                     out.println("<button type=\"button\" onclick=\"loadDoc(" + rs3.getInt("oats.id_oat") + "," + rs3.getInt("oats.estado") + ")\" class=\"btn btn-info\">Cambiar estado</button>");
                                     out.println("<a href='eliminarOAt.jsp?id=" + rs3.getInt("oats.id_oat") + "' class=\"btn btn-danger\">Eliminar</a>");
@@ -273,46 +280,51 @@
                     </table>
                 </div>
             </div>
-        
-        <h2>Agregar nuevo OAT</h2>
-        <s:form action="/AddOAT" id="usrform">
-            <div class="row col-md-6 col-md-offset-3 text-center">
-                <input type="submit" class="btn btn-info form-control" value="Crear">
-            </div>
-            <div class="row col-md-10 col-md-offset-1 text-center">
-                
-                    <input type="hidden" name="id" value=<%out.println(idus);%>/>
 
-                <div class="col col-md-3 text-center">
-                    <label for="titulo">Titulo</label>
-                    <input type ="text" name="titulo" id="titulo" class="form-control"/>
-                </div>
-                <div class="col col-md-5 text-center">
-                    <label for="desc">Descripción</label>
-                    <input type="text" name = "desc" id="desc" class="form-control"/>
-                </div>
-                <div class="col col-md-2 text-center">
-                    <label for="curso">Grupo a asignar</label>
-                    <input type="number" name = "curso" id="curso" class="form-control"/>
-                </div>
-            </div>
-            <div class="row col-md-10 col-md-offset-1 text-center">
-                <textarea name="contenido" form="usrform" id="contenido" rows="20" cols="80"></textarea>
-                <script>
-                    // Replace the <textarea id="editor1"> with a CKEditor
-                    // instance, using default configuration.
-                    CKEDITOR.replace('contenido');
-                </script>
-            </div>
-        </s:form>
+            <hr>
+            <div class="row container">
+                <h2 class="titulo-apartado">Agregar nuevo OAT</h2>
+                <s:form action="/AddOAT" id="usrform">
+                    <div class="row col-md-10 col-md-offset-1 text-center">
 
+                        <input type="hidden" name="id" value=<%out.println(idus);%>/>
+
+                        <div class="col col-md-3 text-center">
+                            <label for="titulo">Titulo</label>
+                            <input type ="text" name="titulo" id="titulo" class="form-control"/>
+                        </div>
+                        <div class="col col-md-5 text-center">
+                            <label for="desc">Descripción</label>
+                            <input type="text" name = "desc" id="desc" class="form-control"/>
+                        </div>
+                        <div class="col col-md-2 text-center">
+                            <label for="curso">Grupo a asignar</label>
+                            <input type="number" name = "curso" id="curso" class="form-control"/>
+                        </div>
+                        <div class="row col-md-2 text-center">
+                            <label for="su">.</label>
+                            <input type="submit" id="su" class="btn btn-info form-control" value="Crear">
+                        </div>
+                        <br>
+                    </div>
+                    <div class="row"><br><br><br></div>
+                    <div class="row col-md-10 col-md-offset-1 text-center">
+                        <textarea name="contenido" form="usrform" id="contenido" rows="20" cols="80"></textarea>
+                        <script>
+                            // Replace the <textarea id="editor1"> with a CKEditor
+                            // instance, using default configuration.
+                            CKEDITOR.replace('contenido');
+                        </script>
+                    </div>
+                </s:form>
+            </div>
         </div>
-    
+
         <footer class="container-fluid text-center">
             <a href="#myPage" title="To Top">
                 <span class="glyphicon glyphicon-chevron-up"></span>
             </a>
             <p>PAT</p>		
         </footer>
-        </body>
+    </body>
 </html>
